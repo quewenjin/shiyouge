@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.shiyouge.mapper.CommentMapper">
+    <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.Comment">
+        <id column="" property="commentId"/>
+        <result column="userIdOfComment" property="userIdOfComment"/>
+        <result column="postIdOfComment" property="postIdOfComment"/>
+        <result column="commentContent" property="commentContent"/>
+        <result column="commentTime" property="commentTime"/>
+    </resultMap>
+
+
+
+</mapper>

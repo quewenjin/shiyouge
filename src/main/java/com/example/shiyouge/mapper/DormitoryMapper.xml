@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.shiyouge.mapper.DormitoryMapper">
+    <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.Dormitory">
+        <id column="" property="dormitoryId"/>
+        <result column="" property="numberOfMate"/>
+        <result column="" property="flowerGrowthValue"/>
+        <result column="" property="flowerWateringTimes"/>
+        <result column="" property="flowerFertilizationTimes"/>
+        <result column="" property="soilMoisture"/>
+        <result column="" property="joinPassward"/>
+    </resultMap>
+
+
+
+</mapper>

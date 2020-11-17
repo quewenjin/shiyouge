@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.shiyouge.mapper.ChatSystemMapper">
+    <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.ChatSystem">
+        <id column="chatId" property="chatId"/>
+        <result column="dormitoryIdOfChat" property="dormitoryIdOfChat"/>
+        <result column="userIdOfSender" property="userIdOfSender"/>
+        <result column="userIdOfReceiver" property="userIdOfReceiver"/>
+        <result column="sendTime" property="sendTime"/>
+        <result column="chatContent" property="chatContent"/>
+    </resultMap>
+
+
+
+</mapper>

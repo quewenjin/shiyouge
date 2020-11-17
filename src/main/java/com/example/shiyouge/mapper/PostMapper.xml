@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.shiyouge.mapper.PostMapper">
+    <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.Post">
+        <id column="postId" property="postId"/>
+        <result column="userIdOfPost" property="userIdOfPost"/>
+        <result column="postContent" property="postContent"/>
+        <result column="partitionOfPost" property="partitionOfPost"/>
+        <result column="publishTime" property="publishTime"/>
+        <result column="commentedTimes" property="commentedTimes"/>
+        <result column="praiseTimes" property="praiseTimes"/>
+        <result column="collectedTimes" property="collectedTimes"/>
+        <result column="reportTimes" property="reportTimes"/>
+        <result column="ifReported" property="ifReported"/>
+        <result column="reportedType" property="reportedType"/>
+    </resultMap>
+
+
+
+</mapper>

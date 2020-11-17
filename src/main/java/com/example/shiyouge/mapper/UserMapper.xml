@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.shiyouge.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.User">
+        <id column="" property="userId"/>
+        <result column="" property="userSex"/>
+        <result column="" property="userNickname"/>
+        <result column="" property="userPhoto"/>
+        <result column="" property="userRealName"/>
+        <result column="" property="userStudentNumber"/>
+        <result column="" property="userDormitoryId"/>
+        <result column="" property="userWateringTimes"/>
+        <result column="" property="userFertilizationTimes"/>
+        <result column="" property="fertilizerQuantity"/>
+        <result column="" property="waterQuantity"/>
+        <result column="" property="userStudyRoomId"/>
+        <result column="" property="ifSilent"/>
+        <result column="" property="endSilentTime"/>
+        <result column="" property="lable"/>
+    </resultMap>
+
+</mapper>
