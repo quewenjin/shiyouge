@@ -18,6 +18,7 @@ public class User {
     private boolean ifSilent;//是否被禁言
     private Timestamp endSilentTime;//结束禁言时间
     private String lable;//用户标签
+    private int userStudyTimeIntotal;//用户自习总时长
 
     public String getUserId() {
         return userId;
@@ -137,5 +138,13 @@ public class User {
 
     public void setLable(String lable) {
         this.lable = lable;
+    }
+
+    public int getUserStudyTimeIntotal() {
+        return userStudyTimeIntotal;
+    }
+
+    public void setUserStudyTimeIntotal(int userStudyTimeIntotal) {
+        this.userStudyTimeIntotal = userStudyTimeIntotal;
     }
 }

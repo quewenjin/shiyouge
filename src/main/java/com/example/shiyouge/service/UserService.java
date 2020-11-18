@@ -16,5 +16,32 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
+    /**
+     * 得到用户的肥料数量
+     * @param userId 用户ID
+     * @return 肥料数量
+     */
+    public int getFertilizerQuantityOfUser(String userId){
+        return userMapper.getTheFertilizerQuantityOfUser(userId);
+    }
+
+    /**
+     * 得到用户的自习总时长
+     * @param userId 用户ID
+     * @return 自习总时长
+     */
+    public int getStudyTimeTotalOfUser(String userId){
+        return userMapper.getTheStudyTimeTotalOfUser(userId);
+    }
+
+    /**
+     * 得到用户的自习时房间号
+     * @param userId 用户ID
+     * @return 自习时房间号
+     */
+    public int getStudyRoomIdOfUser(String userId){
+        return userMapper.getTheStudyRoomIdOfUser(userId);
+    }
+
 
 }

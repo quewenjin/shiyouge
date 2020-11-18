@@ -9,6 +9,10 @@
         <result column="numberOfStudy" property="numberOfStudy"/>
     </resultMap>
 
+    <select id="getThenumberOfStudyRoom" resultType="int">
+        select numberOfStudy from studyroom where studyRoomId = #{roomId}
+    </select>
+
 
 
 </mapper>

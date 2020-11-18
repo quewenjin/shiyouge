@@ -6,20 +6,33 @@
 <mapper namespace="com.example.shiyouge.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.User">
         <id column="" property="userId"/>
-        <result column="" property="userSex"/>
-        <result column="" property="userNickname"/>
-        <result column="" property="userPhoto"/>
-        <result column="" property="userRealName"/>
-        <result column="" property="userStudentNumber"/>
-        <result column="" property="userDormitoryId"/>
-        <result column="" property="userWateringTimes"/>
-        <result column="" property="userFertilizationTimes"/>
-        <result column="" property="fertilizerQuantity"/>
-        <result column="" property="waterQuantity"/>
-        <result column="" property="userStudyRoomId"/>
-        <result column="" property="ifSilent"/>
-        <result column="" property="endSilentTime"/>
-        <result column="" property="lable"/>
+        <result column="userSex" property="userSex"/>
+        <result column="userNickname" property="userNickname"/>
+        <result column="userPhoto" property="userPhoto"/>
+        <result column="userRealName" property="userRealName"/>
+        <result column="userStudentNumber" property="userStudentNumber"/>
+        <result column="userDormitoryId" property="userDormitoryId"/>
+        <result column="userWateringTimes" property="userWateringTimes"/>
+        <result column="userFertilizationTimes" property="userFertilizationTimes"/>
+        <result column="fertilizerQuantity" property="fertilizerQuantity"/>
+        <result column="waterQuantity" property="waterQuantity"/>
+        <result column="userStudyRoomId" property="userStudyRoomId"/>
+        <result column="ifSilent" property="ifSilent"/>
+        <result column="endSilentTime" property="endSilentTime"/>
+        <result column="lable" property="lable"/>
+        <result column="userStudyTimeIntotal" property="userStudyTimeIntotal"/>
     </resultMap>
+
+    <select id="getTheFertilizerQuantityOfUser" resultType="int">
+        select fertilizerQuantity from user where userId = #{userId}
+    </select>
+
+    <select id="getTheStudyTimeTotalOfUser" resultType="int">
+        select userStudyTimeIntotal from user where userIdOfSelfStudy = #{userId}
+    </select>
+
+    <select id="getTheStudyRoomIdOfUser" resultType="int">
+        select userStudyRoomId from user where userIdOfSelfStudy = #{userId}
+    </select>
 
 </mapper>
