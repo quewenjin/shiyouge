@@ -113,8 +113,9 @@ public class StudyController {
      */
     @RequestMapping(value = "/beginStudy", method = RequestMethod.POST)
     public String beginStudy() {
-        studyRoomService.updateNumberOfStudyRoom(1, studyRoomService.getNumberOfStudyRoom(1)+1);
         JSONObject json = new JSONObject();
+        //自习室人数+1
+        studyRoomService.updateNumberOfStudyRoom(1, studyRoomService.getNumberOfStudyRoom(1)+1);
         json.put("status", "succeed");
         return json.toString();
     }
@@ -129,6 +130,7 @@ public class StudyController {
         if (studyRoomService.getNumberOfStudyRoom(1) <= 0){
             json.put("status", "wrong");
         } else {
+            //自习室人数-1
             studyRoomService.updateNumberOfStudyRoom(1, studyRoomService.getNumberOfStudyRoom(1)-1);
             json.put("status", "succeed");
         }
