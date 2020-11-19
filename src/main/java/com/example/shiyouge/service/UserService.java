@@ -43,5 +43,13 @@ public class UserService {
         return userMapper.getTheStudyRoomIdOfUser(userId);
     }
 
+    /**
+     * 根据用户ID更新用户的学习总时长
+     * @param userId 用户ID
+     * @param studyTimeIntotal 用户学习总时长
+     */
+    public void updateStudyTimeTotalOfUser(String userId, int studyTimeIntotal){
+        userMapper.uptateTheStudyTimeTotalOfUser(userId, studyTimeIntotal);
+    }
 
 }

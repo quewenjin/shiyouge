@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Map;
 
 @RestController
@@ -38,4 +40,23 @@ public class StudyController {
         return json.toString();
     }
 
+    /**
+     * 记录学习
+     * @param params 用户ID + 学习时长（分钟计）
+     * @return 状态：recorded
+     */
+    @RequestMapping(value = "/recorddStudy", method = RequestMethod.POST)
+    public String recorddStudy(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
+        int studyTime = Integer.parseInt(params.get("studyTime").toString());
+        Date date = new Date();
+        Timestamp recordTime =  new Timestamp(date.getTime());
+        //添加学习记录
+        studySystemService.createStudyRecord(userId, studyTime, recordTime);
+        //更新个人总时长
+        userService.updateStudyTimeTotalOfUser(userId, userService.getStudyTimeTotalOfUser(userId)+studyTime);
+        JSONObject json = new JSONObject();
+        json.put("status", "uptdated");
+        return json.toString();
+    }
 }

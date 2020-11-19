@@ -11,5 +11,10 @@
         <result column="dateOfStudy" property="dateOfStudy"/>
     </resultMap>
 
+    <insert id="createTheStudyRecord">
+        insert into studysystem(userIdOfSelfStudy, studyTimeTotal,dateOfStudy)
+        value(#{userId}, #{studyTime}, #{recordTime})
+    </insert>
+
 
 </mapper>

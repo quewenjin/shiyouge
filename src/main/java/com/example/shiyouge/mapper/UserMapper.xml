@@ -21,6 +21,8 @@
         <result column="endSilentTime" property="endSilentTime"/>
         <result column="lable" property="lable"/>
         <result column="userStudyTimeIntotal" property="userStudyTimeIntotal"/>
+        <result column="userStudyTimeToday" property="userStudyTimeToday"/>
+        <result column="userStudyTimeWeek" property="userStudyTimeWeek"/>
     </resultMap>
 
     <select id="getTheFertilizerQuantityOfUser" resultType="int">
@@ -34,5 +36,9 @@
     <select id="getTheStudyRoomIdOfUser" resultType="int">
         select userStudyRoomId from user where userIdOfSelfStudy = #{userId}
     </select>
+
+    <update id="uptateTheStudyTimeTotalOfUser">
+        update user set userStudyTimeIntotal = #{studyTimeIntotal} where userId = #{userId}
+    </update>
 
 </mapper>
