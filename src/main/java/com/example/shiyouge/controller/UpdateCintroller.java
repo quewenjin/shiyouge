@@ -20,9 +20,8 @@ public class UpdateCintroller {
     @Scheduled(cron = "0 0 0 * * ?")
     public void setStudyTimeTodayToZero() {
         userService.setAllStudyTimeTodayToZero();
-
-        System.out.println("clear");
-
+        System.out.println("setStudyTimeTodayToZero");
+        System.out.println("每日 00:00:00 将用户的今日学习时长清0");
     }
 
     /**
@@ -31,6 +30,8 @@ public class UpdateCintroller {
     @Scheduled(cron = "0 0 0 ? * MON")
     public void setStudyTimeWeekToZero() {
         userService.setAllStudyTimeWeekToZero();
+        System.out.println("setStudyTimeWeekToZero");
+        System.out.println("每周星期一 00:00:00 将用户的今日学习时长清0");
     }
 
 
