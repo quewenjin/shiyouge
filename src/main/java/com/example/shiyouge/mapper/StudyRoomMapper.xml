@@ -13,6 +13,10 @@
         select numberOfStudy from studyroom where studyRoomId = #{roomId}
     </select>
 
+    <update id="updateThenumberOfStudyRoom">
+        update studyroom set numberOfStudy = #{numberOfStudy} where studyRoomId= #{roomId}
+    </update>
+
 
 
 </mapper>

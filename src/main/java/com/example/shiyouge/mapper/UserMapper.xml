@@ -29,16 +29,52 @@
         select fertilizerQuantity from user where userId = #{userId}
     </select>
 
-    <select id="getTheStudyTimeTotalOfUser" resultType="int">
-        select userStudyTimeIntotal from user where userIdOfSelfStudy = #{userId}
+    <select id="getTheStudyRoomIdOfUser" resultType="int">
+        select userStudyRoomId from user where userId = #{userId}
     </select>
 
-    <select id="getTheStudyRoomIdOfUser" resultType="int">
-        select userStudyRoomId from user where userIdOfSelfStudy = #{userId}
+    <select id="getTheStudyTimeTotalOfUser" resultType="int">
+        select userStudyTimeIntotal from user where userId = #{userId}
     </select>
 
     <update id="uptateTheStudyTimeTotalOfUser">
         update user set userStudyTimeIntotal = #{studyTimeIntotal} where userId = #{userId}
     </update>
+
+    <select id="getTheStudyTimeTodayOfUser" resultType="int">
+        select userStudyTimeToday from user where userId = #{userId}
+    </select>
+
+    <update id="uptateTheStudyTimeTodayOfUser">
+        update user set userStudyTimeToday = #{studyTimeToday} where userId = #{userId}
+    </update>
+
+    <select id="getTheStudyTimeWeekOfUser" resultType="int">
+        select userStudyTimeWeek from user where userId = #{userId}
+    </select>
+
+    <update id="uptateTheStudyTimeWeekOfUser">
+        update user set userStudyTimeWeek = #{studyTimeWeek} where userId = #{userId}
+    </update>
+
+    <select id="getTheNickNameByUserId" resultType="java.lang.String">
+        select userNickname from user where userId = #{userId}
+    </select>
+
+    <update id="setAllTheStudyTimeTodayToZero">
+        update user set userStudyTimeToday = 0
+    </update>
+
+    <update id="setAllTheStudyTimeWeekToZero">
+        update user set userStudyTimeWeek = 0
+    </update>
+
+    <select id="getTheTodayTop10" resultType="java.lang.String">
+        select * from (select * from user order by userStudyTimeToday desc) as tmp limit 10
+    </select>
+
+    <select id="getTheWeekTop10" resultType="java.lang.String">
+        select * from (select * from user order by userStudyTimeWeek desc) as tmp limit 10
+    </select>
 
 </mapper>

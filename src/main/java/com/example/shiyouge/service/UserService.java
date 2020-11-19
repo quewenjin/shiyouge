@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Service
 @Transactional
@@ -35,6 +36,24 @@ public class UserService {
     }
 
     /**
+     * 得到用户的今日自习时长
+     * @param userId 用户ID
+     * @return 今日自习时长
+     */
+    public int getStudyTimeTodayOfUser(String userId){
+        return userMapper.getTheStudyTimeTodayOfUser(userId);
+    }
+
+    /**
+     * 得到用户的本周自习时长
+     * @param userId 用户ID
+     * @return 本周自习时长
+     */
+    public int getStudyTimeWeekOfUser(String userId){
+        return userMapper.getTheStudyTimeWeekOfUser(userId);
+    }
+
+    /**
      * 得到用户的自习时房间号
      * @param userId 用户ID
      * @return 自习时房间号
@@ -52,4 +71,60 @@ public class UserService {
         userMapper.uptateTheStudyTimeTotalOfUser(userId, studyTimeIntotal);
     }
 
+    /**
+     * 根据用户ID更新用户的今日学习时长
+     * @param userId 用户ID
+     * @param studyTimeToday 用户今日学习时长
+     */
+    public void updateStudyTimeTodayOfUser(String userId, int studyTimeToday){
+        userMapper.uptateTheStudyTimeTodayOfUser(userId, studyTimeToday);
+    }
+
+    /**
+     * 根据用户ID更新用户的今日学习时长
+     * @param userId 用户ID
+     * @param studyTimeWeek 用户今日学习时长
+     */
+    public void updateStudyTimeWeekOfUser(String userId, int studyTimeWeek){
+        userMapper.uptateTheStudyTimeWeekOfUser(userId, studyTimeWeek);
+    }
+
+    /**
+     * 通过用户ID得到昵称
+     * @param userId 用户ID
+     * @return 用户昵称
+     */
+    public String getNickNameByUserId(String userId){
+        return userMapper.getTheNickNameByUserId(userId);
+    }
+
+    /**
+     * 所有用户今日学习时长清0
+     */
+    public void setAllStudyTimeTodayToZero(){
+        userMapper.setAllTheStudyTimeTodayToZero();
+    }
+
+    /**
+     * 所有用户本周学习时长清0
+     */
+    public void setAllStudyTimeWeekToZero(){
+        userMapper.setAllTheStudyTimeWeekToZero();
+    }
+
+    /**
+     * 今日前10
+     * @return 前10的用户ID
+     */
+    public List<String> getTodayTop10(){
+        return userMapper.getTheTodayTop10();
+    }
+
+    /**
+     * 本周前10
+     * @return 前10的用户ID
+     */
+    public List<String> getWeekTop10(){
+        return userMapper.getTheWeekTop10();
+    }
 }
