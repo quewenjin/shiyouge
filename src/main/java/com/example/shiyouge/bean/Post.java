@@ -6,7 +6,7 @@ public class Post {
     private int postId;//帖子ID
     private String userIdOfPost;//发帖人ID
     private String postContent;//帖子内容
-    private String partitionOfPost;//分区
+    private int partitionOfPost;//分区-->倾诉区=1，互助区=2，告白区=3
     private Timestamp publishTime;//发布时间
     private int commentedTimes;//评论次数
     private int praiseTimes;//点赞次数
@@ -39,11 +39,11 @@ public class Post {
         this.postContent = postContent;
     }
 
-    public String getPartitionOfPost() {
+    public int getPartitionOfPost() {
         return partitionOfPost;
     }
 
-    public void setPartitionOfPost(String partitionOfPost) {
+    public void setPartitionOfPost(int partitionOfPost) {
         this.partitionOfPost = partitionOfPost;
     }
 

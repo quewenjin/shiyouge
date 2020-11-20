@@ -4,7 +4,6 @@ import com.example.shiyouge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 /**
  * 数据库定时自动更新部分
