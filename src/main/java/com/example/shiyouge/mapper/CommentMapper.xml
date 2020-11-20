@@ -12,6 +12,15 @@
         <result column="commentTime" property="commentTime"/>
     </resultMap>
 
+    <select id="getTheAllCommentsByPostId" resultMap="BaseResultMap">
+        select * from comment where postIdOfComment = #{postId} order by commentTime
+    </select>
+
+    <insert id="createTheNewComment">
+        insert into comment(userIdOfComment, postIdOfComment, commentContent, commentTime)
+        value(#{userId}, #{postId}, #{content}, #{commentTime})
+    </insert>
+
 
 
 </mapper>

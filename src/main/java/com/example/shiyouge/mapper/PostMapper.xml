@@ -30,5 +30,29 @@
         select * from post where postId = #{postId}
     </select>
 
+    <update id="setThePostIfReported">
+        update post set ifReported = #{status} where postId = #{postId}
+    </update>
+
+    <select id="getTheReportTimes" resultType="int">
+        select reportTimes from post where postId = #{postId}
+    </select>
+
+    <update id="setTheReportTimes">
+        update post set reportTimes = #{times} where postId = #{postId}
+    </update>
+
+    <select id="getTheReportTypes" resultType="java.lang.String">
+        select reportedType from post where postId = #{postId}
+    </select>
+
+    <update id="setTheReportTypes">
+        update post set reportedType = #{types} where postId = #{postId}
+    </update>
+
+    <insert id="createThePost">
+        insert into post(userIdOfPost, postContent, partitionOfPost, publishTime)
+        value(#{userId}, #{content}, #{partition}, #{createTime})
+    </insert>
 
 </mapper>
