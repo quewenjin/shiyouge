@@ -18,6 +18,17 @@
         <result column="reportedType" property="reportedType"/>
     </resultMap>
 
+    <select id="getTheAllPostOfPartition" resultMap="BaseResultMap">
+        select * from post where partitionOfPost = #{partitionOfPost} order by publishTime desc
+    </select>
+
+    <select id="getThePostsByContent" resultMap="BaseResultMap">
+        select * from post where postContent like '%'+#{content}+'%'
+    </select>
+
+    <select id="getThePostByPostId" resultMap="BaseResultMap">
+        select * from post where postId = #{postId}
+    </select>
 
 
 </mapper>
