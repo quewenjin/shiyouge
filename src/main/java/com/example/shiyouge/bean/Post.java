@@ -13,7 +13,6 @@ public class Post {
     private int collectedTimes;//收藏次数
     private int reportTimes;//举报次数
     private boolean ifReported;//是否处于被举报状态
-    private String reportedType;//举报类型
 
     public int getPostId() {
         return postId;
@@ -93,13 +92,5 @@ public class Post {
 
     public void setIfReported(boolean ifReported) {
         this.ifReported = ifReported;
-    }
-
-    public String getReportedType() {
-        return reportedType;
-    }
-
-    public void setReportedType(String reportedType) {
-        this.reportedType = reportedType;
     }
 }

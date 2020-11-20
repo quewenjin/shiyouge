@@ -15,7 +15,6 @@
         <result column="collectedTimes" property="collectedTimes"/>
         <result column="reportTimes" property="reportTimes"/>
         <result column="ifReported" property="ifReported"/>
-        <result column="reportedType" property="reportedType"/>
     </resultMap>
 
     <select id="getTheAllPostOfPartition" resultMap="BaseResultMap">

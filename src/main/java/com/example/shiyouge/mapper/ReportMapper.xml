@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.shiyouge.mapper.ReportMapper">
+    <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.Report">
+        <id column="postIdOfReport" property="postIdOfReport"/>
+        <result column="vulgar" property="vulgar"/>
+        <result column="sensitivity" property="sensitivity"/>
+        <result column="illegal" property="illegal"/>
+        <result column="advertisement" property="advertisement"/>
+        <result column="virus" property="virus"/>
+        <result column="others" property="others"/>
+    </resultMap>
+
+</mapper>
