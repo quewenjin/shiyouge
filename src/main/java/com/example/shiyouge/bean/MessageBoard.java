@@ -7,6 +7,7 @@ public class MessageBoard {
     private String userIdOfMessage;//留言的用户的ID
     private String messageContent;//留言内容
     private Timestamp messageTime;//留言时间
+    private int dormitoryIdOfMessage;//宿舍ID
 
     public int getMessageId() {
         return messageId;
@@ -38,5 +39,13 @@ public class MessageBoard {
 
     public void setMessageTime(Timestamp messageTime) {
         this.messageTime = messageTime;
+    }
+
+    public int getDormitoryIdOfMessage() {
+        return dormitoryIdOfMessage;
+    }
+
+    public void setDormitoryIdOfMessage(int dormitoryIdOfMessage) {
+        this.dormitoryIdOfMessage = dormitoryIdOfMessage;
     }
 }

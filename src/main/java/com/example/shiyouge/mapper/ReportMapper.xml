@@ -14,4 +14,53 @@
         <result column="others" property="others"/>
     </resultMap>
 
+    <select id="getTheVulgarNum" resultType="int">
+        select vulgar from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheVulgarNum">
+        update report set vulgar = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheSensitivityNum" resultType="int">
+        select sensitivity from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheSensitivityNum">
+        update report set sensitivity = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheIllegalNum" resultType="int">
+        select illegal from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheIllegalNum">
+        update report set illegal = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheAdvertisementNum" resultType="int">
+        select advertisement from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheAdvertisementNum">
+        update report set advertisement = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheVirusNum" resultType="int">
+        select virus from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheVirusNum">
+        update report set virus = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheOthersNum" resultType="int">
+        select others from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheOthersNum">
+        update report set others = #{num} where postIdOfReport = #{postId}
+    </update>
+
+
 </mapper>

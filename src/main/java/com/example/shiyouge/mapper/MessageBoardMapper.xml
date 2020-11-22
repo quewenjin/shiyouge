@@ -9,6 +9,7 @@
         <result column="userIdOfMessage" property="userIdOfMessage"/>
         <result column="messageContent" property="messageContent"/>
         <result column="messageTime" property="messageTime"/>
+        <result column="dormitoryIdOfMessage" property="dormitoryIdOfMessage"/>
     </resultMap>
 
 

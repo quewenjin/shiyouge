@@ -6,10 +6,7 @@ import com.example.shiyouge.bean.Comment;
 import com.example.shiyouge.bean.Post;
 import com.example.shiyouge.mapper.CommentMapper;
 import com.example.shiyouge.mapper.PostMapper;
-import com.example.shiyouge.service.CollectService;
-import com.example.shiyouge.service.CommentService;
-import com.example.shiyouge.service.PostService;
-import com.example.shiyouge.service.UserService;
+import com.example.shiyouge.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +29,8 @@ public class TreeHoleController {
     CollectService collectService;
     @Autowired
     CommentService commentService;
+    @Autowired
+    ReportService reportService;
 
     /**
      * 得到某分区的所有帖子
@@ -148,4 +147,24 @@ public class TreeHoleController {
         return json.toString();
     }
 
+    /**
+     * 用户举报帖子
+     * @param params 对应的帖子ID + 色情低俗 + 政治敏感 + 违法 + 广告 + 病毒木马 + 其他
+     * @return 状态：reported
+     */
+    @RequestMapping(value = "/reportPost", method = RequestMethod.POST)
+    public String reportPost(@RequestBody Map<String, Object> params) {
+        int postId = Integer.parseInt(params.get("postId").toString());
+        int vulgar = Integer.parseInt(params.get("vulgar").toString());
+        int sensitivity = Integer.parseInt(params.get("sensitivity").toString());
+        int illegal = Integer.parseInt(params.get("illegal").toString());
+        int advertisement = Integer.parseInt(params.get("advertisement").toString());
+        int virus = Integer.parseInt(params.get("virus").toString());
+        int others = Integer.parseInt(params.get("others").toString());
+        //统计加1
+        reportService.updateTheValueOfReport(postId, vulgar, sensitivity, illegal, advertisement, virus, others);
+        JSONObject json = new JSONObject();
+        json.put("status", "reported");
+        return json.toString();
+    }
 }
