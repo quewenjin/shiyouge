@@ -14,6 +14,15 @@
         <result column="others" property="others"/>
     </resultMap>
 
+    <select id="getTheReportByPostId" resultMap="BaseResultMap">
+        select * from report where postIdOfReport = #{postId}
+    </select>
+
+    <insert id="creatTheReportOfPost">
+        insert into report(postIdOfReport, vulgar, sensitivity, illegal, advertisement, virus, others)
+        value(#{postId}, 0, 0, 0, 0, 0, 0, 0)
+    </insert>
+
     <select id="getTheVulgarNum" resultType="int">
         select vulgar from report where postIdOfReport = #{postId}
     </select>
@@ -61,6 +70,5 @@
     <update id="setTheOthersNum">
         update report set others = #{num} where postIdOfReport = #{postId}
     </update>
-
 
 </mapper>

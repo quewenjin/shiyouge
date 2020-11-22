@@ -1,10 +1,23 @@
 package com.example.shiyouge.mapper;
 
+import com.example.shiyouge.bean.Report;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ReportMapper {
+    /**
+     * 用帖子ID得到举报信息
+     * @param postId 帖子ID
+     * @return Report对象
+     */
+    Report getTheReportByPostId(int postId);
+
+    /**
+     * 创建某帖子的举报记录
+     * @param postId 帖子ID
+     */
+    void creatTheReportOfPost(int postId);
 
     /**
      * 得到色情低俗次数

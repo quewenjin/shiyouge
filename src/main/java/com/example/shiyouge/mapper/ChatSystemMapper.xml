@@ -8,11 +8,17 @@
         <id column="chatId" property="chatId"/>
         <result column="dormitoryIdOfChat" property="dormitoryIdOfChat"/>
         <result column="userIdOfSender" property="userIdOfSender"/>
-        <result column="userIdOfReceiver" property="userIdOfReceiver"/>
         <result column="sendTime" property="sendTime"/>
         <result column="chatContent" property="chatContent"/>
     </resultMap>
 
+    <select id="getTheChatRecords" resultMap="BaseResultMap">
+        select * from (select * from chatsystem order by sendTime desc) as tmp limit #{getNum}
+    </select>
 
+    <insert id="creatTheChatRecord">
+        insert into chatsystem(dormitoryIdOfChat, userIdOfSender, sendTime, chatContent)
+        value(#{dormitoryId}, #{userIdOfSender}, #{sendTime}, #{chatContent})
+    </insert>
 
 </mapper>

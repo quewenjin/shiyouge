@@ -12,6 +12,13 @@
         <result column="dormitoryIdOfMessage" property="dormitoryIdOfMessage"/>
     </resultMap>
 
+    <select id="getTheMessagesOfDormitory" resultMap="BaseResultMap">
+        select * from messageboard where dormitoryIdOfMessage = #{dormitoryId} order by messageTime desc
+    </select>
 
+    <insert id="creatTheNewMessage">
+        insert into messageboard(userIdOfMessage, messageContent, messageTime, dormitoryIdOfMessage)
+        value(#{userId}, #{content}, #{leaveTime}, #{dormitoryId})
+    </insert>
 
 </mapper>
