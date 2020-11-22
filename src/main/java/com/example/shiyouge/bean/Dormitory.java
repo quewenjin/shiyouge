@@ -6,7 +6,8 @@ public class Dormitory {
     private int flowerGrowthValue;//花的成长值
     private int flowerWateringTimes;//浇水总次数
     private int flowerFertilizationTimes;//施肥总次数
-    private int soilMoisture;//土壤湿度
+    private int soilMoisture;//土壤湿度(今日浇水次数)
+    private int soilFertility;//土壤肥度（今日施肥次数）
     private String joinPassward;//加入宿舍密码
 
     public int getDormitoryId() {
@@ -55,6 +56,14 @@ public class Dormitory {
 
     public void setSoilMoisture(int soilMoisture) {
         this.soilMoisture = soilMoisture;
+    }
+
+    public int getSoilFertility() {
+        return soilFertility;
+    }
+
+    public void setSoilFertility(int soilFertility) {
+        this.soilFertility = soilFertility;
     }
 
     public String getJoinPassward() {

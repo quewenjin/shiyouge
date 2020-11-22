@@ -11,4 +11,17 @@ public class DormitoryService {
     @Autowired
     DormitoryMapper dormitoryMapper;
 
+    /**
+     * 每日土壤湿度清 0（每日限制浇水10次）
+     */
+    public void setAllSoilMoistureToZero(){
+        dormitoryMapper.setTheAllSoilMoistureToZero();
+    }
+
+    /**
+     * 每日土壤肥度清 0
+     */
+    public void setAllSoilFertilityToZero(){
+        dormitoryMapper.setTheAllSoilFertilityToZero();
+    }
 }

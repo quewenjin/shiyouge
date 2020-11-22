@@ -9,7 +9,6 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-
     /**
      * 得到用户的肥料数量
      * @param userId 用户ID
