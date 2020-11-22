@@ -17,6 +17,25 @@ public interface UserMapper {
     int getTheFertilizerQuantityOfUser(String userId);
 
     /**
+     * 设置用户的肥料数量
+     * @param userId 用户ID
+     */
+    void setTheFertilizerQuantityOfUser(@Param("userId") String userId, @Param("quantity") int quantity);
+
+    /**
+     * 得到用户的水的数量
+     * @param userId 用户ID
+     * @return 水的数量
+     */
+    int getTheWaterQuantityOfUser(String userId);
+
+    /**
+     * 设置用户的水的数量
+     * @param userId 用户ID
+     */
+    void setTheWaterQuantityOfUser(@Param("userId") String userId, @Param("quantity") int quantity);
+
+    /**
      * 得到用户的自习时房间号
      * @param userId 用户ID
      * @return 自习时房间号
@@ -93,4 +112,30 @@ public interface UserMapper {
      * @return 前10的用户ID
      */
     List<String> getTheWeekTop10();
+
+    /**
+     * 得到用户的肥料次数
+     * @param userId 用户ID
+     * @return 肥料次数
+     */
+    int getTheFertilizationTimes(String userId);
+
+    /**
+     * 设置用户的肥料次数
+     * @param userId 用户ID
+     */
+    void setTheFertilizationTimes(@Param("userId") String userId, @Param("times") int times);
+
+    /**
+     * 得到用户的浇水次数
+     * @param userId 用户ID
+     * @return 浇水次数
+     */
+    int getTheWateringTimes(String userId);
+
+    /**
+     * 设置用户的浇水次数
+     * @param userId 用户ID
+     */
+    void setTheWateringTimes(@Param("userId") String userId, @Param("times") int times);
 }

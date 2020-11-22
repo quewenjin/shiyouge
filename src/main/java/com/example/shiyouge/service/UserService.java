@@ -1,6 +1,7 @@
 package com.example.shiyouge.service;
 
 import com.example.shiyouge.mapper.UserMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,31 @@ public class UserService {
      */
     public int getFertilizerQuantityOfUser(String userId){
         return userMapper.getTheFertilizerQuantityOfUser(userId);
+    }
+
+    /**
+     * 设置用户的肥料数量
+     * @param userId 用户ID
+     */
+    public void setFertilizerQuantityOfUser(String userId, int quantity){
+        userMapper.setTheFertilizerQuantityOfUser(userId, quantity);
+    }
+
+    /**
+     * 得到用户的水的数量
+     * @param userId 用户ID
+     * @return 水的数量
+     */
+    public int getWaterQuantityOfUser(String userId){
+        return userMapper.getTheFertilizerQuantityOfUser(userId);
+    }
+
+    /**
+     * 设置用户的水的数量
+     * @param userId 用户ID
+     */
+    public  void setWaterQuantityOfUser(String userId, int quantity){
+        userMapper.setTheFertilizerQuantityOfUser(userId, quantity);
     }
 
     /**
@@ -126,5 +152,39 @@ public class UserService {
      */
     public List<String> getWeekTop10(){
         return userMapper.getTheWeekTop10();
+    }
+
+    /**
+     * 得到用户的肥料次数
+     * @param userId 用户ID
+     * @return 肥料次数
+     */
+    public int getTheFertilizationTimes(String userId){
+        return userMapper.getTheFertilizationTimes(userId);
+    }
+
+    /**
+     * 设置用户的肥料次数
+     * @param userId 用户ID
+     */
+    public void setTheFertilizationTimes(String userId, int times){
+        userMapper.setTheFertilizationTimes(userId, times);
+    }
+
+    /**
+     * 得到用户的浇水次数
+     * @param userId 用户ID
+     * @return 浇水次数
+     */
+    public int getTheWateringTimes(String userId){
+        return userMapper.getTheWateringTimes(userId);
+    }
+
+    /**
+     * 设置用户的浇水次数
+     * @param userId 用户ID
+     */
+    public void setTheWateringTimes(String userId, int times){
+        userMapper.setTheWateringTimes(userId, times);
     }
 }

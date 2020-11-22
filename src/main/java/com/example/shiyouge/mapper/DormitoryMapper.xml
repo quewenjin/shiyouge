@@ -23,6 +23,40 @@
         update dormitory set soilFertility = 0
     </update>
 
+    <select id="getTheSoilMoistureOfDormitory" resultType="int">
+        select soilMoisture from dormitory where dormitoryId = #{dormitoryId}
+    </select>
 
+    <select id="getTheSoilFertilityOfDormitory" resultType="int">
+        select soilFertility from dormitory where dormitoryId = #{dormitoryId}
+    </select>
+
+    <select id="getTheFlowerGrowthValueOfDormitory" resultType="int">
+        select flowerGrowthValue from dormitory where dormitoryId = #{dormitoryId}
+    </select>
+
+    <update id="setTheSoilMoistureOfDormitory">
+        update dormitory set soilMoisture = #{moistrue} where dormitoryId = #{dormitoryId}
+    </update>
+
+    <update id="setTheFlowerGrowthValueOfDormitory">
+        update dormitory set flowerGrowthValue = #{flowerGrowthValue} where dormitoryId = #{dormitoryId}
+    </update>
+
+    <select id="getTheFlowerWateringTimes" resultType="int">
+        select flowerWateringTimes from dormitory where dormitoryId = #{dormitoryId}
+    </select>
+
+    <update id="setTheFlowerWateringTimes">
+        update dormitory set flowerWateringTimes = #{times} where dormitoryId = #{dormitoryId}
+    </update>
+
+    <select id="getTheFlowerFertilizationTimes" resultType="int">
+        select flowerFertilizationTimes from dormitory where dormitoryId = #{dormitoryId}
+    </select>
+
+    <update id="setTheFlowerFertilizationTimes">
+        update dormitory set flowerFertilizationTimes = #{times} where dormitoryId = #{dormitoryId}
+    </update>
 
 </mapper>
