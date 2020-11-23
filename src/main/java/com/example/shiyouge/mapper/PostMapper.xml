@@ -55,11 +55,11 @@
     </insert>
 
     <delete id="deletePostByPostId" parameterType="int">
-        delete * from post where postId = #{postId}
+        delete from post where postId = #{postId}
     </delete>
 
     <update id="reportedCancel">
-        update post set ifReport = 0 where postId = #{postId}
+        update post set ifReported = 0 where postId = #{postId}
     </update>
 
 

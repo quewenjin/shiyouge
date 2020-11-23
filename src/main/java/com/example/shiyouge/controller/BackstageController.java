@@ -59,14 +59,15 @@ public class BackstageController {
      * @return 状态：succeed 或 wrong
      */
     @RequestMapping(value = "/updateUserInfo",method = RequestMethod.POST)
-    public String updateUserInfo(@RequestBody Map<String, Integer> params) {
+    public String updateUserInfo(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
         String userRealName = params.get("userRealName").toString();
-        int userStudentNumber = params.get("userStudentNumber");
+        int userStudentNumber = Integer.parseInt(params.get("userStudentNumber").toString());
         JSONObject json = new JSONObject();
-        if (userService.updateUserInfo(userRealName, userStudentNumber) >= 1) {
+        try {
+            userService.updateUserInfo(userRealName, userStudentNumber, userId);
             json.put("status", "succeed");
-        }
-        else {
+        } catch (Exception e){
             json.put("status","wrong");
         }
         return json.toString();
@@ -84,9 +85,9 @@ public class BackstageController {
             json1.put("status", "wrong");
         } else {
             JSONArray jsonArray = new JSONArray();
-            JSONObject json2 = new JSONObject();
             List<Integer> postIdsOfReport = reportService.getPostIdOfReport();
-            for (Integer postIdOfReport : postIdsOfReport) {
+            for (int postIdOfReport : postIdsOfReport) {
+                JSONObject json2 = new JSONObject();
                 json2.put("postIdOfReport", postIdOfReport);
                 String postContent = reportService.getPostContnetByPostId(postIdOfReport);
                 json2.put("postContent", postContent);
@@ -103,7 +104,7 @@ public class BackstageController {
                 json2.put("type", json3);
                 jsonArray.add(json2);
             }
-            json1.put("",jsonArray);
+            json1.put("posts",jsonArray);
             json1.put("status", "succeed");
         }
         return  json1.toString();
@@ -111,11 +112,12 @@ public class BackstageController {
 
     /**
      * 删帖
-     * @param postId 帖子ID
+     * @param params 帖子ID
      * @return 状态：succeed
      */
     @RequestMapping(value = "/deletePost", method = RequestMethod.POST)
-    public String deletePost(@RequestBody int postId){
+    public String deletePost(@RequestBody Map<String, Object> params){
+        int postId = Integer.parseInt(params.get("postId").toString());
         JSONObject json = new JSONObject();
         if(postService.deletePostByPostId(postId) == 1) {
             json.put("status", "succeed");
@@ -128,11 +130,12 @@ public class BackstageController {
 
     /**
      * 取消举报状态
-     * @param postId 帖子ID
+     * @param params 帖子ID
      * @return 状态：succeed
      */
      @RequestMapping(value = "/reportedCancel", method = RequestMethod.POST)
-    public String reportedCancel(@RequestBody int postId) {
+    public String reportedCancel(@RequestBody Map<String, Object> params) {
+         int postId = Integer.parseInt(params.get("postId").toString());
          JSONObject json = new JSONObject();
          if (postService.reportedCancel(postId) >= 1) {
              json.put("status", "succeed");
@@ -145,11 +148,12 @@ public class BackstageController {
 
     /**
      * 禁言用户
-     * @param userId 用户ID
+     * @param params 用户ID
      * @return 状态：succeed
      */
     @RequestMapping(value = "/silent", method = RequestMethod.POST)
-    public String silent(@RequestBody int userId) {
+    public String silentUser(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
         JSONObject json = new JSONObject();
         if (userService.silent(userId) >= 1) {
             json.put("status", "succeed");
@@ -166,11 +170,11 @@ public class BackstageController {
      * @return 状态：succeed
      */
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
-    public String silent(@RequestBody Map<String,String> params) {
-        JSONObject json = new JSONObject();
+    public String adminSignIn(@RequestBody Map<String, Object> params) {
         String userId = params.get("userId").toString();
         String password = params.get("password").toString();
-        if (adminService.signIn(userId,password) == 1) {
+        JSONObject json = new JSONObject();
+        if (adminService.signIn(userId, password) == 1) {
             json.put("status", "succeed");
         }
         else {

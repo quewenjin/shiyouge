@@ -1,6 +1,7 @@
 package com.example.shiyouge.service;
 
 import com.example.shiyouge.mapper.UserMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -212,10 +213,11 @@ public class UserService {
      * 修改真实姓名和学号
      * @param  userRealName 用户真实姓名
      * @param  userStudentNumber 学号
+     * @param userId ID
      * @return 状态：succeed
      */
-    public int updateUserInfo(String userRealName, int userStudentNumber){
-        return  userMapper.updateUserInfo(userRealName, userStudentNumber);
+    public int updateUserInfo(String userRealName, int userStudentNumber, String userId){
+        return userMapper.updateUserInfo(userRealName, userStudentNumber, userId);
     }
 
     /**
@@ -224,11 +226,10 @@ public class UserService {
      */
     public int getNumberOfReported() { return userMapper.getNumberOfReported();}
 
-
     /**
      * 禁言用户
      * @param userId 用户ID
      * @return 状态：succeed
      */
-    public int silent(int userId) { return userMapper.silent(userId);}
+    public int silent(String userId) { return userMapper.silent(userId);}
 }
