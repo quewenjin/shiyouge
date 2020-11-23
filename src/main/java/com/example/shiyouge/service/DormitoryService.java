@@ -13,10 +13,10 @@ public class DormitoryService {
     DormitoryMapper dormitoryMapper;
 
     /**
-     * 移除某舍员
+     * 创建宿舍
      */
-    public void created(int DormitoryID){
-        dormitoryMapper.created(DormitoryID);
+    public void created(int DormitoryID, String joinPassward){
+        dormitoryMapper.created(DormitoryID,joinPassward);
     }
 
     /**
@@ -27,7 +27,8 @@ public class DormitoryService {
     }
 
     /**
-     * 移除某舍员
+     * 随机宿舍ID
+     * @return 随机ID
      */
     public int randomID(){
         return dormitoryMapper.randomID();
