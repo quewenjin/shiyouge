@@ -2,7 +2,6 @@ package com.example.shiyouge.controller;
 
 import com.example.shiyouge.service.UserService;
 import com.alibaba.fastjson.JSONObject;
-import com.example.shiyouge.bean.User;
 import com.example.shiyouge.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,12 +28,12 @@ public class UserController {
     public String getDetailsOfPeople(@RequestBody Map<String, Object> params) {
         int userID = Integer.parseInt(params.get("userID").toString());
         JSONObject json = new JSONObject();
-        json.put("Tags", UserService.getTags(userID));
-        json.put("Nickname", UserService.getNickname(userID));
-        json.put("StudentNumber", UserService.getStudentNumber(userID));
-        json.put("Sex", UserService.getSex(userID));
-        json.put("Name", UserService.getName(userID));
-        json.put("PhotoID", UserService.getPhotoID(userID));
+        json.put("Tags", userService.getTags(userID));
+        json.put("Nickname", userService.getNickname(userID));
+        json.put("StudentNumber", userService.getStudentNumber(userID));
+        json.put("Sex", userService.getSex(userID));
+        json.put("Name", userService.getName(userID));
+        json.put("PhotoID", userService.getPhotoID(userID));
         return json.toString();
     }
 
@@ -48,7 +47,7 @@ public class UserController {
         String Nickname = params.get("Nickname").toString();
         JSONObject json = new JSONObject();
         try {
-            UserService.setNickname(Nickname);
+            userService.setNickname(Nickname);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
@@ -67,8 +66,8 @@ public class UserController {
         JSONObject json = new JSONObject();
         try {
             int DormitoryID = UserService.getDormitory(userID);
-            UserService.quitDormitory(userID);
-            DormitoryService.removeUser(DormitoryID, userID);
+            userService.quitDormitory(userID);
+            dormitoryService.removeUser(DormitoryID, userID);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
@@ -83,7 +82,7 @@ public class UserController {
     @RequestMapping(value = "/randomDormitory", method = RequestMethod.POST)
     public String randomDormitory() {
         JSONObject json = new JSONObject();
-        json.put("id", DormitoryService.randomID());
+        json.put("id", dormitoryService.randomID());
         return json.toString();
     }
 
@@ -97,7 +96,7 @@ public class UserController {
         int DormitoryID = Integer.parseInt(params.get("DormitoryID").toString());
         JSONObject json = new JSONObject();
         try {
-            DormitoryService.created(DormitoryID);
+            dormitoryService.created(DormitoryID);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
@@ -116,7 +115,7 @@ public class UserController {
         String Tags = params.get("Tags").toString();
         JSONObject json = new JSONObject();
         try {
-            UserService.setTags(userID, Tags);
+            userService.setTags(userID, Tags);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
