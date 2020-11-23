@@ -18,6 +18,11 @@ public class AdminService {
      * @return 1
      */
     public int signIn(String userId,String password){
-        return adminMapper.singIn(userId,password);
+        String pass = adminMapper.signIn(userId,password);
+        if (pass.equals(password)){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

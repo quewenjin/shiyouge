@@ -14,12 +14,64 @@
         <result column="others" property="others"/>
     </resultMap>
 
+    <insert id="creatTheReportOfPost">
+        insert into report(postIdOfReport, vulgar, sensitivity, illegal, advertisement, virus, others)
+        value(#{postId}, 0, 0, 0, 0, 0, 0, 0)
+    </insert>
+
+    <select id="getTheVulgarNum" resultType="int">
+        select vulgar from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheVulgarNum">
+        update report set vulgar = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheSensitivityNum" resultType="int">
+        select sensitivity from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheSensitivityNum">
+        update report set sensitivity = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheIllegalNum" resultType="int">
+        select illegal from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheIllegalNum">
+        update report set illegal = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheAdvertisementNum" resultType="int">
+        select advertisement from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheAdvertisementNum">
+        update report set advertisement = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheVirusNum" resultType="int">
+        select virus from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheVirusNum">
+        update report set virus = #{num} where postIdOfReport = #{postId}
+    </update>
+
+    <select id="getTheOthersNum" resultType="int">
+        select others from report where postIdOfReport = #{postId}
+    </select>
+
+    <update id="setTheOthersNum">
+        update report set others = #{num} where postIdOfReport = #{postId}
+    </update>
 
     <select id="getPostIdOfReport" resultType="int">
         select postIdOfReport from report
     </select>
 
-    <select id="getPostContent" resultType="String">
+    <select id="getPostContnetByPostId" resultType="String">
         select postContent from post where postId = #{postIdOfReport}
     </select>
 
@@ -27,8 +79,12 @@
         select reportTimes from post where postId = #{postIdOfReport}
     </select>
 
-    <select id="getReportTypeByPostId" resultType="Report">
+    <select id="getReportTypeByPostId" resultType="java.lang.String">
         select vulgar,sensitiviry, illegal, advertisement, virus, others
         from report where postIdOfReport = #{postIdOfReport}
+    </select>
+
+    <select id="getTheReportByPostId" resultMap="BaseResultMap">
+        select * from report where postIdOfReport = #{postIdOfReport}
     </select>
 </mapper>

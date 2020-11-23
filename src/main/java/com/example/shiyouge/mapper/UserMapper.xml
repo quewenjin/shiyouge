@@ -29,6 +29,18 @@
         select fertilizerQuantity from user where userId = #{userId}
     </select>
 
+    <update id="setTheFertilizerQuantityOfUser">
+        update user set fertilizerQuantity = #{quantity} where userId = #{userId}
+    </update>
+
+    <select id="getTheWaterQuantityOfUser" resultType="int">
+        select waterQuantity from user where userId = #{userId}
+    </select>
+
+    <update id="setTheWaterQuantityOfUser">
+        update user set waterQuantity = #{quantity} where userId = #{userId}
+    </update>
+
     <select id="getTheStudyRoomIdOfUser" resultType="int">
         select userStudyRoomId from user where userId = #{userId}
     </select>
@@ -77,6 +89,22 @@
         select * from (select * from user order by userStudyTimeWeek desc) as tmp limit 10
     </select>
 
+    <select id="getTheFertilizationTimes" resultType="int">
+        select userFertilizationTimes from user where userId = #{userId}
+    </select>
+
+    <update id="setTheFertilizationTimes">
+        update user set userFertilizationTimes = #{times} where userId = #{userId}
+    </update>
+
+    <select id="getTheWateringTimes" resultType="int">
+        select userWateringTimes from user where userId = #{userId}
+    </select>
+
+    <update id="setTheWateringTimes">
+        update user set userWateringTimes = #{times} where userId = #{userId}
+    </update>
+
     <select id="getAllUserId" resultType="java.lang.String">
         select userId from user
     </select>
@@ -107,7 +135,7 @@
         select count(*) from post where ifReported = 1
     </select>
 
-    <update id="silent" parameterType="user">
+    <update id="silent">
         update user set ifSilent = 1 where userId = #{userId}
     </update>
 

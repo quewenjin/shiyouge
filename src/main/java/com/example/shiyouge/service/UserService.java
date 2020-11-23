@@ -23,6 +23,31 @@ public class UserService {
     }
 
     /**
+     * 设置用户的肥料数量
+     * @param userId 用户ID
+     */
+    public void setFertilizerQuantityOfUser(String userId, int quantity){
+        userMapper.setTheFertilizerQuantityOfUser(userId, quantity);
+    }
+
+    /**
+     * 得到用户的水的数量
+     * @param userId 用户ID
+     * @return 水的数量
+     */
+    public int getWaterQuantityOfUser(String userId){
+        return userMapper.getTheFertilizerQuantityOfUser(userId);
+    }
+
+    /**
+     * 设置用户的水的数量
+     * @param userId 用户ID
+     */
+    public  void setWaterQuantityOfUser(String userId, int quantity){
+        userMapper.setTheFertilizerQuantityOfUser(userId, quantity);
+    }
+
+    /**
      * 得到用户的自习总时长
      * @param userId 用户ID
      * @return 自习总时长
@@ -121,6 +146,40 @@ public class UserService {
      * @return 前10的用户ID
      */
     public List<String> getWeekTop10(){ return userMapper.getTheWeekTop10(); }
+
+    /**
+     * 得到用户的肥料次数
+     * @param userId 用户ID
+     * @return 肥料次数
+     */
+    public int getTheFertilizationTimes(String userId){
+        return userMapper.getTheFertilizationTimes(userId);
+    }
+
+    /**
+     * 设置用户的肥料次数
+     * @param userId 用户ID
+     */
+    public void setTheFertilizationTimes(String userId, int times){
+        userMapper.setTheFertilizationTimes(userId, times);
+    }
+
+    /**
+     * 得到用户的浇水次数
+     * @param userId 用户ID
+     * @return 浇水次数
+     */
+    public int getTheWateringTimes(String userId){
+        return userMapper.getTheWateringTimes(userId);
+    }
+
+    /**
+     * 设置用户的浇水次数
+     * @param userId 用户ID
+     */
+    public void setTheWateringTimes(String userId, int times){
+        userMapper.setTheWateringTimes(userId, times);
+    }
 
     /**
      * 获得所有用户ID

@@ -8,7 +8,7 @@ public interface AdminMapper {
      * 管理员登录
      * @param userId 用户ID
      * @param password 密码
-     * @return 1
+     * @return 密码
      */
-    int singIn(String userId, String password);
+    String signIn(String userId, String password);
 }

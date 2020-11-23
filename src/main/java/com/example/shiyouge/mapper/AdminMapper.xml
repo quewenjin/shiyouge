@@ -9,8 +9,8 @@
         <result column="AdminPassword" property="adminPassword"/>
     </resultMap>
 
-    <select id="signIn" resultType="int">
-        select password from (select password from user where userId = #{userId}) as tmp limit 10
+    <select id="signIn" resultType="java.lang.String">
+        select password from user where userId = #{userId}
     </select>
 
 </mapper>

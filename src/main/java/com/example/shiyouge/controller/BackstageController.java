@@ -56,7 +56,7 @@ public class BackstageController {
     /**
      * 修改真实姓名和学号
      * @param params 用户真实姓名 + 学号
-     * @return 状态：succeed
+     * @return 状态：succeed 或 wrong
      */
     @RequestMapping(value = "/updateUserInfo",method = RequestMethod.POST)
     public String updateUserInfo(@RequestBody Map<String, Integer> params) {
@@ -83,7 +83,6 @@ public class BackstageController {
         if (numberOfReported == 0){
             json1.put("status", "wrong");
         } else {
-            json1.put("status", "succeed");
             JSONArray jsonArray = new JSONArray();
             JSONObject json2 = new JSONObject();
             List<Integer> postIdsOfReport = reportService.getPostIdOfReport();
@@ -91,10 +90,10 @@ public class BackstageController {
                 json2.put("postIdOfReport", postIdOfReport);
                 String postContent = reportService.getPostContnetByPostId(postIdOfReport);
                 json2.put("postContent", postContent);
-                String reportTimes = reportService.getReportTimesByPostId(postIdOfReport);
+                int reportTimes = reportService.getReportTimesByPostId(postIdOfReport);
                 json2.put("reportTimes", reportTimes);
                 JSONObject json3 = new JSONObject();
-                Report report = reportService.getReportTypeByPostId(postIdOfReport);
+                Report report = reportService.getTheReportByPostId(postIdOfReport);
                 json3.put("vulgar",report.getVulgar());
                 json3.put("sensitivity",report.getSensitivity());
                 json3.put("illegal",report.getIllegal());
@@ -105,6 +104,7 @@ public class BackstageController {
                 jsonArray.add(json2);
             }
             json1.put("",jsonArray);
+            json1.put("status", "succeed");
         }
         return  json1.toString();
     }

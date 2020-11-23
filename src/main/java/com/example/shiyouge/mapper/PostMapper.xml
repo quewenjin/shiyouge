@@ -58,7 +58,7 @@
         delete * from post where postId = #{postId}
     </delete>
 
-    <update id="reportedCancel" parameterType="Post">
+    <update id="reportedCancel">
         update post set ifReport = 0 where postId = #{postId}
     </update>
 
