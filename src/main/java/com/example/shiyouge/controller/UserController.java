@@ -1,5 +1,6 @@
 package com.example.shiyouge.controller;
 
+import com.example.shiyouge.service.UserService;
 import com.alibaba.fastjson.JSONObject;
 import com.example.shiyouge.bean.User;
 import com.example.shiyouge.service.*;
