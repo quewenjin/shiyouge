@@ -11,4 +11,12 @@
         <result column="recordTime" property="recordTime"/>
     </resultMap>
 
+    <select id="getTheBlackBoardRecords" resultMap="BaseResultMap">
+        select * from (select * from blackboard where dormitoryIdOfBoard = #{dormitoryId} order by recordTime desc) as tmp limit #{getNum}
+    </select>
+
+    <update id="createTheBlackBoardRecord">
+        update blackboard set recordType = #{type} where dormitoryIdOfBoard = #{dormitoryId}
+    </update>
+
 </mapper>
