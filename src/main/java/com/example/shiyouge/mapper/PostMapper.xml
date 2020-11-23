@@ -22,7 +22,7 @@
     </select>
 
     <select id="getThePostsByContent" resultMap="BaseResultMap">
-        select * from post where postContent like '%'+#{content}+'%'
+        select * from post where postContent like '%${content}%'
     </select>
 
     <select id="getThePostByPostId" resultMap="BaseResultMap">
@@ -53,5 +53,14 @@
         insert into post(userIdOfPost, postContent, partitionOfPost, publishTime)
         value(#{userId}, #{content}, #{partition}, #{createTime})
     </insert>
+
+    <delete id="deletePostByPostId" parameterType="int">
+        delete * from post where postId = #{postId}
+    </delete>
+
+    <update id="reportedCancel">
+        update post set ifReport = 0 where postId = #{postId}
+    </update>
+
 
 </mapper>

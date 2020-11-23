@@ -1,10 +1,19 @@
 package com.example.shiyouge.mapper;
 
+import com.example.shiyouge.bean.Report;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface ReportMapper {
+
+    /**
+     * 创建某帖子的举报记录
+     * @param postId 帖子ID
+     */
+    void creatTheReportOfPost(int postId);
 
     /**
      * 得到色情低俗次数
@@ -89,4 +98,38 @@ public interface ReportMapper {
      * @param num 次数
      */
     void setTheOthersNum(@Param("postId") int postId, @Param("num") int num);
+
+    /**
+     * 获得被举报帖子的ID
+     * @return 被举报帖子的ID
+     */
+    List<Integer> getPostIdOfReport();
+
+    /**
+     * 获得被举报帖子的内容
+     * @param postIdOfReport 被举报帖子的ID
+     * @return 被举报帖子的内容
+     */
+    String getPostContnetByPostId(int postIdOfReport);
+
+    /**
+     * 获得被举报帖子的被举报次数
+     * @param postIdOfReport 被举报帖子的ID
+     * @return 被举报帖子的次数
+     */
+    int getReportTimesByPostId(int postIdOfReport);
+
+    /**
+     * 获得被举报帖子的被举报类型
+     * @param postIdOfReport 被举报帖子的ID
+     * @return 被举报帖子的举报类型
+     */
+    String getReportTypeByPostId(int postIdOfReport);
+
+    /**
+     * 得到通过ID得到 Report 对象
+     * @param postIdOfReport ID
+     * @return Report 对象
+     */
+    Report getTheReportByPostId(int postIdOfReport);
 }

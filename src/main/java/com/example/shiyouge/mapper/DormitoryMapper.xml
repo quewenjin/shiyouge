@@ -5,15 +5,58 @@
 
 <mapper namespace="com.example.shiyouge.mapper.DormitoryMapper">
     <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.Dormitory">
-        <id column="" property="dormitoryId"/>
-        <result column="" property="numberOfMate"/>
-        <result column="" property="flowerGrowthValue"/>
-        <result column="" property="flowerWateringTimes"/>
-        <result column="" property="flowerFertilizationTimes"/>
-        <result column="" property="soilMoisture"/>
-        <result column="" property="joinPassward"/>
+        <id column="dormitoryId" property="dormitoryId"/>
+        <result column="numberOfMate" property="numberOfMate"/>
+        <result column="flowerGrowthValue" property="flowerGrowthValue"/>
+        <result column="flowerWateringTimes" property="flowerWateringTimes"/>
+        <result column="flowerFertilizationTimes" property="flowerFertilizationTimes"/>
+        <result column="soilMoisture" property="soilMoisture"/>
+        <result column="soilFertilit" property="soilFertility"/>
+        <result column="joinPassward" property="joinPassward"/>
     </resultMap>
 
+    <update id="setTheAllSoilMoistureToZero">
+        update dormitory set soilMoisture = 0
+    </update>
 
+    <update id="setTheAllSoilFertilityToZero">
+        update dormitory set soilFertility = 0
+    </update>
+
+    <select id="getTheSoilMoistureOfDormitory" resultType="int">
+        select soilMoisture from dormitory where dormitoryId = #{dormitoryId}
+    </select>
+
+    <select id="getTheSoilFertilityOfDormitory" resultType="int">
+        select soilFertility from dormitory where dormitoryId = #{dormitoryId}
+    </select>
+
+    <select id="getTheFlowerGrowthValueOfDormitory" resultType="int">
+        select flowerGrowthValue from dormitory where dormitoryId = #{dormitoryId}
+    </select>
+
+    <update id="setTheSoilMoistureOfDormitory">
+        update dormitory set soilMoisture = #{moistrue} where dormitoryId = #{dormitoryId}
+    </update>
+
+    <update id="setTheFlowerGrowthValueOfDormitory">
+        update dormitory set flowerGrowthValue = #{flowerGrowthValue} where dormitoryId = #{dormitoryId}
+    </update>
+
+    <select id="getTheFlowerWateringTimes" resultType="int">
+        select flowerWateringTimes from dormitory where dormitoryId = #{dormitoryId}
+    </select>
+
+    <update id="setTheFlowerWateringTimes">
+        update dormitory set flowerWateringTimes = #{times} where dormitoryId = #{dormitoryId}
+    </update>
+
+    <select id="getTheFlowerFertilizationTimes" resultType="int">
+        select flowerFertilizationTimes from dormitory where dormitoryId = #{dormitoryId}
+    </select>
+
+    <update id="setTheFlowerFertilizationTimes">
+        update dormitory set flowerFertilizationTimes = #{times} where dormitoryId = #{dormitoryId}
+    </update>
 
 </mapper>

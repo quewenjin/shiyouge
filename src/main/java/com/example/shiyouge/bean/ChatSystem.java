@@ -6,7 +6,7 @@ public class ChatSystem {
     private int chatId;//聊天记录ID
     private int dormitoryIdOfChat;//对应宿舍ID
     private String userIdOfSender;//发送人的ID
-    private String userIdOfReceiver;//接收人的ID
+    //private String userIdOfReceiver;//接收人的ID
     private Timestamp sendTime;//发送时间
     private String chatContent;//聊天内容
 
@@ -32,14 +32,6 @@ public class ChatSystem {
 
     public void setUserIdOfSender(String userIdOfSender) {
         this.userIdOfSender = userIdOfSender;
-    }
-
-    public String getUserIdOfReceiver() {
-        return userIdOfReceiver;
-    }
-
-    public void setUserIdOfReceiver(String userIdOfReceiver) {
-        this.userIdOfReceiver = userIdOfReceiver;
     }
 
     public Timestamp getSendTime() {

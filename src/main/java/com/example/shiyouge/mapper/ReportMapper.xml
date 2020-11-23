@@ -14,6 +14,11 @@
         <result column="others" property="others"/>
     </resultMap>
 
+    <insert id="creatTheReportOfPost">
+        insert into report(postIdOfReport, vulgar, sensitivity, illegal, advertisement, virus, others)
+        value(#{postId}, 0, 0, 0, 0, 0, 0, 0)
+    </insert>
+
     <select id="getTheVulgarNum" resultType="int">
         select vulgar from report where postIdOfReport = #{postId}
     </select>
@@ -62,5 +67,24 @@
         update report set others = #{num} where postIdOfReport = #{postId}
     </update>
 
+    <select id="getPostIdOfReport" resultType="int">
+        select postIdOfReport from report
+    </select>
 
+    <select id="getPostContnetByPostId" resultType="String">
+        select postContent from post where postId = #{postIdOfReport}
+    </select>
+
+    <select id="getReportTimesByPostId" resultType="int">
+        select reportTimes from post where postId = #{postIdOfReport}
+    </select>
+
+    <select id="getReportTypeByPostId" resultType="java.lang.String">
+        select vulgar,sensitiviry, illegal, advertisement, virus, others
+        from report where postIdOfReport = #{postIdOfReport}
+    </select>
+
+    <select id="getTheReportByPostId" resultMap="BaseResultMap">
+        select * from report where postIdOfReport = #{postIdOfReport}
+    </select>
 </mapper>

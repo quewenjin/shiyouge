@@ -9,4 +9,8 @@
         <result column="AdminPassword" property="adminPassword"/>
     </resultMap>
 
+    <select id="signIn" resultType="java.lang.String">
+        select password from user where userId = #{userId}
+    </select>
+
 </mapper>
