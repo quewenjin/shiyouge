@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/backstage")
+@RequestMapping(value = "/backStage")
 public class BackstageController {
     @Autowired
     UserService userService;

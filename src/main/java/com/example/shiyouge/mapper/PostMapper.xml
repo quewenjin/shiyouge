@@ -22,7 +22,7 @@
     </select>
 
     <select id="getThePostsByContent" resultMap="BaseResultMap">
-        select * from post where postContent like '%${content}%'
+        select * from post where postContent like CONCAT(CONCAT('%', #{content}, '%'))
     </select>
 
     <select id="getThePostByPostId" resultMap="BaseResultMap">
