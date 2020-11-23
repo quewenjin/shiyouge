@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -80,4 +81,19 @@ public class PostService {
     public void createThePost(String userId, String content, int parttiion, Timestamp createTime){
         postMapper.createThePost(userId, content, parttiion, createTime);
     }
+
+    /**
+     * 删帖
+     * @param postId 帖子ID
+     * @return 状态：succeed
+     */
+    public int deletePostByPostId(int postId) {return postMapper.deletePostByPostId(postId);}
+
+    /**
+     * 取消举报状态
+     * @param postId 帖子ID
+     * @return 状态：succeed
+     */
+    public int reportedCancel(int postId) {return postMapper.reportedCancel(postId);}
+
 }

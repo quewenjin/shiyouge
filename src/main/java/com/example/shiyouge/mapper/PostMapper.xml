@@ -54,4 +54,13 @@
         value(#{userId}, #{content}, #{partition}, #{createTime})
     </insert>
 
+    <delete id="deletePostByPostId" parameterType="int">
+        delete * from post where postId = #{postId}
+    </delete>
+
+    <update id="reportedCancel" parameterType="Post">
+        update post set ifReport = 0 where postId = #{postId}
+    </update>
+
+
 </mapper>
