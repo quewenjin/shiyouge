@@ -13,6 +13,27 @@ public class DormitoryService {
     DormitoryMapper dormitoryMapper;
 
     /**
+     * 移除某舍员
+     */
+    public void created(int DormitoryID){
+        dormitoryMapper.created(DormitoryID);
+    }
+
+    /**
+     * 移除某舍员
+     */
+    public void removeUser(String userID){
+        dormitoryMapper.removeUser(userID);
+    }
+
+    /**
+     * 移除某舍员
+     */
+    public int randomID(){
+        return dormitoryMapper.randomID();
+    }
+
+    /**
      * 每日土壤湿度清 0（每日限制浇水10次）
      */
     public void setAllSoilMoistureToZero(){

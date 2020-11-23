@@ -26,14 +26,14 @@ public class UserController {
      */
     @RequestMapping(value = "/getDetailsOfPeople", method = RequestMethod.POST)
     public String getDetailsOfPeople(@RequestBody Map<String, Object> params) {
-        int userID = Integer.parseInt(params.get("userID").toString());
+        String userID = params.get("userID").toString();
         JSONObject json = new JSONObject();
-        json.put("Tags", userService.getTags(userID));
-        json.put("Nickname", userService.getNickname(userID));
-        json.put("StudentNumber", userService.getStudentNumber(userID));
-        json.put("Sex", userService.getSex(userID));
-        json.put("Name", userService.getName(userID));
-        json.put("PhotoID", userService.getPhotoID(userID));
+        json.put("Tags", userService.getTagsByUserId(userID));
+        json.put("NickName", userService.getNickNameByUserId(userID));
+        json.put("StudentNumber", userService.getStudentNumberByUserId(userID));
+        json.put("Sex", userService.getSexByUserId(userID));
+        json.put("RealName", userService.getRealNameByUserId(userID));
+        json.put("Photo", userService.getPhotoByUserId(userID));
         return json.toString();
     }
 
@@ -47,7 +47,7 @@ public class UserController {
         String Nickname = params.get("Nickname").toString();
         JSONObject json = new JSONObject();
         try {
-            userService.setNickname(Nickname);
+            userService.setUserNickName(Nickname);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
@@ -62,14 +62,13 @@ public class UserController {
      */
     @RequestMapping(value = "/quitDormitory", method = RequestMethod.POST)
     public String quitDormitory(@RequestBody Map<String, Object> params) {
-        int userID = Integer.parseInt(params.get("userID").toString());
+        String userID = params.get("userID").toString();
         JSONObject json = new JSONObject();
         try {
-            int DormitoryID = UserService.getDormitory(userID);
-            userService.quitDormitory(userID);
-            dormitoryService.removeUser(DormitoryID, userID);
+            userService.quitDormitoryOfUser(userID);
+            dormitoryService.removeUser(userID);
             json.put("status", "succeed");
-        } catch (Exception e){
+        } catch (Exception De){
             json.put("status", "wrong");
         }
         return json.toString();
@@ -106,16 +105,15 @@ public class UserController {
 
     /**
      * 设置标签
-     * @param params 用户ID + 用户标签Tags
+     * @param params 用户标签Tags
      * @return 状态：succeed
      */
     @RequestMapping(value = "/setUserTag", method = RequestMethod.POST)
     public String setUserTag(@RequestBody Map<String, Object> params) {
-        int userID = Integer.parseInt(params.get("userID").toString());
         String Tags = params.get("Tags").toString();
         JSONObject json = new JSONObject();
         try {
-            userService.setTags(userID, Tags);
+            userService.setUserTag(Tags);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
