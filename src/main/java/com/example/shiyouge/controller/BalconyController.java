@@ -3,7 +3,6 @@ package com.example.shiyouge.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.shiyouge.bean.BlackBoard;
-import com.example.shiyouge.bean.ChatSystem;
 import com.example.shiyouge.service.BlackBoardService;
 import com.example.shiyouge.service.DormitoryService;
 import com.example.shiyouge.service.UserService;
