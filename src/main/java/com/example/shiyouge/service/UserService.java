@@ -1,15 +1,10 @@
 package com.example.shiyouge.service;
 
 import com.example.shiyouge.mapper.UserMapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -25,31 +20,6 @@ public class UserService {
      */
     public int getFertilizerQuantityOfUser(String userId){
         return userMapper.getTheFertilizerQuantityOfUser(userId);
-    }
-
-    /**
-     * 设置用户的肥料数量
-     * @param userId 用户ID
-     */
-    public void setFertilizerQuantityOfUser(String userId, int quantity){
-        userMapper.setTheFertilizerQuantityOfUser(userId, quantity);
-    }
-
-    /**
-     * 得到用户的水的数量
-     * @param userId 用户ID
-     * @return 水的数量
-     */
-    public int getWaterQuantityOfUser(String userId){
-        return userMapper.getTheFertilizerQuantityOfUser(userId);
-    }
-
-    /**
-     * 设置用户的水的数量
-     * @param userId 用户ID
-     */
-    public  void setWaterQuantityOfUser(String userId, int quantity){
-        userMapper.setTheFertilizerQuantityOfUser(userId, quantity);
     }
 
     /**
@@ -150,41 +120,56 @@ public class UserService {
      * 本周前10
      * @return 前10的用户ID
      */
-    public List<String> getWeekTop10(){
-        return userMapper.getTheWeekTop10();
+    public List<String> getWeekTop10(){ return userMapper.getTheWeekTop10(); }
+
+    /**
+     * 获得所有用户ID
+     * @return 所有用户ID
+     */
+     public List<String> getAllUserId() { return userMapper.getAllUserId();}
+
+    /**
+     * 获得用户真实姓名
+     * @param userId 用户ID
+     * @return 用户真实姓名
+     */
+    public String getRealNameByUserId(String userId) { return userMapper.getRealNameByUserId(userId); }
+
+    /**
+     * 获得用户学号
+     * @param userId 用户ID
+     * @return 用户学号
+     */
+    public String getStudentNumberByUserId(String userId) { return userMapper.getStudentNumberByUserId(userId);}
+
+    /**
+     * 获得用户禁言是否被禁言
+     * @param userId 用户ID
+     * @return 用户是否被禁言
+     */
+    public int getIfSilentByUserId(String userId) { return userMapper.getIfSilentByUserId(userId);}
+
+    /**
+     * 修改真实姓名和学号
+     * @param  userRealName 用户真实姓名
+     * @param  userStudentNumber 学号
+     * @return 状态：succeed
+     */
+    public int updateUserInfo(String userRealName, int userStudentNumber){
+        return  userMapper.updateUserInfo(userRealName, userStudentNumber);
     }
 
     /**
-     * 得到用户的肥料次数
-     * @param userId 用户ID
-     * @return 肥料次数
+     * 获得被举报帖子的数量
+     * @return 被举报帖子的数量
      */
-    public int getTheFertilizationTimes(String userId){
-        return userMapper.getTheFertilizationTimes(userId);
-    }
+    public int getNumberOfReported() { return userMapper.getNumberOfReported();}
+
 
     /**
-     * 设置用户的肥料次数
+     * 禁言用户
      * @param userId 用户ID
+     * @return 状态：succeed
      */
-    public void setTheFertilizationTimes(String userId, int times){
-        userMapper.setTheFertilizationTimes(userId, times);
-    }
-
-    /**
-     * 得到用户的浇水次数
-     * @param userId 用户ID
-     * @return 浇水次数
-     */
-    public int getTheWateringTimes(String userId){
-        return userMapper.getTheWateringTimes(userId);
-    }
-
-    /**
-     * 设置用户的浇水次数
-     * @param userId 用户ID
-     */
-    public void setTheWateringTimes(String userId, int times){
-        userMapper.setTheWateringTimes(userId, times);
-    }
+    public int silent(int userId) { return userMapper.silent(userId);}
 }

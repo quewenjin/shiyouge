@@ -9,31 +9,13 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
+
     /**
      * 得到用户的肥料数量
      * @param userId 用户ID
      * @return 肥料数量
      */
     int getTheFertilizerQuantityOfUser(String userId);
-
-    /**
-     * 设置用户的肥料数量
-     * @param userId 用户ID
-     */
-    void setTheFertilizerQuantityOfUser(@Param("userId") String userId, @Param("quantity") int quantity);
-
-    /**
-     * 得到用户的水的数量
-     * @param userId 用户ID
-     * @return 水的数量
-     */
-    int getTheWaterQuantityOfUser(String userId);
-
-    /**
-     * 设置用户的水的数量
-     * @param userId 用户ID
-     */
-    void setTheWaterQuantityOfUser(@Param("userId") String userId, @Param("quantity") int quantity);
 
     /**
      * 得到用户的自习时房间号
@@ -114,28 +96,52 @@ public interface UserMapper {
     List<String> getTheWeekTop10();
 
     /**
-     * 得到用户的肥料次数
-     * @param userId 用户ID
-     * @return 肥料次数
+     * 获得所有用户ID
+     * @return 所有用户ID
      */
-    int getTheFertilizationTimes(String userId);
+    List<String> getAllUserId();
 
     /**
-     * 设置用户的肥料次数
+     * 获得所有用户真实姓名
      * @param userId 用户ID
+     * @return 所有用户真实姓名
      */
-    void setTheFertilizationTimes(@Param("userId") String userId, @Param("times") int times);
+    String getRealNameByUserId(String userId);
 
     /**
-     * 得到用户的浇水次数
+     * 获得所有用户学号
      * @param userId 用户ID
-     * @return 浇水次数
+     * @return 所有用户学号
      */
-    int getTheWateringTimes(String userId);
+    String getStudentNumberByUserId(String userId);
 
     /**
-     * 设置用户的浇水次数
+     * 获得用户禁言是否被禁言
      * @param userId 用户ID
+     * @return 用户是否被禁言
      */
-    void setTheWateringTimes(@Param("userId") String userId, @Param("times") int times);
+    int getIfSilentByUserId(String userId);
+
+    /**
+     * 修改真实姓名和学号
+     * @param  userRealName 用户真实姓名
+     * @param  userStudentNumber 学号
+     * @return 状态：succeed
+     */
+    int updateUserInfo(String userRealName, int userStudentNumber);
+
+    /**
+     * 获得被举报帖子的数量
+     * @return 被举报帖子的数量
+     */
+    int getNumberOfReported();
+
+    /**
+     * 禁言用户
+     * @param userId 用户ID
+     * @return 状态：succeed
+     */
+    int silent(int userId);
+
+
 }

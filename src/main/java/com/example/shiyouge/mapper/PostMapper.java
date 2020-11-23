@@ -75,4 +75,18 @@ public interface PostMapper {
      */
     void createThePost(@Param("userId") String userId, @Param("content") String content,
                          @Param("partition") int parttiion, @Param("createTime") Timestamp createTime);
+
+    /**
+     * 删帖
+     * @param postId 帖子ID
+     * @return 状态：succeed
+     */
+     int deletePostByPostId(int postId);
+
+    /**
+     * 取消举报状态
+     * @param postId 帖子ID
+     * @return 状态：succeed
+     */
+    int reportedCancel(int postId);
 }
