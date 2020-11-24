@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * 数据库定时自动更新部分
  */
 @Component
-public class UpdateCintroller {
+public class UpdateController {
     @Autowired
     UserService userService;
     @Autowired

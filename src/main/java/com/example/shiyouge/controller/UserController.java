@@ -79,6 +79,23 @@ public class UserController {
     }
 
     /**
+     * 随机ID
+     * @return 状态：succeed 或 wrong
+     */
+    @RequestMapping(value = "/randomDormitoryId", method = RequestMethod.POST)
+    public String radomDormitoryId() {
+        JSONObject json = new JSONObject();
+        try {
+            int randomId = dormitoryService.getMaxDormitoryId();
+            json.put("dormitoryId", randomId);
+            json.put("status", "succeed");
+        } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
      * 创建宿舍
      * @param params 宿舍ID 加入密码
      * @return 状态：succeed 或 wrong
