@@ -4,10 +4,19 @@ package com.example.shiyouge.bean;
 import java.sql.Timestamp;
 
 public class BlackBoard {
+    private int recordIdOfBlackBoard;//记录ID
     private int dormitoryIdOfBoard;//对应宿舍ID
     private String recordType;//类型(浇水还是施肥)
     private String userIdOfRecord;//执行的用户的ID
     private Timestamp recordTime ;//记录时间
+
+    public int getRecordIdOfBlackBoard() {
+        return recordIdOfBlackBoard;
+    }
+
+    public void setRecordIdOfBlackBoard(int recordIdOfBlackBoard) {
+        this.recordIdOfBlackBoard = recordIdOfBlackBoard;
+    }
 
     public int getDormitoryIdOfBoard() {
         return dormitoryIdOfBoard;

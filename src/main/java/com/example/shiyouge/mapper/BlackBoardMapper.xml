@@ -5,7 +5,8 @@
 
 <mapper namespace="com.example.shiyouge.mapper.BlackBoardMapper">
     <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.BlackBoard">
-        <id column="dormitoryIdOfBoard" property="dormitoryIdOfBoard"/>
+        <id column="recordIdOfBlackBoard" property= "recordIdOfBlackBoard"/>
+        <result column="dormitoryIdOfBoard" property="dormitoryIdOfBoard"/>
         <result column="recordType" property="recordType"/>
         <result column="userIdOfRecord" property="userIdOfRecord"/>
         <result column="recordTime" property="recordTime"/>
@@ -15,8 +16,9 @@
         select * from (select * from blackboard where dormitoryIdOfBoard = #{dormitoryId} order by recordTime desc) as tmp limit #{getNum}
     </select>
 
-    <update id="createTheBlackBoardRecord">
-        update blackboard set recordType = #{type} where dormitoryIdOfBoard = #{dormitoryId}
-    </update>
+    <insert id="createTheBlackBoardRecord">
+        insert into blackboard(dormitoryIdOfBoard, recordType, userIdOfRecord, recordTime)
+        value(#{dormitoryId}, #{actionType}, #{userId}, #{createTime})
+    </insert>
 
 </mapper>

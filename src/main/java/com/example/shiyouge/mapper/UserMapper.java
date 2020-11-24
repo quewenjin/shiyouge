@@ -167,9 +167,11 @@ public interface UserMapper {
      * 修改真实姓名和学号
      * @param  userRealName 用户真实姓名
      * @param  userStudentNumber 学号
+     * @param userId ID
      * @return 状态：succeed
      */
-    int updateUserInfo(String userRealName, int userStudentNumber);
+    int updateUserInfo(@Param("userRealName") String userRealName, @Param("userStudentNumber") int userStudentNumber,
+                       @Param("userId") String userId);
 
     /**
      * 获得被举报帖子的数量
@@ -182,6 +184,7 @@ public interface UserMapper {
      * @param userId 用户ID
      * @return 状态：succeed
      */
+
     int silent(int userId);
 
     /**
@@ -231,5 +234,4 @@ public interface UserMapper {
      * @param usersTags 用户兴趣标签
      */
     void setUserTag(String userId, String usersTags);
-
 }

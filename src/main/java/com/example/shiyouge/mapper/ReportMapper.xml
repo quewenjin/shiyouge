@@ -16,7 +16,7 @@
 
     <insert id="creatTheReportOfPost">
         insert into report(postIdOfReport, vulgar, sensitivity, illegal, advertisement, virus, others)
-        value(#{postId}, 0, 0, 0, 0, 0, 0, 0)
+        value(#{postId}, 0, 0, 0, 0, 0, 0)
     </insert>
 
     <select id="getTheVulgarNum" resultType="int">

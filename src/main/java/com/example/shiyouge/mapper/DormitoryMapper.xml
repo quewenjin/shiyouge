@@ -39,6 +39,10 @@
         update dormitory set soilMoisture = #{moistrue} where dormitoryId = #{dormitoryId}
     </update>
 
+    <select id="setTheSoilFertilityOfDormitory">
+        update dormitory set soilFertility = #{fertility} where dormitoryId = #{dormitoryId}
+    </select>
+
     <update id="setTheFlowerGrowthValueOfDormitory">
         update dormitory set flowerGrowthValue = #{flowerGrowthValue} where dormitoryId = #{dormitoryId}
     </update>

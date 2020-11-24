@@ -142,6 +142,38 @@ public class TreeHoleController {
     }
 
     /**
+     * 用户举报帖子
+     * @param params 对应的帖子ID + 色情低俗 + 政治敏感 + 违法 + 广告 + 病毒木马 + 其他
+     * @return 状态：reported 或 wrong
+     */
+    @RequestMapping(value = "/reportPost", method = RequestMethod.POST)
+    public String reportPost(@RequestBody Map<String, Object> params) {
+        int postId = Integer.parseInt(params.get("postId").toString());
+        int vulgar = Integer.parseInt(params.get("vulgar").toString());
+        int sensitivity = Integer.parseInt(params.get("sensitivity").toString());
+        int illegal = Integer.parseInt(params.get("illegal").toString());
+        int advertisement = Integer.parseInt(params.get("advertisement").toString());
+        int virus = Integer.parseInt(params.get("virus").toString());
+        int others = Integer.parseInt(params.get("others").toString());
+        JSONObject json = new JSONObject();
+        try {
+            //判断，如果是第一次被举报
+            if (!reportService.findTheReportByPostId(postId)){
+                //创建举报信息记录
+                reportService.creatTheReportOfPost(postId);
+                //设置状态为举报
+                postService.setThePostIfReported(postId, 1);
+            }
+            //统计对对应数值加1
+            reportService.updateTheValueOfReport(postId, vulgar, sensitivity, illegal, advertisement, virus, others);
+            json.put("status", "reported");
+        } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
      * 用户写帖子
      * @param params 用户ID + 评论内容 + 分区
      * @return 状态：created 或 wrong
@@ -158,35 +190,6 @@ public class TreeHoleController {
             //在数据库创建评论
             postService.createThePost(userId, content, partition, createTime);
             json.put("status", "created");
-        } catch (Exception e){
-            json.put("status", "wrong");
-        }
-        return json.toString();
-    }
-
-    /**
-     * 用户举报帖子
-     * @param params 对应的帖子ID + 色情低俗 + 政治敏感 + 违法 + 广告 + 病毒木马 + 其他
-     * @return 状态：reported 或 wrong
-     */
-    @RequestMapping(value = "/reportPost", method = RequestMethod.POST)
-    public String reportPost(@RequestBody Map<String, Object> params) {
-        int postId = Integer.parseInt(params.get("postId").toString());
-        int vulgar = Integer.parseInt(params.get("vulgar").toString());
-        int sensitivity = Integer.parseInt(params.get("sensitivity").toString());
-        int illegal = Integer.parseInt(params.get("illegal").toString());
-        int advertisement = Integer.parseInt(params.get("advertisement").toString());
-        int virus = Integer.parseInt(params.get("virus").toString());
-        int others = Integer.parseInt(params.get("others").toString());
-        JSONObject json = new JSONObject();
-        try {
-            //判断，如果是第一次被举报，创建举报信息记录
-            if (!reportService.findTheReportByPostId(postId)){
-                reportService.creatTheReportOfPost(postId);
-            }
-            //统计对对应数值加1
-            reportService.updateTheValueOfReport(postId, vulgar, sensitivity, illegal, advertisement, virus, others);
-            json.put("status", "reported");
         } catch (Exception e){
             json.put("status", "wrong");
         }

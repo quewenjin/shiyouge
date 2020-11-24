@@ -44,6 +44,13 @@ public interface DormitoryMapper {
     void setTheSoilMoistureOfDormitory(@Param("dormitoryId") int dormitoryId, @Param("moistrue") int moisture);
 
     /**
+     * 修改土壤湿度
+     * @param dormitoryId 宿舍ID
+     * @param fertility 湿度
+     */
+    void setTheSoilFertilityOfDormitory(@Param("dormitoryId") int dormitoryId, @Param("fertility") int fertility);
+
+    /**
      * 修改花的成长值
      * @param dormitoryId 宿舍ID
      * @param flowerGrowthValue 成长值

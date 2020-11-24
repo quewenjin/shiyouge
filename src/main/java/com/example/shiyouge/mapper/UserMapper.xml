@@ -127,7 +127,7 @@
 
     <update id="updateUserInfo">
         update user
-        set userRealName = #{userRealName},userStudentNumber = #{userStudentNumber}
+        set userRealName = #{userRealName}, userStudentNumber = #{userStudentNumber}
         where userId = #{userId}
     </update>
 

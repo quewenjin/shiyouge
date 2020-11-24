@@ -144,5 +144,4 @@ public class UserController {
         json.put("status", "succeed");
         return json.toString();
     }
-
 }

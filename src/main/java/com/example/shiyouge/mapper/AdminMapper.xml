@@ -10,7 +10,7 @@
     </resultMap>
 
     <select id="signIn" resultType="java.lang.String">
-        select password from user where userId = #{userId}
+        select adminPassword from admin where adminId = #{userId}
     </select>
 
 </mapper>
