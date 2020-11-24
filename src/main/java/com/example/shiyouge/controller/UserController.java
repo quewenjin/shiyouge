@@ -86,7 +86,7 @@ public class UserController {
     public String radomDormitoryId() {
         JSONObject json = new JSONObject();
         try {
-            int randomId = dormitoryService.getMaxDormitoryId();
+            int randomId = dormitoryService.getMaxDormitoryId()+1;
             json.put("dormitoryId", randomId);
             json.put("status", "succeed");
         } catch (Exception e){
