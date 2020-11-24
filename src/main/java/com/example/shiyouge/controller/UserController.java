@@ -34,6 +34,7 @@ public class UserController {
         json.put("sex", userService.getSexByUserId(userID));
         json.put("realName", userService.getRealNameByUserId(userID));
         json.put("photo", userService.getPhotoByUserId(userID));
+        json.put("dormitoryId", userService.getDormitoryIDByUserId(userID));
         return json.toString();
     }
 
