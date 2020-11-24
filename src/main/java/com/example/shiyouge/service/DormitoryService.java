@@ -15,15 +15,15 @@ public class DormitoryService {
     /**
      * 创建宿舍
      */
-    public void created(int DormitoryID, String joinPassward){
-        dormitoryMapper.created(DormitoryID,joinPassward);
+    public void created(int DormitoryID, String joinPassword){
+        dormitoryMapper.createDormitory(DormitoryID, joinPassword);
     }
 
     /**
-     * 移除某舍员
+     * 减少宿舍人数
      */
-    public void removeUser(String userID){
-        dormitoryMapper.removeUser(userID);
+    public void subDormitoryMate(int DormitoryID){
+        dormitoryMapper.subDormitoryMate(DormitoryID);
     }
 
     /**
@@ -31,7 +31,9 @@ public class DormitoryService {
      * @return 随机ID
      */
     public int randomID(){
-        return dormitoryMapper.randomID();
+        int max=100,min=1;
+        int ran = (int) (Math.random()*(max-min)+min);
+        return ran;
     }
 
     /**

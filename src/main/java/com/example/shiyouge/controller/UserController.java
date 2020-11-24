@@ -66,7 +66,8 @@ public class UserController {
         JSONObject json = new JSONObject();
         try {
             userService.quitDormitoryOfUser(userID);
-            dormitoryService.removeUser(userID);
+            int dormitoryID = userService.getDormitoryIDByUserId(userID);
+            dormitoryService.subDormitoryMate(dormitoryID);
             json.put("status", "succeed");
         } catch (Exception De){
             json.put("status", "wrong");
@@ -87,15 +88,16 @@ public class UserController {
 
     /**
      * 创建宿舍
-     * @param params 宿舍ID
+     * @param params 宿舍ID 加入密码
      * @return 状态：succeed
      */
     @RequestMapping(value = "/createDormitory", method = RequestMethod.POST)
     public String createDormitory(@RequestBody Map<String, Object> params) {
         int DormitoryID = Integer.parseInt(params.get("DormitoryID").toString());
+        String joinPassword = params.get("joinPassword").toString();
         JSONObject json = new JSONObject();
         try {
-            dormitoryService.created(DormitoryID);
+            dormitoryService.created(DormitoryID, joinPassword);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");

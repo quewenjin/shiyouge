@@ -8,7 +8,7 @@ public class Dormitory {
     private int flowerFertilizationTimes;//施肥总次数
     private int soilMoisture;//土壤湿度(今日浇水次数)
     private int soilFertility;//土壤肥度（今日施肥次数）
-    private String joinPassward;//加入宿舍密码
+    private String joinPassword;//加入宿舍密码
 
     public int getDormitoryId() {
         return dormitoryId;
@@ -67,10 +67,10 @@ public class Dormitory {
     }
 
     public String getJoinPassward() {
-        return joinPassward;
+        return joinPassword;
     }
 
-    public void setJoinPassward(String joinPassward) {
-        this.joinPassward = joinPassward;
+    public void setJoinPassward(String joinPassword) {
+        this.joinPassword = joinPassword;
     }
 }

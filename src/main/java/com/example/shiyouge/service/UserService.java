@@ -207,29 +207,45 @@ public class UserService {
      * @param userId 用户ID
      * @return 用户学号
      */
-    public String getStudentNumberByUserId(String userId) { return userMapper.getStudentNumberByUserId(userId);}
+    public String getStudentNumberByUserId(String userId) {
+        return userMapper.getStudentNumberByUserId(userId);
+    }
+
+    /**
+     * 获得用户兴趣标签
+     * @param userId 用户ID
+     * @return 兴趣标签
+     */
+    public String getTagsByUserId(String userId) {
+        return userMapper.getTagsByUserId(userId);
+    }
 
     /**
      * 获得用户所在宿舍ID
      * @param userId 用户ID
      * @return 宿舍ID
      */
-
-    public String getTagsByUserId(String userId) { return userMapper.getTagsByUserId(userId);}
+    public int getDormitoryIDByUserId(String userId) {
+        return userMapper.getDormitoryIDByUserId(userId);
+    }
 
     /**
      * 获得用户性别
      * @param userId 用户ID
      * @return 用户性别
      */
-    public String getSexByUserId(String userId) { return userMapper.getSexByUserId(userId);}
+    public String getSexByUserId(String userId) {
+        return userMapper.getSexByUserId(userId);
+    }
 
     /**
      * 获得用户头像
      * @param userId 用户ID
      * @return 用户头像
      */
-    public String getPhotoByUserId(String userId) { return userMapper.getPhotoByUserId(userId);}
+    public String getPhotoByUserId(String userId) {
+        return userMapper.getPhotoByUserId(userId);
+    }
 
 
     /**
@@ -237,7 +253,9 @@ public class UserService {
      * @param userId 用户ID
      * @return 用户是否被禁言
      */
-    public int getIfSilentByUserId(String userId) { return userMapper.getIfSilentByUserId(userId);}
+    public int getIfSilentByUserId(String userId) {
+        return userMapper.getIfSilentByUserId(userId);
+    }
 
     /**
      * 修改真实姓名和学号
@@ -251,20 +269,20 @@ public class UserService {
 
     /**
      * 修改昵称
+     * @param userId 用户ID
      * @param  userNickName 用户昵称
-     * @return 状态：succeed
      */
-    public int setUserNickName(String userNickName){
-        return  userMapper.setUserNickName(userNickName);
+    public void setUserNickName(String userId, String userNickName){
+        userMapper.setUserNickName(userId, userNickName);
     }
 
     /**
      * 修改兴趣标签
+     * @param userId 用户ID
      * @param  usersTags 用户兴趣标签
-     * @return 状态：succeed
      */
-    public int setUserTag(String usersTags){
-        return  userMapper.setUserTag(usersTags);
+    public void setUserTag(String userId, String usersTags){
+        userMapper.setUserTag(userId, usersTags);
     }
 
     /**

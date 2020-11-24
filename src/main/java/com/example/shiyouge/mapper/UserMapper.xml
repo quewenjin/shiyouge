@@ -139,4 +139,31 @@
         update user set ifSilent = 1 where userId = #{userId}
     </update>
 
+    <update id="quitDormitoryOfUser">
+        update user set userDormitoryId = -1 where userId = #{userId}
+    </update>
+
+    <select id="getTagsByUserId" resultType="java.lang.String">
+        select lable from user where userId = #{userId}
+    </select>
+
+    <select id="getDormitoryIDByUserId" resultType="int">
+        select userDormitoryId from user where userId = #{userId}
+    </select>
+
+    <select id="getSexByUserId" resultType="java.lang.String">
+        select userSex from user where userId = #{userId}
+    </select>
+
+    <select id="getPhotoByUserId" resultType="java.lang.String">
+        select userPhoto from user where userId = #{userId}
+    </select>
+
+    <update id="setUserNickName">
+        update user set userNickname = #{userNickName} where userId = #{userId}
+    </update>
+
+    <update id="setUserTag">
+        update user set label = #{usersTags} where userId = #{userId}
+    </update>
 </mapper>
