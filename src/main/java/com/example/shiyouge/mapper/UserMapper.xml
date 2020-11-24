@@ -117,7 +117,7 @@
         select userRealName from user where userId = #{userId}
     </select>
 
-    <select id="getStudentNumberByUserId" resultType="java.lang.String">
+    <select id="getStudentNumberByUserId" resultType="java.lang.Integer">
         select userStudentNumber from user where userId = #{userId}
     </select>
 
@@ -140,11 +140,11 @@
     </update>
 
     <update id="quitDormitoryOfUser">
-        update user set userDormitoryId = -1 where userId = #{userId}
+        update user set userDormitoryId = 0 where userId = #{userId}
     </update>
 
     <select id="getTagsByUserId" resultType="java.lang.String">
-        select lable from user where userId = #{userId}
+        select label from user where userId = #{userId}
     </select>
 
     <select id="getDormitoryIDByUserId" resultType="int">
@@ -174,4 +174,9 @@
     <update id="setTheEndSilentTime">
         update user set endSilentTime = #{endSilentTime} where userId = #{userId}
     </update>
+
+    <update id="joinDormitoryOfUser">
+         update user set userDormitoryId = #{dormitoryId} where userId = #{userId}
+    </update>
+
 </mapper>

@@ -20,10 +20,20 @@ public class DormitoryService {
     }
 
     /**
-     * 减少宿舍人数
+     * 设置宿舍人数
+     * @param dormitoryId 宿舍ID
      */
-    public void subDormitoryMate(int DormitoryID){
-        dormitoryMapper.subDormitoryMate(DormitoryID);
+    public void setTheDormitoryMate(int dormitoryId, int theNum){
+        dormitoryMapper.setTheDormitoryMate(dormitoryId, theNum);
+    }
+
+    /**
+     * 得到宿舍人数
+     * @param dormitoryId 宿舍ID
+     * @return 人数
+     */
+    public int getTheDormitoryMate(int dormitoryId){
+        return dormitoryMapper.getTheDormitoryMate(dormitoryId);
     }
 
     /**
@@ -159,5 +169,31 @@ public class DormitoryService {
      */
     public void setTheFlowerFertilizationTimes(@Param("dormitoryId") int dormitoryId, @Param("times") int times){
         dormitoryMapper.setTheFlowerFertilizationTimes(dormitoryId, times);
+    }
+
+    /**
+     * 得到最大的宿舍ID
+     * @return 最大ID
+     */
+    public int getMaxDormitoryId(){
+        return dormitoryMapper.getMaxDormitoryId();
+    }
+
+    /**
+     * 设置加入密码
+     * @param dormitoryId 宿舍ID
+     * @param joinPassword 加入密码
+     */
+    void setTheJoinPassward(int dormitoryId, String joinPassword){
+        dormitoryMapper.setTheJoinPassward(dormitoryId, joinPassword);
+    }
+
+    /**
+     * 得到加入密码
+     * @param dormitoryId 宿舍ID
+     * @return 密码
+     */
+    String getTheJoinPassward(int dormitoryId){
+        return dormitoryMapper.getTheJoinPassward(dormitoryId);
     }
 }

@@ -96,4 +96,11 @@ public class PostService {
      */
     public int reportedCancel(int postId) {return postMapper.reportedCancel(postId);}
 
+    /**
+     * 得到全部帖子
+     * @return 全部帖子
+     */
+    public List<Post> getAllThePosts(){
+        return postMapper.getAllThePosts();
+    }
 }

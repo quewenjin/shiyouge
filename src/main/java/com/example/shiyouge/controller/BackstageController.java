@@ -9,6 +9,7 @@ import com.example.shiyouge.service.PostService;
 import com.example.shiyouge.service.ReportService;
 import com.example.shiyouge.service.UserService;
 import com.example.shiyouge.utils.DateUtil;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class BackstageController {
     AdminService adminService;
 
     /**
-     * 获得所有用户ID，昵称，真实姓名，学号，
+     * 获得所有用户的信息
      * @return json数组： 用户ID + 昵称 + 真实姓名 + 学号 + 是否禁言
      */
     @RequestMapping(value = "/getUserStatus", method = RequestMethod.POST)
@@ -42,15 +43,12 @@ public class BackstageController {
         List<String> userIds = userService.getAllUserId();
         for (String userId : userIds) {
             JSONObject jo = new JSONObject();
-            jo.put("userId",userId);
-            String userNickname = userService.getNickNameByUserId(userId);
-            jo.put("userNickname", userNickname);
-            String userRealname = userService.getRealNameByUserId(userId);
-            jo.put("userRealname", userRealname);
-            String userStudentNumber = userService.getStudentNumberByUserId(userId);
-            jo.put("userStudentNumber", userStudentNumber);
-            Integer ifSilent = userService.getIfSilentByUserId(userId);
-            jo.put("ifSilent", ifSilent);
+            jo.put("userId", userId);
+            jo.put("sex", userService.getSexByUserId(userId));
+            jo.put("userNickname", userService.getNickNameByUserId(userId));
+            jo.put("userRealname", userService.getRealNameByUserId(userId));
+            jo.put("userStudentNumber", userService.getStudentNumberByUserId(userId));
+            jo.put("ifSilent", userService.getIfSilentByUserId(userId));
             jsonArray.add(jo);
         }
         return  jsonArray.toString();
@@ -180,7 +178,7 @@ public class BackstageController {
     /**
      * 管理员登录
      * @param params 管理员ID 密码
-     * @return 状态：succeed
+     * @return 状态：succeed 或 wrong
      */
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     public String adminSignIn(@RequestBody Map<String, Object> params) {
@@ -191,6 +189,30 @@ public class BackstageController {
             json.put("status", "succeed");
         }
         else {
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
+     * 得到全部帖子
+     * @return 状态：succeed 或 wrong
+     */
+    @RequestMapping(value = "/getAllPosts", method = RequestMethod.POST)
+    public String getAllPosts() {
+        JSONObject json = new JSONObject();
+        try {
+            JSONArray jsonArray = new JSONArray();
+            List<Post> posts = postService.getAllThePosts();
+            for (Post thePost: posts) {
+                JSONObject jo = new JSONObject();
+                jo.put("postId", thePost.getPostId());
+                jo.put("postContent", thePost.getPostContent());
+                jsonArray.add(jo);
+            }
+            json.put("posts", jsonArray);
+            json.put("status", "succeed");
+        } catch (Exception e){
             json.put("status", "wrong");
         }
         return json.toString();

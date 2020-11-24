@@ -155,7 +155,7 @@ public interface UserMapper {
      * @param userId 用户ID
      * @return 所有用户学号
      */
-    String getStudentNumberByUserId(String userId);
+    int getStudentNumberByUserId(String userId);
 
     /**
      * 获得用户禁言是否被禁言
@@ -193,6 +193,12 @@ public interface UserMapper {
      * @param userId 用户ID
      */
     void quitDormitoryOfUser(String userId);
+
+    /**
+     * 加入宿舍
+     * @param userId 用户ID
+     */
+    void joinDormitoryOfUser(@Param("userId") String userId, @Param("dormitoryId") int dormitoryId);
 
     /**
      * 获得用户兴趣标签

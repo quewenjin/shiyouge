@@ -89,4 +89,10 @@ public interface PostMapper {
      * @return 状态：succeed
      */
     int reportedCancel(int postId);
+
+    /**
+     * 得到全部帖子
+     * @return 全部帖子
+     */
+    List<Post> getAllThePosts();
 }

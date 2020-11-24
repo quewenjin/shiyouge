@@ -26,26 +26,26 @@ public class UserController {
      */
     @RequestMapping(value = "/getDetailsOfPeople", method = RequestMethod.POST)
     public String getDetailsOfPeople(@RequestBody Map<String, Object> params) {
-        String userID = params.get("userID").toString();
+        String userID = params.get("userId").toString();
         JSONObject json = new JSONObject();
-        json.put("Tags", userService.getTagsByUserId(userID));
-        json.put("NickName", userService.getNickNameByUserId(userID));
-        json.put("StudentNumber", userService.getStudentNumberByUserId(userID));
-        json.put("Sex", userService.getSexByUserId(userID));
-        json.put("RealName", userService.getRealNameByUserId(userID));
-        json.put("Photo", userService.getPhotoByUserId(userID));
+        json.put("tags", userService.getTagsByUserId(userID));
+        json.put("nickname", userService.getNickNameByUserId(userID));
+        json.put("studentNumber", userService.getStudentNumberByUserId(userID));
+        json.put("sex", userService.getSexByUserId(userID));
+        json.put("realName", userService.getRealNameByUserId(userID));
+        json.put("photo", userService.getPhotoByUserId(userID));
         return json.toString();
     }
 
     /**
      * 修改昵称
      * @param params 昵称
-     * @return 状态：succeed
+     * @return 状态：succeed 或 wrong
      */
-    @RequestMapping(value = "/setNickName", method = RequestMethod.POST)
+    @RequestMapping(value = "/setNickname", method = RequestMethod.POST)
     public String setNickName(@RequestBody Map<String, Object> params) {
-        String userID = params.get("userID").toString();
-        String Nickname = params.get("Nickname").toString();
+        String userID = params.get("userId").toString();
+        String Nickname = params.get("nickname").toString();
         JSONObject json = new JSONObject();
         try {
             userService.setUserNickName(userID, Nickname);
@@ -59,16 +59,18 @@ public class UserController {
     /**
      * 退出宿舍
      * @param params 用户ID
-     * @return 状态：succeed
+     * @return 状态：succeed 或 wrong
      */
     @RequestMapping(value = "/quitDormitory", method = RequestMethod.POST)
     public String quitDormitory(@RequestBody Map<String, Object> params) {
-        String userID = params.get("userID").toString();
+        String userID = params.get("userId").toString();
         JSONObject json = new JSONObject();
         try {
-            userService.quitDormitoryOfUser(userID);
             int dormitoryID = userService.getDormitoryIDByUserId(userID);
-            dormitoryService.subDormitoryMate(dormitoryID);
+            //宿舍人数-1
+            dormitoryService.setTheDormitoryMate(dormitoryID, dormitoryService.getTheDormitoryMate(dormitoryID)-1);
+            //退出宿舍
+            userService.quitDormitoryOfUser(userID);
             json.put("status", "succeed");
         } catch (Exception De){
             json.put("status", "wrong");
@@ -77,28 +79,46 @@ public class UserController {
     }
 
     /**
-     * 随机宿舍id
-     * @return string：一个暂未使用的宿舍id
-     */
-    @RequestMapping(value = "/randomDormitory", method = RequestMethod.POST)
-    public String randomDormitory() {
-        JSONObject json = new JSONObject();
-        json.put("id", dormitoryService.randomID());
-        return json.toString();
-    }
-
-    /**
      * 创建宿舍
      * @param params 宿舍ID 加入密码
-     * @return 状态：succeed
+     * @return 状态：succeed 或 wrong
      */
     @RequestMapping(value = "/createDormitory", method = RequestMethod.POST)
     public String createDormitory(@RequestBody Map<String, Object> params) {
-        int DormitoryID = Integer.parseInt(params.get("DormitoryID").toString());
+        String userId = params.get("userId").toString();
+        int DormitoryID = Integer.parseInt(params.get("dormitoryId").toString());
         String joinPassword = params.get("joinPassword").toString();
         JSONObject json = new JSONObject();
         try {
             dormitoryService.created(DormitoryID, joinPassword);
+            //宿舍人数+1
+            dormitoryService.setTheDormitoryMate(DormitoryID, dormitoryService.getTheDormitoryMate(DormitoryID)+1);
+            //加入对应宿舍
+            userService.joinDormitoryOfUser(userId, DormitoryID);
+            json.put("status", "succeed");
+        } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
+     * 加入宿舍
+     * @param params 宿舍ID 加入密码
+     * @return 状态：succeed 或 wrong
+     */
+    @RequestMapping(value = "/joinDormitory", method = RequestMethod.POST)
+    public String joinDormitory(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
+        int DormitoryID = Integer.parseInt(params.get("dormitoryId").toString());
+        String joinPassword = params.get("joinPassword").toString();
+        JSONObject json = new JSONObject();
+        try {
+            dormitoryService.created(DormitoryID, joinPassword);
+            //宿舍人数+1
+            dormitoryService.setTheDormitoryMate(DormitoryID, dormitoryService.getTheDormitoryMate(DormitoryID)+1);
+            //加入对应宿舍
+            userService.joinDormitoryOfUser(userId, DormitoryID);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
@@ -109,15 +129,33 @@ public class UserController {
     /**
      * 设置标签
      * @param params 用户标签Tags
-     * @return 状态：succeed
+     * @return 状态：succeed 或 wrong
      */
     @RequestMapping(value = "/setUserTag", method = RequestMethod.POST)
     public String setUserTag(@RequestBody Map<String, Object> params) {
-        String userID = params.get("userID").toString();
-        String Tags = params.get("Tags").toString();
+        String userID = params.get("userId").toString();
+        String Tags = params.get("tags").toString();
         JSONObject json = new JSONObject();
         try {
             userService.setUserTag(userID, Tags);
+            json.put("status", "succeed");
+        } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
+     * 得到标签
+     * @param params 用户ID
+     * @return 状态：succeed 或 wrong
+     */
+    @RequestMapping(value = "/getUserTag", method = RequestMethod.POST)
+    public String getUserTag(@RequestBody Map<String, Object> params) {
+        String userID = params.get("userId").toString();
+        JSONObject json = new JSONObject();
+        try {
+            json.put("tags", userService.getTagsByUserId(userID));
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");

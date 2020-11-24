@@ -63,12 +63,28 @@
         update dormitory set flowerFertilizationTimes = #{times} where dormitoryId = #{dormitoryId}
     </update>
 
-    <update id="subDormitoryMate">
-        update dormitory set numberOfMate = numberOfMate-1 where dormitoryId = #{dormitoryId}
+    <update id="setTheDormitoryMate">
+        update dormitory set numberOfMate = #{theNum} where dormitoryId = #{dormitoryId}
     </update>
+
+    <select id="getTheDormitoryMate" resultType="int">
+        select numberOfMate from dormitory where dormitoryId = #{dormitoryId}
+    </select>
 
     <insert id="createDormitory">
         insert into dormitory (dormitoryId, joinPassword) values (#{dormitoryId}, #{joinPassword});
     </insert>
+
+    <select id="getMaxDormitoryId" resultType="int">
+        select max(dormitoryId) from dormitory
+    </select>
+
+    <update id="setTheJoinPassward">
+        update dormitory set joinPassward = #{joinPassword} where dormitoryId = #{dormitoryId}
+    </update>
+
+    <select id="getTheJoinPassward" resultType="java.lang.String">
+        select joinPassward from dormitory where dormitoryId = #{dormitoryId}
+    </select>
 
 </mapper>

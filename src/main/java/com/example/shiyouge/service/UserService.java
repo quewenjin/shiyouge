@@ -24,6 +24,14 @@ public class UserService {
     }
 
     /**
+     * 加入宿舍
+     * @param userId 用户ID
+     */
+    public void joinDormitoryOfUser(String userId, int dormitoryId){
+        userMapper.joinDormitoryOfUser(userId, dormitoryId);
+    }
+
+    /**
      * 得到用户的肥料数量
      * @param userId 用户ID
      * @return 肥料数量
@@ -209,7 +217,7 @@ public class UserService {
      * @param userId 用户ID
      * @return 用户学号
      */
-    public String getStudentNumberByUserId(String userId) {
+    public int getStudentNumberByUserId(String userId) {
         return userMapper.getStudentNumberByUserId(userId);
     }
 
@@ -317,5 +325,14 @@ public class UserService {
      */
     public void setTheEndSilentTime(String userId, Timestamp endSilentTime){
         userMapper.setTheEndSilentTime(userId, endSilentTime);
+    }
+
+    /**
+     * 得到性别
+     * @param userId ID
+     * @return 性别
+     */
+    String getTheSexByUserId(String userId){
+        return userMapper.getSexByUserId(userId);
     }
 }

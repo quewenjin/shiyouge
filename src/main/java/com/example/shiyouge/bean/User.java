@@ -8,7 +8,7 @@ public class User {
     private String userNickname;//昵称
     private String userPhoto;//头像(base64)
     private String userRealName;//真实姓名
-    private String userStudentNumber;//学号
+    private int userStudentNumber;//学号
     private int userDormitoryId;//用户的宿舍ID
     private int userWateringTimes;//浇水次数
     private int userFertilizationTimes;//施肥次数
@@ -62,11 +62,11 @@ public class User {
         this.userRealName = userRealName;
     }
 
-    public String getUserStudentNumber() {
+    public int getUserStudentNumber() {
         return userStudentNumber;
     }
 
-    public void setUserStudentNumber(String userStudentNumber) {
+    public void setUserStudentNumber(int userStudentNumber) {
         this.userStudentNumber = userStudentNumber;
     }
 

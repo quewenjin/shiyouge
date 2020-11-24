@@ -86,10 +86,17 @@ public interface DormitoryMapper {
     void setTheFlowerFertilizationTimes(@Param("dormitoryId") int dormitoryId, @Param("times") int times);
 
     /**
-     * 减少宿舍人数
+     * 设置宿舍人数
      * @param dormitoryId 宿舍ID
      */
-    void subDormitoryMate(@Param("dormitoryId") int dormitoryId);
+    void setTheDormitoryMate(@Param("dormitoryId") int dormitoryId, @Param("theNum") int theNum);
+
+    /**
+     * 得到宿舍人数
+     * @param dormitoryId 宿舍ID
+     * @return 人数
+     */
+    int getTheDormitoryMate(int dormitoryId);
 
     /**
      * 创建宿舍
@@ -97,4 +104,24 @@ public interface DormitoryMapper {
      * @param joinPassword 加入密码
      */
     void createDormitory(@Param("dormitoryId") int dormitoryId, @Param("joinPassword") String joinPassword);
+
+    /**
+     * 得到最大的宿舍ID
+     * @return 最大ID
+     */
+    int getMaxDormitoryId();
+
+    /**
+     * 设置加入密码
+     * @param dormitoryId 宿舍ID
+     * @param joinPassword 加入密码
+     */
+    void setTheJoinPassward(@Param("dormitoryId") int dormitoryId, @Param("joinPassword") String joinPassword);
+
+    /**
+     * 得到加入密码
+     * @param dormitoryId 宿舍ID
+     * @return 密码
+     */
+    String getTheJoinPassward(int dormitoryId);
 }

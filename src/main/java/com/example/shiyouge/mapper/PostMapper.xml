@@ -62,5 +62,7 @@
         update post set ifReported = 0 where postId = #{postId}
     </update>
 
-
+    <select id="getAllThePosts" resultMap="BaseResultMap">
+        select * from post
+    </select>
 </mapper>
