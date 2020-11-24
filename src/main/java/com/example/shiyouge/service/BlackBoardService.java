@@ -29,9 +29,10 @@ public class BlackBoardService {
      * 创建小黑板记录
      * @param dormitoryId 宿舍ID
      * @param type 类型
+     * @param userId 用户ID
      * @param createTime 创建时间
      */
-    public void createBlackBoardRecord(int dormitoryId, String type, Timestamp createTime){
-        blackBoardMapper.createTheBlackBoardRecord(dormitoryId, type, createTime);
+    public void createBlackBoardRecord(int dormitoryId, String type, String userId, Timestamp createTime){
+        blackBoardMapper.createTheBlackBoardRecord(dormitoryId, type, userId, createTime);
     }
 }

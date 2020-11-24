@@ -20,8 +20,9 @@ public interface BlackBoardMapper {
      * 创建小黑板记录
      * @param dormitoryId 宿舍ID
      * @param type 类型
+     * @param userId 用户ID
      * @param createTime 创建时间
      */
-    void createTheBlackBoardRecord(@Param("dormitoryId") int dormitoryId, @Param("type") String type,
-                                   @Param("createTime") Timestamp createTime);
+    void createTheBlackBoardRecord(@Param("dormitoryId") int dormitoryId, @Param("actionType") String actionType,
+                                   @Param("userId") String userId, @Param("createTime") Timestamp createTime);
 }

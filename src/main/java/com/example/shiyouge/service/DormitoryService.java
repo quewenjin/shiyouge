@@ -45,6 +45,24 @@ public class DormitoryService {
     }
 
     /**
+     * 修改土壤湿度
+     * @param dormitoryId 宿舍ID
+     * @param moisture 湿度
+     */
+    public void setSoilMoistureOfDormitory(int dormitoryId, int moisture){
+        dormitoryMapper.setTheSoilMoistureOfDormitory(dormitoryId, moisture);
+    }
+
+    /**
+     * 修改土壤湿度
+     * @param dormitoryId 宿舍ID
+     * @param fertility 湿度
+     */
+    public void setSoilFertilityOfDormitory(int dormitoryId, int fertility){
+        dormitoryMapper.setTheSoilFertilityOfDormitory(dormitoryId, fertility);
+    }
+
+    /**
      * 得到对应宿舍花的成长等级
      * @param dormitoryId 宿舍ID
      * @return 成长等级
@@ -72,15 +90,6 @@ public class DormitoryService {
             level = 8;
         }
         return level;
-    }
-
-    /**
-     * 修改土壤湿度
-     * @param dormitoryId 宿舍ID
-     * @param moisture 湿度
-     */
-    public void setSoilMoistureOfDormitory(int dormitoryId, int moisture){
-        dormitoryMapper.setTheSoilMoistureOfDormitory(dormitoryId, moisture);
     }
 
     /**

@@ -67,6 +67,8 @@ public class BalconyController {
                 json.put("status", "noFertilizer");
                 return json.toString();
             }
+            //小黑板记录
+            blackBoardService.createBlackBoardRecord(dormitoryId, typeOfAction, userId, recordTime);
             //用户施肥次数+1
             userService.setTheFertilizationTimes(userId, userService.getTheFertilizationTimes(userId)+1);
             //用户肥料数量-1
@@ -75,8 +77,8 @@ public class BalconyController {
             dormitoryService.setTheFlowerFertilizationTimes(dormitoryId, dormitoryService.getTheFlowerFertilizationTimes(dormitoryId)+1);
             //花的成长值+3
             dormitoryService.setFlowerGrowthValueOfDormitory(dormitoryId, dormitoryService.getFlowerGrowthLevelOfDormitory(dormitoryId)+3);
-            //小黑板记录
-            blackBoardService.createBlackBoardRecord(dormitoryId, typeOfAction, recordTime);
+            //花的今天施肥+1
+            dormitoryService.setSoilFertilityOfDormitory(dormitoryId, dormitoryService.getTheSoilFertilityOfDormitory(dormitoryId)+1);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
@@ -109,6 +111,8 @@ public class BalconyController {
                 json.put("status", "tooWet");
                 return json.toString();
             }
+            //小黑板记录
+            blackBoardService.createBlackBoardRecord(dormitoryId, typeOfAction, userId, recordTime);
             //用户浇水次数+1
             userService.setTheWateringTimes(userId, userService.getTheWateringTimes(userId)+1);
             //用户水数量-1
@@ -117,8 +121,8 @@ public class BalconyController {
             dormitoryService.setTheFlowerWateringTimes(dormitoryId, dormitoryService.getTheFlowerWateringTimes(dormitoryId)+1);
             //花的成长值+1
             dormitoryService.setFlowerGrowthValueOfDormitory(dormitoryId, dormitoryService.getFlowerGrowthLevelOfDormitory(dormitoryId)+1);
-            //小黑板记录
-            blackBoardService.createBlackBoardRecord(dormitoryId, typeOfAction, recordTime);
+            //花的今天浇水+1
+            dormitoryService.setSoilMoistureOfDormitory(dormitoryId, dormitoryService.getTheSoilMoistureOfDormitory(dormitoryId)+1);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
