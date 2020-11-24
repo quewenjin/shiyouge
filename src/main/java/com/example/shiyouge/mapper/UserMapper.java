@@ -184,5 +184,54 @@ public interface UserMapper {
      * @param userId 用户ID
      * @return 状态：succeed
      */
-    int silent(String userId);
+
+    int silent(int userId);
+
+    /**
+     * 退出宿舍
+     * @param userId 用户ID
+     */
+    void quitDormitoryOfUser(String userId);
+
+    /**
+     * 获得用户兴趣标签
+     * @param userId 用户ID
+     * @return 兴趣标签
+     */
+    String getTagsByUserId(String userId);
+
+    /**
+     * 获得用户宿舍ID
+     * @param userId 用户ID
+     * @return 宿舍ID
+     */
+    int getDormitoryIDByUserId(String userId);
+
+    /**
+     * 获得用户性别
+     * @param userId 用户ID
+     * @return 性别
+     */
+    String getSexByUserId(String userId);
+
+    /**
+     * 获得用户头像
+     * @param userId 用户ID
+     * @return 头像（base64）
+     */
+    String getPhotoByUserId(String userId);
+
+    /**
+     * 设置用户昵称
+     * @param userId 用户ID
+     * @param userNickName 用户昵称
+     */
+    void setUserNickName(String userId, String userNickName);
+
+    /**
+     * 设置用户兴趣标签
+     * @param userId 用户ID
+     * @param usersTags 用户兴趣标签
+     */
+    void setUserTag(String userId, String usersTags);
 }

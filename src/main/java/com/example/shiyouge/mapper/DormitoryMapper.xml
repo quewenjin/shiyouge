@@ -63,4 +63,12 @@
         update dormitory set flowerFertilizationTimes = #{times} where dormitoryId = #{dormitoryId}
     </update>
 
+    <update id="subDormitoryMate">
+        update dormitory set numberOfMate = numberOfMate-1 where dormitoryId = #{dormitoryId}
+    </update>
+
+    <insert id="createDormitory">
+        insert into dormitory (dormitoryId, joinPassword) values (#{dormitoryId}, #{joinPassword});
+    </insert>
+
 </mapper>

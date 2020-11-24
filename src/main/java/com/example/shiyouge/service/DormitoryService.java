@@ -13,6 +13,30 @@ public class DormitoryService {
     DormitoryMapper dormitoryMapper;
 
     /**
+     * 创建宿舍
+     */
+    public void created(int DormitoryID, String joinPassword){
+        dormitoryMapper.createDormitory(DormitoryID, joinPassword);
+    }
+
+    /**
+     * 减少宿舍人数
+     */
+    public void subDormitoryMate(int DormitoryID){
+        dormitoryMapper.subDormitoryMate(DormitoryID);
+    }
+
+    /**
+     * 随机宿舍ID
+     * @return 随机ID
+     */
+    public int randomID(){
+        int max=100,min=1;
+        int ran = (int) (Math.random()*(max-min)+min);
+        return ran;
+    }
+
+    /**
      * 每日土壤湿度清 0（每日限制浇水10次）
      */
     public void setAllSoilMoistureToZero(){

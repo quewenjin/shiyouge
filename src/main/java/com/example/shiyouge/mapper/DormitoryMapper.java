@@ -84,4 +84,17 @@ public interface DormitoryMapper {
      * @param times 次数
      */
     void setTheFlowerFertilizationTimes(@Param("dormitoryId") int dormitoryId, @Param("times") int times);
+
+    /**
+     * 减少宿舍人数
+     * @param dormitoryId 宿舍ID
+     */
+    void subDormitoryMate(@Param("dormitoryId") int dormitoryId);
+
+    /**
+     * 创建宿舍
+     * @param dormitoryId 宿舍ID
+     * @param joinPassword 加入密码
+     */
+    void createDormitory(@Param("dormitoryId") int dormitoryId, @Param("joinPassword") String joinPassword);
 }

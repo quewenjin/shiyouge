@@ -15,6 +15,14 @@ public class UserService {
     UserMapper userMapper;
 
     /**
+     * 退出宿舍
+     * @param userId 用户ID
+     */
+    public void quitDormitoryOfUser(String userId){
+        userMapper.quitDormitoryOfUser(userId);
+    }
+
+    /**
      * 得到用户的肥料数量
      * @param userId 用户ID
      * @return 肥料数量
@@ -112,15 +120,6 @@ public class UserService {
     }
 
     /**
-     * 通过用户ID得到昵称
-     * @param userId 用户ID
-     * @return 用户昵称
-     */
-    public String getNickNameByUserId(String userId){
-        return userMapper.getTheNickNameByUserId(userId);
-    }
-
-    /**
      * 所有用户今日学习时长清0
      */
     public void setAllStudyTimeTodayToZero(){
@@ -189,6 +188,15 @@ public class UserService {
      public List<String> getAllUserId() { return userMapper.getAllUserId();}
 
     /**
+     * 通过用户ID得到昵称
+     * @param userId 用户ID
+     * @return 用户昵称
+     */
+    public String getNickNameByUserId(String userId){
+        return userMapper.getTheNickNameByUserId(userId);
+    }
+
+    /**
      * 获得用户真实姓名
      * @param userId 用户ID
      * @return 用户真实姓名
@@ -200,14 +208,55 @@ public class UserService {
      * @param userId 用户ID
      * @return 用户学号
      */
-    public String getStudentNumberByUserId(String userId) { return userMapper.getStudentNumberByUserId(userId);}
+    public String getStudentNumberByUserId(String userId) {
+        return userMapper.getStudentNumberByUserId(userId);
+    }
+
+    /**
+     * 获得用户兴趣标签
+     * @param userId 用户ID
+     * @return 兴趣标签
+     */
+    public String getTagsByUserId(String userId) {
+        return userMapper.getTagsByUserId(userId);
+    }
+
+    /**
+     * 获得用户所在宿舍ID
+     * @param userId 用户ID
+     * @return 宿舍ID
+     */
+    public int getDormitoryIDByUserId(String userId) {
+        return userMapper.getDormitoryIDByUserId(userId);
+    }
+
+    /**
+     * 获得用户性别
+     * @param userId 用户ID
+     * @return 用户性别
+     */
+    public String getSexByUserId(String userId) {
+        return userMapper.getSexByUserId(userId);
+    }
+
+    /**
+     * 获得用户头像
+     * @param userId 用户ID
+     * @return 用户头像
+     */
+    public String getPhotoByUserId(String userId) {
+        return userMapper.getPhotoByUserId(userId);
+    }
+
 
     /**
      * 获得用户禁言是否被禁言
      * @param userId 用户ID
      * @return 用户是否被禁言
      */
-    public int getIfSilentByUserId(String userId) { return userMapper.getIfSilentByUserId(userId);}
+    public int getIfSilentByUserId(String userId) {
+        return userMapper.getIfSilentByUserId(userId);
+    }
 
     /**
      * 修改真实姓名和学号
@@ -218,6 +267,24 @@ public class UserService {
      */
     public int updateUserInfo(String userRealName, int userStudentNumber, String userId){
         return userMapper.updateUserInfo(userRealName, userStudentNumber, userId);
+    }
+
+    /**
+     * 修改昵称
+     * @param userId 用户ID
+     * @param  userNickName 用户昵称
+     */
+    public void setUserNickName(String userId, String userNickName){
+        userMapper.setUserNickName(userId, userNickName);
+    }
+
+    /**
+     * 修改兴趣标签
+     * @param userId 用户ID
+     * @param  usersTags 用户兴趣标签
+     */
+    public void setUserTag(String userId, String usersTags){
+        userMapper.setUserTag(userId, usersTags);
     }
 
     /**
