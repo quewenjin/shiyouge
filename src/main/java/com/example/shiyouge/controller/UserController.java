@@ -44,10 +44,11 @@ public class UserController {
      */
     @RequestMapping(value = "/setNickName", method = RequestMethod.POST)
     public String setNickName(@RequestBody Map<String, Object> params) {
+        String userID = params.get("userID").toString();
         String Nickname = params.get("Nickname").toString();
         JSONObject json = new JSONObject();
         try {
-            userService.setUserNickName(Nickname);
+            userService.setUserNickName(userID, Nickname);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
@@ -112,10 +113,11 @@ public class UserController {
      */
     @RequestMapping(value = "/setUserTag", method = RequestMethod.POST)
     public String setUserTag(@RequestBody Map<String, Object> params) {
+        String userID = params.get("userID").toString();
         String Tags = params.get("Tags").toString();
         JSONObject json = new JSONObject();
         try {
-            userService.setUserTag(Tags);
+            userService.setUserTag(userID, Tags);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
