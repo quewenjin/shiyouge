@@ -1,27 +1,29 @@
 package com.example.shiyouge.Algorithm;
 
-import java.io.*;
 import java.util.*;
-import java.lang.Math.*;
 
 public class code2 {
-    final static int N=101;
+    private final static int N=101;
     private static List<String> v=new ArrayList<>(N);
-    private static int fn[]=new int[N];
-    private static double MAX=1e9,MIN=-1e9,limit=0.5;
-    private static int n,left[]=new int[N],pre[]=new int[N],used[]=new int[N];
-    private static double G[][]=new double[N][N],lx[]=new double[N],ly[]=new double[N],slack[]=new double[N];
+    private static int[] fn =new int[N];
+    private static double MIN=-1e9;
+    private static double limit=0.5;
+    private static int n;
+    private static int[] left =new int[N];
+    private static int[] pre =new int[N];
+    private static int[] used =new int[N];
+    private static double[][] G =new double[N][N];
+    private static double[] lx =new double[N];
+    private static double[] ly =new double[N];
+    private static double[] slack =new double[N];
 
     //调用init vv传入每组的标签信息，fnn传入每组的匹配失败次数 一组两个人
-    public static void init(List<String> vv,int fnn[]){
+    public static void init(List<String> vv, int[] fnn){
         n=vv.size();
         for(int i=0;i<n;i++){
             v.add(vv.get(i));
         }
-        for(int i=0;i<n;i++){
-            fn[i]=fnn[i];
-        }
-        return;
+        if (n >= 0) System.arraycopy(fnn, 0, fn, 0, n);
     }
     private static double cal(int x,int y){
         if(x==y) return 0;
@@ -41,15 +43,16 @@ public class code2 {
         return num/den;
     }
     private static void go(int now,int n){
-        for(int i=0;i<n;i++) {
+        double MAX = 1e9;
+        for(int i = 0; i<n; i++) {
             used[i]=0;
-            slack[i]=MAX;
+            slack[i]= MAX;
         }
         left[n]=now;
-        int u=0,v=0;
+        int u,v=0;
         for(u=n;left[u]!=-1;u=v){
             used[u]=1;
-            double d=MAX;
+            double d= MAX;
             for(int i=0;i<n;i++){
                 if(used[i]==0){
                     double tmp=lx[left[u]]+=ly[i]-G[left[u]][i];
@@ -71,7 +74,10 @@ public class code2 {
                 }
             }
         }
-        for(;u!=n;left[u]=left[pre[u]],u=pre[u]);
+        for(;u!=n;){
+            left[u]=left[pre[u]];
+            u=pre[u];
+        }
     }
     //init后调用solve即可
     public static int[] solve(){

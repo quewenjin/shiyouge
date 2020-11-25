@@ -22,6 +22,7 @@ public class User {
     private int userStudyTimeToday;//用户今日自习时长
     private int userStudyTimeWeek;//用户本周自习时长
     private String openId;//open_id
+    private int matchingFailedTimes;//匹配失败次数
 
     public String getUserId() {
         return userId;
@@ -173,5 +174,13 @@ public class User {
 
     public void setOpenId(String openId) {
         this.openId = openId;
+    }
+
+    public int getMatchingFailedTimes() {
+        return matchingFailedTimes;
+    }
+
+    public void setMatchingFailedTimes(int matchingFailedTimes) {
+        this.matchingFailedTimes = matchingFailedTimes;
     }
 }
