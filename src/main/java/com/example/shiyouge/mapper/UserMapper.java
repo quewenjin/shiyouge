@@ -291,4 +291,18 @@ public interface UserMapper {
      * @param ifSilent 是否禁言
      */
     void setIfSilentByUserId(@Param("userId") String userId, @Param("ifSilent") int ifSilent);
+
+    /**
+     * 设置用户头像
+     * @param userId ID
+     * @param photo 头像
+     */
+    void setThePhotoByUserId(@Param("userId") String userId, @Param("photo") String photo);
+
+    /**
+     * 用openId得到用户
+     * @param openId openId
+     * @return
+     */
+    User getUserByOpenId(String openId);
 }

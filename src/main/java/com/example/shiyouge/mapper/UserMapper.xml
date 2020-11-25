@@ -201,4 +201,12 @@
         update user set ifSilent = #{ifSilent} where userId = #{userId}
     </update>
 
+    <update id="setThePhotoByUserId">
+        update user set userPhoto = #{photo} where userId = #{userId}
+    </update>
+
+    <select id="getUserByOpenId" resultMap="BaseResultMap">
+        select * from user where openId = #{openId}
+    </select>
+
 </mapper>

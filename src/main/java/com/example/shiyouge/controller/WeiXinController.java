@@ -5,7 +5,7 @@ import com.example.shiyouge.bean.User;
 import com.example.shiyouge.config.UserConstantInterface;
 import com.example.shiyouge.service.UserService;
 import com.example.shiyouge.utils.HttpClientUtil;
-import com.example.shiyouge.utils.RandomUIDUtil;
+import com.example.shiyouge.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-import java.lang.Math;
 
 @RestController
 @RequestMapping(value = "/weixin")
@@ -46,17 +44,33 @@ public class WeiXinController {
         String open_id = jsonObject.get("openid").toString();
         // 根据返回的user实体类，判断用户是否是新用户，是的话，创建新的用户，信息存到数据库，返回 session_key 和 open_id
         JSONObject json = new JSONObject();
-        User user = userService.getUserByUserId(open_id);
+        //用open_id查询用户
+        User user = userService.getUserByOpenId(open_id);
         if(user == null){
             // 添加到数据库
-            String theUid = RandomUIDUtil.getTheRandomUID();
+            String theUid = RandomUtil.getTheRandomUID();
             while (userService.getUserByUserId(theUid) != null){//防用户ID重复
-                theUid = RandomUIDUtil.getTheRandomUID();
+                theUid = RandomUtil.getTheRandomUID();
             }
+            //创建用户
             Boolean flag = userService.createUserByOpenId(theUid, open_id);
             if(!flag){
                 json.put("status", "wrong");
             } else {
+                //随机头像
+                int theHeadNum = RandomUtil.randomZeroToThree();
+                String theHead = "https://pic.downk.cc/item/5ec11c50c2a9a83be54e84c8.jpg";//默认头像
+                if (theHeadNum == 0){
+                    theHead = "https://pic.downk.cc/item/5fbe44afb18d627113a4acaa.png";//headimg1
+                } else if (theHeadNum == 1){
+                    theHead = "https://pic.downk.cc/item/5fbe44afb18d627113a4acaa.png";//headimg2
+                } else if (theHeadNum == 2){
+                    theHead = "https://pic.downk.cc/item/5fbe44afb18d627113a4acaa.png";//headimg3
+                } else if (theHeadNum == 3){
+                    theHead = "https://pic.downk.cc/item/5fbe44afb18d627113a4acaa.png";//headimg4
+                }
+                //设置头像
+                userService.setPhotoByUserId(theUid, theHead);
                 json.put("userId", theUid);
                 json.put("status", "succeed");
             }

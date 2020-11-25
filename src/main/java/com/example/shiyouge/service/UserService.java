@@ -374,4 +374,22 @@ public class UserService {
     public void setIfSilentByUserId(String userId, int ifSilent){
         userMapper.setIfSilentByUserId(userId, ifSilent);
     }
+
+    /**
+     * 设置用户头像
+     * @param userId ID
+     * @param photo 头像
+     */
+    public void setPhotoByUserId(String userId, String photo){
+        userMapper.setThePhotoByUserId(userId, photo);
+    }
+
+    /**
+     * 用openId得到用户
+     * @param openId openId
+     * @return
+     */
+    public User getUserByOpenId(String openId){
+        return userMapper.getUserByOpenId(openId);
+    }
 }
