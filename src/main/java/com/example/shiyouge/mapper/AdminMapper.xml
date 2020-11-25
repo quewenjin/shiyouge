@@ -5,8 +5,8 @@
 
 <mapper namespace="com.example.shiyouge.mapper.AdminMapper">
     <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.Admin">
-        <id column="AdminId" property="adminId"/>
-        <result column="AdminPassword" property="adminPassword"/>
+        <id column="adminId" property="adminId"/>
+        <result column="adminPassword" property="adminPassword"/>
     </resultMap>
 
     <select id="signIn" resultType="java.lang.String">

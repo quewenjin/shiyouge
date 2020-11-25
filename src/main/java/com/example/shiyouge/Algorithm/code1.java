@@ -13,7 +13,7 @@ public class code1 {
 
     /**
      * init
-     * @param vv 每个人的标签，有选的 1 没选的 0 --> List<0,0,0,0,0,0,.....>
+     * @param vv 每个人的标签，有选的 1 没选的 0 --> List<01000000101.....>
      * @param fnn 传进来的这些人的匹配失败的次数的数组
      */
     public static void init(List<String> vv, int[] fnn){

@@ -18,10 +18,11 @@ public class code2 {
     private static double[] slack =new double[N];
 
     //调用init vv传入每组的标签信息，fnn传入每组的匹配失败次数 一组两个人
+
     /**
      * init
-     * @param vv 每个人的标签，有选的 1 没选的 0 --> List<0,0,0,0,0,0,.....>
-     * @param fnn 传进来的这些人的匹配失败的次数的数组，第一次的成对以后的失败数组。一对的两个都一样次数
+     * @param vv 每个人的标签，有选的 1 没选的 0 --> List<01000000101.....>
+     * @param fnn 传进来的这些人的匹配失败的次数的数组
      */
     public static void init(List<String> vv, int[] fnn){
         n=vv.size();
