@@ -95,4 +95,11 @@ public interface PostMapper {
      * @return 全部帖子
      */
     List<Post> getAllThePosts();
+
+    /**
+     * 得到发布时间
+     * @param postId ID
+     * @return 帖子发布时间
+     */
+    Timestamp getThePublishTimeOfPost(int postId);
 }

@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.lang.Math;
+
+
 
 @RestController
 @RequestMapping(value = "/weixin")
@@ -58,5 +61,14 @@ public class WeiXinController {
         json.put("session_key", session_key);
         json.put("open_id", open_id);
         return json.toString();
+    }
+
+    public static void main(String[] args) {
+        Random random = new Random();
+        int theRandom = random.nextInt(900000000) + 100000000;
+        String theUID;
+        for (int i = 0; i<30;i++){
+            System.out.println();
+        }
     }
 }

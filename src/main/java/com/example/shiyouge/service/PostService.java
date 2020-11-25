@@ -103,4 +103,13 @@ public class PostService {
     public List<Post> getAllThePosts(){
         return postMapper.getAllThePosts();
     }
+
+    /**
+     * 得到发布时间
+     * @param postId ID
+     * @return 帖子发布时间
+     */
+    public Timestamp getPublishTimeOfPost(int postId){
+        return postMapper.getThePublishTimeOfPost(postId);
+    }
 }

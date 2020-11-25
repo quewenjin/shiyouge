@@ -65,4 +65,8 @@
     <select id="getAllThePosts" resultMap="BaseResultMap">
         select * from post
     </select>
+
+    <select id="getThePublishTimeOfPost" resultType="java.sql.Timestamp">
+        select publishTime from post where postId = #{postId}
+    </select>
 </mapper>

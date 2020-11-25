@@ -93,6 +93,7 @@ public class BackstageController {
                 json2.put("postIdOfReport", postIdOfReport);
                 String postContent = thePost.getPostContent();
                 json2.put("postContent", postContent);
+                json2.put("publishTime", postService.getPublishTimeOfPost(postIdOfReport));
                 int reportTimes = thePost.getReportTimes();
                 json2.put("reportTimes", reportTimes);
                 JSONObject json3 = new JSONObject();
