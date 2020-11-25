@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * web相关的定制化配置
+ * 配置 fastjson
  *
  * @author ZENG.XIAO.YAN
  * @version 1.0
