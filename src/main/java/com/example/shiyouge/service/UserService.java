@@ -258,7 +258,6 @@ public class UserService {
         return userMapper.getPhotoByUserId(userId);
     }
 
-
     /**
      * 获得用户禁言是否被禁言
      * @param userId 用户ID
@@ -302,13 +301,6 @@ public class UserService {
      * @return 被举报帖子的数量
      */
     public int getNumberOfReported() { return userMapper.getNumberOfReported();}
-
-    /**
-     * 禁言用户
-     * @param userId 用户ID
-     * @return 状态：succeed
-     */
-    public int silent(String userId) { return userMapper.silent(userId);}
 
     /**
      * 得到用户结束禁言时间
@@ -372,5 +364,14 @@ public class UserService {
      */
     public void setTheUserStudentNumber(String userId, String userStudentNumber){
         userMapper.setTheUserStudentNumber(userId, userStudentNumber);
+    }
+
+    /**
+     * 设置用户禁言是否被禁言
+     * @param userId 用户ID
+     * @param ifSilent 是否禁言
+     */
+    public void setIfSilentByUserId(String userId, int ifSilent){
+        userMapper.setIfSilentByUserId(userId, ifSilent);
     }
 }

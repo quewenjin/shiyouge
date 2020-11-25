@@ -182,14 +182,6 @@ public interface UserMapper {
     int getNumberOfReported();
 
     /**
-     * 禁言用户
-     * @param userId 用户ID
-     * @return 状态：succeed
-     */
-
-    int silent(String userId);
-
-    /**
      * 退出宿舍
      * @param userId 用户ID
      */
@@ -292,4 +284,11 @@ public interface UserMapper {
      * @param userStudentNumber 学号
      */
     void setTheUserStudentNumber(@Param("userId") String userId, @Param("userStudentNumber") String userStudentNumber);
+
+    /**
+     * 设置用户禁言是否被禁言
+     * @param userId 用户ID
+     * @param ifSilent 是否禁言
+     */
+    void setIfSilentByUserId(@Param("userId") String userId, @Param("ifSilent") int ifSilent);
 }

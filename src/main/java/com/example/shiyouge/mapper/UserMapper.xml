@@ -136,10 +136,6 @@
         select count(*) from post where ifReported = 1
     </select>
 
-    <update id="silent">
-        update user set ifSilent = 1 where userId = #{userId}
-    </update>
-
     <update id="quitDormitoryOfUser">
         update user set userDormitoryId = 0 where userId = #{userId}
     </update>
@@ -199,6 +195,10 @@
 
     <update id="setTheUserStudentNumber">
         update user set userStudentNumber = #{userStudentNumber} where userId = #{userId}
+    </update>
+
+    <update id="setIfSilentByUserId">
+        update user set ifSilent = #{ifSilent} where userId = #{userId}
     </update>
 
 </mapper>

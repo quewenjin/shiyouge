@@ -60,7 +60,7 @@ public class UserController {
     }
 
     /**
-     * 设置
+     * 设置用户基本信息
      * @param params 昵称
      * @return 状态：succeed 或 wrong
      */

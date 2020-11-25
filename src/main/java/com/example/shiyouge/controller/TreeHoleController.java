@@ -132,10 +132,16 @@ public class TreeHoleController {
         Timestamp createTime =  new Timestamp(date.getTime());
         Timestamp endSilentTime = userService.getTheEndSilentTime(userId);
         JSONObject json = new JSONObject();
-        //如果用户禁言时间还未结束
-        if (createTime.before(endSilentTime)){
-            json.put("status", "silented");
-            return json.toString();
+        //如果用户是被禁言状态
+        if (userService.getIfSilentByUserId(userId) == 1){
+            //如果用户禁言时间还未结束
+            if (createTime.before(endSilentTime)){
+                json.put("status", "silented");
+                return json.toString();
+            }  else {
+                //解除禁言状态
+                userService.setIfSilentByUserId(userId, 0);
+            }
         }
         try {
             //在数据库创建评论信息
@@ -172,6 +178,8 @@ public class TreeHoleController {
             }
             //统计对对应数值加1
             reportService.updateTheValueOfReport(postId, vulgar, sensitivity, illegal, advertisement, virus, others);
+            //帖子举报次数 +1
+            postService.setReportTimes(postId, postService.getReportTimes(postId)+1);
             json.put("status", "reported");
         } catch (Exception e){
             json.put("status", "wrong");
@@ -193,10 +201,16 @@ public class TreeHoleController {
         Timestamp createTime =  new Timestamp(date.getTime());
         Timestamp endSilentTime = userService.getTheEndSilentTime(userId);
         JSONObject json = new JSONObject();
-        //如果用户禁言时间还未结束
-        if (createTime.before(endSilentTime)){
-            json.put("status", "silented");
-            return json.toString();
+        //如果用户是被禁言状态
+        if (userService.getIfSilentByUserId(userId) == 1){
+            //如果用户禁言时间还未结束
+            if (createTime.before(endSilentTime)){
+                json.put("status", "silented");
+                return json.toString();
+            }  else {
+                //解除禁言状态
+                userService.setIfSilentByUserId(userId, 0);
+            }
         }
         try {
             //在数据库创建评论

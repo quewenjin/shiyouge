@@ -145,6 +145,8 @@ public class BackstageController {
          if (postService.reportedCancel(postId) >= 1) {
              //删除举报记录
              reportService.deleteReportByPostId(postId);
+             //帖子举报次数清 0
+             postService.setReportTimes(postId, 0);
              json.put("status", "succeed");
          }
          else {
@@ -163,14 +165,15 @@ public class BackstageController {
         String userId = params.get("userId").toString();
         Date date = new Date();
         date = DateUtil.goToDayChange(1, date);
-        Timestamp endSilentTime =  new Timestamp(date.getTime());
+        Timestamp endSilentTime =  new Timestamp(date.getTime());//禁言结束时间为当前时间的一天后
         JSONObject json = new JSONObject();
-        if (userService.silent(userId) >= 1) {
+        try {
+            //设置禁言状态
+            userService.setIfSilentByUserId(userId, 1);
             //用户结束禁言时间的设置
             userService.setTheEndSilentTime(userId, endSilentTime);
             json.put("status", "succeed");
-        }
-        else {
+        } catch (Exception e) {
             json.put("status", "wrong");
         }
         return json.toString();
@@ -215,6 +218,25 @@ public class BackstageController {
             json.put("posts", jsonArray);
             json.put("status", "succeed");
         } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
+     * 解除禁言
+     * @param params 用户ID
+     * @return 状态：succeed
+     */
+    @RequestMapping(value = "/cancelSilent", method = RequestMethod.POST)
+    public String cancelSilent(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
+        JSONObject json = new JSONObject();
+        try {
+            //解除禁言状态
+            userService.setIfSilentByUserId(userId, 0);
+            json.put("status", "succeed");
+        } catch (Exception e) {
             json.put("status", "wrong");
         }
         return json.toString();
