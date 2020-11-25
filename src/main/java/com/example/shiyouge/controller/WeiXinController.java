@@ -57,12 +57,14 @@ public class WeiXinController {
             if(!flag){
                 json.put("status", "wrong");
             } else {
+                json.put("userId", uid);
                 json.put("status", "succeed");
             }
+        } else {
+            json.put("userId", user.getOpenId());
         }
         // 封装返回小程序
         json.put("session_key", session_key);
-        json.put("open_id", open_id);
         return json.toString();
     }
 }
