@@ -197,7 +197,7 @@ public class BackstageController {
 
     /**
      * 得到全部帖子
-     * @return 状态：succeed 或 wrong
+     * @return 状态：succeed 或 wrong + json数组：帖子ID + 帖子发布时间 + 帖子内容
      */
     @RequestMapping(value = "/getAllPosts", method = RequestMethod.POST)
     public String getAllPosts() {
@@ -208,6 +208,7 @@ public class BackstageController {
             for (Post thePost: posts) {
                 JSONObject jo = new JSONObject();
                 jo.put("postId", thePost.getPostId());
+                jo.put("publishTime", thePost.getPublishTime());
                 jo.put("postContent", thePost.getPostContent());
                 jsonArray.add(jo);
             }
