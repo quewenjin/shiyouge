@@ -21,6 +21,7 @@ public class User {
     private int userStudyTimeIntotal;//用户自习总时长
     private int userStudyTimeToday;//用户今日自习时长
     private int userStudyTimeWeek;//用户本周自习时长
+    private String openId;//open_id
 
     public String getUserId() {
         return userId;
@@ -164,5 +165,13 @@ public class User {
 
     public void setUserStudyTimeWeek(int userStudyTimeWeek) {
         this.userStudyTimeWeek = userStudyTimeWeek;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }

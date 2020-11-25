@@ -23,6 +23,7 @@
         <result column="userStudyTimeIntotal" property="userStudyTimeIntotal"/>
         <result column="userStudyTimeToday" property="userStudyTimeToday"/>
         <result column="userStudyTimeWeek" property="userStudyTimeWeek"/>
+        <result column="openId" property="openId"/>
     </resultMap>
 
     <select id="getTheFertilizerQuantityOfUser" resultType="int">
@@ -184,8 +185,8 @@
     </select>
 
     <insert id="createUserByOpenId">
-        insert into user(userId)
-        value (#{openId})
+        insert into user(userId, openId)
+        value (#{userId}, #{openId})
     </insert>
 
     <update id="setTheUserSex">

@@ -60,7 +60,7 @@ public class UserController {
     }
 
     /**
-     * 修改昵称
+     * 设置
      * @param params 昵称
      * @return 状态：succeed 或 wrong
      */
@@ -72,6 +72,9 @@ public class UserController {
         String userRealName = params.get("userRealName").toString();
         JSONObject json = new JSONObject();
         try {
+            userService.setTheUserRealName(userId, userRealName);// 设置真实姓名
+            userService.setTheUserStudentNumber(userId, studentNumber);// 设置学号
+            userService.setTheUserSex(userId, userSex);// 设置性别
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");

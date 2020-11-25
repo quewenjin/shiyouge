@@ -339,11 +339,12 @@ public class UserService {
 
     /**
      * 用open_id创建用户
+     * @param userId 用户id
      * @param openId open_id
      * @return 是否成功
      */
-    public Boolean createUserByOpenId(String openId){
-        return userMapper.createUserByOpenId(openId);
+    public Boolean createUserByOpenId(String userId, String openId){
+        return userMapper.createUserByOpenId(userId, openId);
     }
 
     /**
@@ -351,7 +352,7 @@ public class UserService {
      * @param userId ID
      * @param userSex 性别
      */
-    void setTheUserSex(String userId, String userSex){
+    public void setTheUserSex(String userId, String userSex){
         userMapper.setTheUserSex(userId, userSex);
     }
 
@@ -360,7 +361,7 @@ public class UserService {
      * @param userId ID
      * @param userRealName 真实姓名
      */
-    void setTheUserRealName(String userId, String userRealName){
+    public void setTheUserRealName(String userId, String userRealName){
         userMapper.setTheUserRealName(userId, userRealName);
     }
 
@@ -369,7 +370,7 @@ public class UserService {
      * @param userId ID
      * @param userStudentNumber 学号
      */
-    void setTheUserStudentNumber(String userId, String userStudentNumber){
+    public void setTheUserStudentNumber(String userId, String userStudentNumber){
         userMapper.setTheUserStudentNumber(userId, userStudentNumber);
     }
 }

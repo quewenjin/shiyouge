@@ -266,10 +266,11 @@ public interface UserMapper {
 
     /**
      * 用open_id创建用户
+     * @param userId 用户id
      * @param openId open_id
      * @return 是否成功
      */
-    Boolean createUserByOpenId(String openId);
+    Boolean createUserByOpenId(@Param("userId") String userId, @Param("openId") String openId);
 
     /**
      * 设置性别

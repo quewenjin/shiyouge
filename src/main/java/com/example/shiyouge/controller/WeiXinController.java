@@ -5,6 +5,7 @@ import com.example.shiyouge.bean.User;
 import com.example.shiyouge.config.UserConstantInterface;
 import com.example.shiyouge.service.UserService;
 import com.example.shiyouge.utils.HttpClientUtil;
+import com.example.shiyouge.utils.RandomUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.lang.Math;
-
-
 
 @RestController
 @RequestMapping(value = "/weixin")
@@ -50,7 +49,11 @@ public class WeiXinController {
         User user = userService.getUserByUserId(open_id);
         if(user == null){
             // 添加到数据库
-            Boolean flag = userService.createUserByOpenId(open_id);
+            String uid = RandomUIDUtil.getTheRandomUID();
+            while (userService.getUserByUserId(uid) != null){//防用户ID重复
+                uid = RandomUIDUtil.getTheRandomUID();
+            }
+            Boolean flag = userService.createUserByOpenId(uid, open_id);
             if(!flag){
                 json.put("status", "wrong");
             } else {
@@ -61,14 +64,5 @@ public class WeiXinController {
         json.put("session_key", session_key);
         json.put("open_id", open_id);
         return json.toString();
-    }
-
-    public static void main(String[] args) {
-        Random random = new Random();
-        int theRandom = random.nextInt(900000000) + 100000000;
-        String theUID;
-        for (int i = 0; i<30;i++){
-            System.out.println();
-        }
     }
 }
