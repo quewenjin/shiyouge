@@ -49,15 +49,15 @@ public class WeiXinController {
         User user = userService.getUserByUserId(open_id);
         if(user == null){
             // 添加到数据库
-            String uid = RandomUIDUtil.getTheRandomUID();
-            while (userService.getUserByUserId(uid) != null){//防用户ID重复
-                uid = RandomUIDUtil.getTheRandomUID();
+            String theUid = RandomUIDUtil.getTheRandomUID();
+            while (userService.getUserByUserId(theUid) != null){//防用户ID重复
+                theUid = RandomUIDUtil.getTheRandomUID();
             }
-            Boolean flag = userService.createUserByOpenId(uid, open_id);
+            Boolean flag = userService.createUserByOpenId(theUid, open_id);
             if(!flag){
                 json.put("status", "wrong");
             } else {
-                json.put("userId", uid);
+                json.put("userId", theUid);
                 json.put("status", "succeed");
             }
         } else {
