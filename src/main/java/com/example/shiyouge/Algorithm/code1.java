@@ -10,6 +10,12 @@ public class code1 {
     private static int n;
 
     //调用init vv传入每个人的标签信息，fnn传入每个人的匹配失败次数
+
+    /**
+     * init
+     * @param vv 每个人的标签，有选的 1 没选的 0 --> List<0,0,0,0,0,0,.....>
+     * @param fnn 传进来的这些人的匹配失败的次数的数组
+     */
     public static void init(List<String> vv, int[] fnn){
         n=vv.size();
         for(int i=0;i<n;i++){
@@ -17,6 +23,10 @@ public class code1 {
         }
         if (n >= 0) System.arraycopy(fnn, 0, fn, 0, n);
     }
+
+    /**
+     * 手写算法
+     */
     private static double cal(int x,int y){
         double MIN = -1e9;
         if(x==y) return MIN;
@@ -34,7 +44,12 @@ public class code1 {
         System.out.println(x+","+y+","+num/den);
         return num/den;
     }
-    //init后调用solve即可
+
+    /**
+     * init后调用solve即可
+     * 返回匹配数组，匹配失败为-1
+     * @return 数组match，match[0]=1 意思为传进去的第0个和第1个匹配，以此类推；若match[]=1 为第i个人匹配失败
+     */
     public static int[] solve(){
         for(int i=0;i<n;i++){
             match[i]=-1;
@@ -49,6 +64,5 @@ public class code1 {
             }
         }
         return match;
-        //返回匹配数组，匹配失败为-1
     }
 }
