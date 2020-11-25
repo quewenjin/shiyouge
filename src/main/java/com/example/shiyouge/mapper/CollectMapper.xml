@@ -14,6 +14,17 @@
         select * from collect where userIdOfCollector = #{userId} and postIdOfCollection = #{postId}
     </select>
 
+    <select id="getThePostIdOfCollect" resultType="java.lang.Integer">
+        select postIdOfCollection from collect where userIdOfCollector = #{userId}
+    </select>
 
+    <insert id="createCollection">
+        insert into collect(userIdOfCollector, postIdOfCollection)
+        value (#{userId}, #{postId})
+    </insert>
+
+    <delete id="cancelCollection">
+        delete from collect where userIdOfCollector = #{userId} and postIdOfCollection = #{postId}
+    </delete>
 
 </mapper>

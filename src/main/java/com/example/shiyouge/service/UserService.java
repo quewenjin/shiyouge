@@ -1,5 +1,6 @@
 package com.example.shiyouge.service;
 
+import com.example.shiyouge.bean.User;
 import com.example.shiyouge.mapper.UserMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -217,7 +218,7 @@ public class UserService {
      * @param userId 用户ID
      * @return 用户学号
      */
-    public int getStudentNumberByUserId(String userId) {
+    public String getStudentNumberByUserId(String userId) {
         return userMapper.getStudentNumberByUserId(userId);
     }
 
@@ -328,11 +329,47 @@ public class UserService {
     }
 
     /**
-     * 得到性别
+     * 通过ID得到用户
      * @param userId ID
-     * @return 性别
+     * @return user
      */
-    String getTheSexByUserId(String userId){
-        return userMapper.getSexByUserId(userId);
+    public User getUserByUserId(String userId){
+        return userMapper.getUserByUserId(userId);
+    }
+
+    /**
+     * 用open_id创建用户
+     * @param openId open_id
+     * @return 是否成功
+     */
+    public Boolean createUserByOpenId(String openId){
+        return userMapper.createUserByOpenId(openId);
+    }
+
+    /**
+     * 设置性别
+     * @param userId ID
+     * @param userSex 性别
+     */
+    void setTheUserSex(String userId, String userSex){
+        userMapper.setTheUserSex(userId, userSex);
+    }
+
+    /**
+     * 设置真实姓名
+     * @param userId ID
+     * @param userRealName 真实姓名
+     */
+    void setTheUserRealName(String userId, String userRealName){
+        userMapper.setTheUserRealName(userId, userRealName);
+    }
+
+    /**
+     * 设置学号
+     * @param userId ID
+     * @param userStudentNumber 学号
+     */
+    void setTheUserStudentNumber(String userId, String userStudentNumber){
+        userMapper.setTheUserStudentNumber(userId, userStudentNumber);
     }
 }

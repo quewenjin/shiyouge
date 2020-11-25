@@ -1,5 +1,6 @@
 package com.example.shiyouge.mapper;
 
+import com.example.shiyouge.bean.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -155,7 +156,7 @@ public interface UserMapper {
      * @param userId 用户ID
      * @return 所有用户学号
      */
-    int getStudentNumberByUserId(String userId);
+    String getStudentNumberByUserId(String userId);
 
     /**
      * 获得用户禁言是否被禁言
@@ -255,4 +256,39 @@ public interface UserMapper {
      * @param endSilentTime 结束禁言时间
      */
     void setTheEndSilentTime(@Param("userId") String userId, @Param("endSilentTime") Timestamp endSilentTime);
+
+    /**
+     * 通过ID得到用户
+     * @param userId ID
+     * @return user
+     */
+    User getUserByUserId(String userId);
+
+    /**
+     * 用open_id创建用户
+     * @param openId open_id
+     * @return 是否成功
+     */
+    Boolean createUserByOpenId(String openId);
+
+    /**
+     * 设置性别
+     * @param userId ID
+     * @param userSex 性别
+     */
+    void setTheUserSex(@Param("userId") String userId, @Param("userSex") String userSex);
+
+    /**
+     * 设置真实姓名
+     * @param userId ID
+     * @param userRealName 真实姓名
+     */
+    void setTheUserRealName(@Param("userId") String userId, @Param("userRealName") String userRealName);
+
+    /**
+     * 设置学号
+     * @param userId ID
+     * @param userStudentNumber 学号
+     */
+    void setTheUserStudentNumber(@Param("userId") String userId, @Param("userStudentNumber") String userStudentNumber);
 }

@@ -207,4 +207,71 @@ public class TreeHoleController {
         }
         return json.toString();
     }
+
+    /**
+     * 得到用户收藏的的所有帖子
+     * @return 状态：succeed 或 wrong + json数组：编号，内容，时间，评论数，收藏数（按时间排序，近期发布在前）
+     */
+    @RequestMapping(value = "/getPostsOfCollected", method = RequestMethod.POST)
+    public String getPostsOfCollected(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
+        JSONObject json = new JSONObject();
+        try {
+            JSONArray jsonArray = new JSONArray();
+            List<Integer> postIds = collectService.getThePostIdOfCollect(userId);
+            for (int postId: postIds) {
+                Post post = postService.getPostByPostId(postId);
+                JSONObject jo = new JSONObject();
+                jo.put("postId", post.getPostId());
+                jo.put("postContent", post.getPostContent());
+                jo.put("publishTime", post.getPublishTime());
+                jo.put("commentedTimes", post.getCommentedTimes());
+                jo.put("collectedTimes", post.getCollectedTimes());
+                jsonArray.add(jo);
+            }
+            json.put("posts", jsonArray);
+            json.put("status", "succeed");
+        } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
+     * 收藏帖子
+     * @param params 用户ID + 帖子ID
+     * @return 状态：succeed 或 wrong
+     */
+    @RequestMapping(value = "/collectPost", method = RequestMethod.POST)
+    public String collectPost(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
+        int postId = Integer.parseInt(params.get("postId").toString());
+        JSONObject json = new JSONObject();
+        try {
+            collectService.createCollection(userId, postId);
+            json.put("status", "succeed");
+        } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
+     * 取消收藏
+     * @param params 用户ID + 帖子ID
+     * @return 状态：succeed 或 wrong
+     */
+    @RequestMapping(value = "/cancelCollect", method = RequestMethod.POST)
+    public String cancelCollect(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
+        int postId = Integer.parseInt(params.get("postId").toString());
+        JSONObject json = new JSONObject();
+        try {
+            collectService.cancelCollection(userId, postId);
+            json.put("status", "succeed");
+        } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
 }

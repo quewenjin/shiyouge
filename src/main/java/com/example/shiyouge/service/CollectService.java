@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CollectService {
@@ -26,5 +28,32 @@ public class CollectService {
         } else {
             return 0;
         }
+    }
+
+    /**
+     * 得到用户收藏的所有帖子的ID
+     * @param userId ID
+     * @return 帖子ID
+     */
+    public List<Integer> getThePostIdOfCollect(String userId){
+        return collectMapper.getThePostIdOfCollect(userId);
+    }
+
+    /**
+     * 收藏帖子
+     * @param userId ID
+     * @param postId ID
+     */
+    public void createCollection(String userId, int postId){
+        collectMapper.createCollection(userId, postId);
+    }
+
+    /**
+     * 取消收藏
+     * @param userId ID
+     * @param postId ID
+     */
+    public void cancelCollection(String userId, int postId){
+        collectMapper.cancelCollection(userId, postId);
     }
 }

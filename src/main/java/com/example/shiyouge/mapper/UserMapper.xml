@@ -117,7 +117,7 @@
         select userRealName from user where userId = #{userId}
     </select>
 
-    <select id="getStudentNumberByUserId" resultType="java.lang.Integer">
+    <select id="getStudentNumberByUserId" resultType="java.lang.String">
         select userStudentNumber from user where userId = #{userId}
     </select>
 
@@ -177,6 +177,27 @@
 
     <update id="joinDormitoryOfUser">
          update user set userDormitoryId = #{dormitoryId} where userId = #{userId}
+    </update>
+
+    <select id="getUserByUserId" resultMap="BaseResultMap">
+        select * from user where userId = #{userId}
+    </select>
+
+    <insert id="createUserByOpenId">
+        insert into user(userId)
+        value (#{openId})
+    </insert>
+
+    <update id="setTheUserSex">
+        update user set userSex = #{userSex} where userId = #{userId}
+    </update>
+
+    <update id="setTheUserRealName">
+        update user set userRealName = #{userRealName} where userId = #{userId}
+    </update>
+
+    <update id="setTheUserStudentNumber">
+        update user set userStudentNumber = #{userStudentNumber} where userId = #{userId}
     </update>
 
 </mapper>

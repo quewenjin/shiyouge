@@ -1,5 +1,6 @@
 package com.example.shiyouge.controller;
 
+import com.example.shiyouge.bean.Dormitory;
 import com.example.shiyouge.service.UserService;
 import com.alibaba.fastjson.JSONObject;
 import com.example.shiyouge.service.*;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -58,6 +60,26 @@ public class UserController {
     }
 
     /**
+     * 修改昵称
+     * @param params 昵称
+     * @return 状态：succeed 或 wrong
+     */
+    @RequestMapping(value = "/setBaseInf", method = RequestMethod.POST)
+    public String setBaseInf(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
+        String studentNumber = params.get("studentNumber").toString();
+        String userSex = params.get("userSex").toString();
+        String userRealName = params.get("userRealName").toString();
+        JSONObject json = new JSONObject();
+        try {
+            json.put("status", "succeed");
+        } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
      * 退出宿舍
      * @param params 用户ID
      * @return 状态：succeed 或 wrong
@@ -87,7 +109,11 @@ public class UserController {
     public String radomDormitoryId() {
         JSONObject json = new JSONObject();
         try {
-            int randomId = dormitoryService.getMaxDormitoryId()+1;
+            int randomId = 1;
+            List<Dormitory> dormitories = dormitoryService.getAllDormitorys();
+            if (dormitories.size() != 0){
+                randomId = dormitoryService.getMaxDormitoryId()+1;
+            }
             json.put("dormitoryId", randomId);
             json.put("status", "succeed");
         } catch (Exception e){

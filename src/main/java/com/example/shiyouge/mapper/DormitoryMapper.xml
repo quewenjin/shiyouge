@@ -87,4 +87,8 @@
         select joinPassward from dormitory where dormitoryId = #{dormitoryId}
     </select>
 
+    <select id="getAllDormitorys" resultMap="BaseResultMap">
+        select * from dormitory
+    </select>
+
 </mapper>

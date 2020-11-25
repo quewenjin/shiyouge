@@ -1,10 +1,13 @@
 package com.example.shiyouge.service;
 
+import com.example.shiyouge.bean.Dormitory;
 import com.example.shiyouge.mapper.DormitoryMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -195,5 +198,13 @@ public class DormitoryService {
      */
     String getTheJoinPassward(int dormitoryId){
         return dormitoryMapper.getTheJoinPassward(dormitoryId);
+    }
+
+    /**
+     * 得到全部的宿舍
+     * @return 宿舍List
+     */
+    public List<Dormitory> getAllDormitorys(){
+        return dormitoryMapper.getAllDormitorys();
     }
 }

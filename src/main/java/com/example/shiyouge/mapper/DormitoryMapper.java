@@ -1,7 +1,10 @@
 package com.example.shiyouge.mapper;
 
+import com.example.shiyouge.bean.Dormitory;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface DormitoryMapper {
@@ -124,4 +127,10 @@ public interface DormitoryMapper {
      * @return 密码
      */
     String getTheJoinPassward(int dormitoryId);
+
+    /**
+     * 得到全部的宿舍
+     * @return 宿舍List
+     */
+    List<Dormitory> getAllDormitorys();
 }
