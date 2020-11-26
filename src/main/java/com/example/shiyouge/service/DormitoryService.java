@@ -187,8 +187,8 @@ public class DormitoryService {
      * @param dormitoryId 宿舍ID
      * @param joinPassword 加入密码
      */
-    void setTheJoinPassward(int dormitoryId, String joinPassword){
-        dormitoryMapper.setTheJoinPassward(dormitoryId, joinPassword);
+    void setTheJoinPassword(int dormitoryId, String joinPassword){
+        dormitoryMapper.setTheJoinPassword(dormitoryId, joinPassword);
     }
 
     /**
@@ -196,8 +196,8 @@ public class DormitoryService {
      * @param dormitoryId 宿舍ID
      * @return 密码
      */
-    String getTheJoinPassward(int dormitoryId){
-        return dormitoryMapper.getTheJoinPassward(dormitoryId);
+    String getTheJoinPassword(int dormitoryId){
+        return dormitoryMapper.getTheJoinPassword(dormitoryId);
     }
 
     /**

@@ -119,14 +119,14 @@ public interface DormitoryMapper {
      * @param dormitoryId 宿舍ID
      * @param joinPassword 加入密码
      */
-    void setTheJoinPassward(@Param("dormitoryId") int dormitoryId, @Param("joinPassword") String joinPassword);
+    void setTheJoinPassword(@Param("dormitoryId") int dormitoryId, @Param("joinPassword") String joinPassword);
 
     /**
      * 得到加入密码
      * @param dormitoryId 宿舍ID
      * @return 密码
      */
-    String getTheJoinPassward(int dormitoryId);
+    String getTheJoinPassword(int dormitoryId);
 
     /**
      * 得到全部的宿舍

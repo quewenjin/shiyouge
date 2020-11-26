@@ -80,11 +80,11 @@
     </select>
 
     <update id="setTheJoinPassward">
-        update dormitory set joinPassward = #{joinPassword} where dormitoryId = #{dormitoryId}
+        update dormitory set joinPassword = #{joinPassword} where dormitoryId = #{dormitoryId}
     </update>
 
     <select id="getTheJoinPassward" resultType="java.lang.String">
-        select joinPassward from dormitory where dormitoryId = #{dormitoryId}
+        select joinPassword from dormitory where dormitoryId = #{dormitoryId}
     </select>
 
     <select id="getAllDormitorys" resultMap="BaseResultMap">

@@ -4,6 +4,7 @@ import com.example.shiyouge.bean.Dormitory;
 import com.example.shiyouge.service.UserService;
 import com.alibaba.fastjson.JSONObject;
 import com.example.shiyouge.service.*;
+import com.example.shiyouge.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,7 +113,7 @@ public class UserController {
     public String radomDormitoryId() {
         JSONObject json = new JSONObject();
         try {
-            int randomId = 1;
+            int randomId = RandomUtil.getTheRandomDormitoryId();
             List<Dormitory> dormitories = dormitoryService.getAllDormitorys();
             if (dormitories.size() != 0){
                 randomId = dormitoryService.getMaxDormitoryId()+1;
@@ -138,8 +139,6 @@ public class UserController {
         JSONObject json = new JSONObject();
         try {
             dormitoryService.created(DormitoryID, joinPassword);
-            //宿舍人数+1
-            dormitoryService.setTheDormitoryMate(DormitoryID, dormitoryService.getTheDormitoryMate(DormitoryID)+1);
             //加入对应宿舍
             userService.joinDormitoryOfUser(userId, DormitoryID);
             json.put("status", "succeed");
@@ -152,7 +151,7 @@ public class UserController {
     /**
      * 加入宿舍
      * @param params 宿舍ID 加入密码
-     * @return 状态：succeed 或 wrong
+     * @return 状态：succeed 或 wrong 或 filled
      */
     @RequestMapping(value = "/joinDormitory", method = RequestMethod.POST)
     public String joinDormitory(@RequestBody Map<String, Object> params) {
@@ -162,11 +161,16 @@ public class UserController {
         JSONObject json = new JSONObject();
         try {
             dormitoryService.created(DormitoryID, joinPassword);
-            //宿舍人数+1
-            dormitoryService.setTheDormitoryMate(DormitoryID, dormitoryService.getTheDormitoryMate(DormitoryID)+1);
-            //加入对应宿舍
-            userService.joinDormitoryOfUser(userId, DormitoryID);
-            json.put("status", "succeed");
+            int theNum = dormitoryService.getTheDormitoryMate(DormitoryID);//宿舍人数
+            if (theNum < 4){
+                //宿舍人数+1
+                dormitoryService.setTheDormitoryMate(DormitoryID, dormitoryService.getTheDormitoryMate(DormitoryID)+1);
+                //加入对应宿舍
+                userService.joinDormitoryOfUser(userId, DormitoryID);
+                json.put("status", "succeed");
+            } else {
+                json.put("status", "filled");
+            }
         } catch (Exception e){
             json.put("status", "wrong");
         }
@@ -207,28 +211,6 @@ public class UserController {
         } catch (Exception e){
             json.put("status", "wrong");
         }
-        return json.toString();
-    }
-
-    /**
-     * 两人匹配算法
-     * @return 临时宿舍id
-     */
-    @RequestMapping(value = "/SingleAlgorithm", method = RequestMethod.POST)
-    public String SingleAlgorithm() {
-        JSONObject json = new JSONObject();
-        json.put("status", "succeed");
-        return json.toString();
-    }
-
-    /**
-     * 四人匹配算法
-     * @return 最终宿舍id
-     */
-    @RequestMapping(value = "/CoupleAlgorithm", method = RequestMethod.POST)
-    public String CoupleAlgorithm() {
-        JSONObject json = new JSONObject();
-        json.put("status", "succeed");
         return json.toString();
     }
 }

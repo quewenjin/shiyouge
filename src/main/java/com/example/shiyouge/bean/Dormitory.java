@@ -18,6 +18,14 @@ public class Dormitory {
         this.dormitoryId = dormitoryId;
     }
 
+    public String getJoinPassword() {
+        return joinPassword;
+    }
+
+    public void setJoinPassword(String joinPassword) {
+        this.joinPassword = joinPassword;
+    }
+
     public int getNumberOfMate() {
         return numberOfMate;
     }

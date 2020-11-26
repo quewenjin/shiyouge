@@ -16,6 +16,16 @@ public class RandomUtil {
     }
 
     /**
+     * 随机得到六位长度的数字ID
+     * @return int
+     */
+    public static int getTheRandomDormitoryId(){
+        Random random = new Random();
+        int theRandom = random.nextInt(900000) + 100000;
+        return theRandom;
+    }
+
+    /**
      * 0到3 随机
      * @return int
      */
