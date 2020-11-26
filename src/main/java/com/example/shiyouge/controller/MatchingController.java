@@ -3,6 +3,7 @@ package com.example.shiyouge.controller;
 import com.example.shiyouge.Algorithm.code1;
 import com.example.shiyouge.Algorithm.code2;
 import com.example.shiyouge.bean.User;
+import com.example.shiyouge.service.DormitoryService;
 import com.example.shiyouge.service.MatchingService;
 import com.example.shiyouge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class MatchingController {
     MatchingService matchingService;
     @Autowired
     UserService userService;
+    @Autowired
+    DormitoryService dormitoryService;
 
     /**
      * 第一阶段匹配
@@ -97,18 +100,37 @@ public class MatchingController {
             List<String> userIdsOfFailure= null;//二阶匹配失败者的ID
             int[] faultTimesOfFailure = new int[users.size()];//二阶匹配失败者的失败次数
             int numOfFailure = 0;
-            //值为-1 的对应的失败次数+1,记录下来
+            //值为 -1 的每对用户的失败次数+1,记录下来
             for (int i = 0; i < 12; i++) {
                 if (left[i] == -1){
                     //成对的第一个
                     String theUserId1 = users.get(2*i).getUserId();
+                    //对应失败次数+1
                     matchingService.setMatchingFailedTimesByUserId(theUserId1, matchingService.getMatchingFailedTimesByUserId(theUserId1)+1);
+                    //记录用户ID
                     userIdsOfFailure.add(theUserId1);
-                    //faultTimesOfFailure
+                    //记录用户失败次数
+                    faultTimesOfFailure[numOfFailure] = matchingService.getMatchingFailedTimesByUserId(theUserId1);
+                    numOfFailure ++;
                     //成对的第二个
                     String theUserId2 = users.get(2*i+1).getUserId();
+                    //对应失败次数+1
                     matchingService.setMatchingFailedTimesByUserId(theUserId2, matchingService.getMatchingFailedTimesByUserId(theUserId2)+1);
+                    //记录用户ID
                     userIdsOfFailure.add(theUserId2);
+                    //记录用户失败次数
+                    faultTimesOfFailure[numOfFailure] = matchingService.getMatchingFailedTimesByUserId(theUserId2);//记录用户失败次数
+                    numOfFailure ++;
+                }
+            }
+            //把匹配的成对存到第二阶的数据库
+            int theMatchingId = 0;
+            for (int i = 0; i < 12; i++) {
+                if (left[i] >= 0){
+
+                    //历遍过设置为-1
+                    left[left[i]] = -1;
+                    left[i] = -1;
                 }
             }
         }
