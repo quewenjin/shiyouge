@@ -24,7 +24,7 @@ public class WeiXinController {
     /**
      * 微信用户登录
      * @param params 前台传的 code
-     * @return 状态：succeed 或 wrong + session_key + open_id
+     * @return 状态：succeed 或 wrong + session_key + 用户ID + 宿舍ID
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String weixinLogin(@RequestBody Map<String, Object> params) {
@@ -74,11 +74,14 @@ public class WeiXinController {
                 }
                 //设置头像
                 userService.setPhotoByUserId(theUid, theHead);
+                //其他信息
                 json.put("userId", theUid);
+                json.put("dormitoryId", userService.getDormitoryIDByUserId(theUid));
                 json.put("status", "succeed");
             }
         } else {
-            json.put("userId", user.getOpenId());
+            json.put("userId", user.getUserId());
+            json.put("dormitoryId", user.getUserDormitoryId());
         }
         // 封装返回小程序
         json.put("session_key", session_key);

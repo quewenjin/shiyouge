@@ -1,6 +1,5 @@
 package com.example.shiyouge.bean;
 
-
 import java.sql.Timestamp;
 
 public class Comment {

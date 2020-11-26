@@ -90,6 +90,7 @@ public class StudyController {
                 jo.put("rank", rank);
                 String nickname = userService.getNickNameByUserId(userId);
                 jo.put("nickname", nickname);
+                jo.put("photo", userService.getPhotoByUserId(userId));
                 int studyTimeToday = userService.getStudyTimeTodayOfUser(userId);
                 jo.put("studyTimeToday", studyTimeToday);
                 rank++;
@@ -119,6 +120,7 @@ public class StudyController {
                 jo.put("rank", rank);
                 String nickname = userService.getNickNameByUserId(userId);
                 jo.put("nickname", nickname);
+                jo.put("photo", userService.getPhotoByUserId(userId));
                 int studyTimeWeek = userService.getStudyTimeWeekOfUser(userId);
                 jo.put("studyTimeWeek", studyTimeWeek);
                 rank++;
