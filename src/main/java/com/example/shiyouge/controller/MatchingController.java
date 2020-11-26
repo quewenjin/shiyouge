@@ -28,9 +28,11 @@ public class MatchingController {
     /**
      * 第一阶段匹配
      * 每隔一段时间监测在匹配人数是否达到
+     * 每5分钟 执行任务
      */
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0/5 * * * ?")
     public void judgeTheNumForCode1() {
+        System.out.println("一阶匹配开始");
         //得到处于一阶匹配的用户
         List<User> users = userService.getUsersByMatchingStatus(1);
         List<String> labelOfUsers= null;
@@ -73,14 +75,17 @@ public class MatchingController {
                 }
             }
         }
+        System.out.println("一阶匹配结束");
     }
 
     /**
      * 第二阶段匹配
      * 每隔一段时间监测在匹配人数是否达到
+     * 每10分钟 执行任务
      */
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void judgeTheNumForCode2() {
+        System.out.println("二阶匹配开始");
         //得到处于二阶匹配的用户
         List<User> users = userService.getUsersByMatchingStatus(2);
         List<String> labelOfUsers= null;
@@ -166,5 +171,6 @@ public class MatchingController {
                 userService.setIfOnMatchingByUserId(users.get(i).getUserId(), 2);
             }
         }
+        System.out.println("二阶匹配结束");
     }
 }
