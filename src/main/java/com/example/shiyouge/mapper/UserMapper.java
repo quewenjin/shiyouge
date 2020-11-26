@@ -305,4 +305,38 @@ public interface UserMapper {
      * @return
      */
     User getUserByOpenId(String openId);
+
+    /**
+     * 得到是否在匹配中
+     * @param userId ID
+     * @return 是否匹配中
+     */
+    int getIfOnMatchingByUserId(String userId);
+
+    /**
+     * 设置是否匹配中
+     * @param userId ID
+     * @param ifOnMatching 状态
+     */
+    void setIfOnMatchingByUserId(@Param("userId") String userId, @Param("ifOnMatching") int ifOnMatching);
+
+    /**
+     * 得到匹配失败次数
+     * @param userId ID
+     * @return 是否匹配中
+     */
+    int getMatchingFailedTimesByUserId(String userId);
+
+    /**
+     * 设置匹配失败次数
+     * @param userId ID
+     * @param failedTimes 失败次数
+     */
+    void setMatchingFailedTimesByUserId(@Param("userId") String userId, @Param("failedTimes") int failedTimes);
+
+    /**
+     * 处于某匹配状态的用户
+     * @return List
+     */
+    List<User> getTheUsersByMatchingStatus(int ifOnMatching);
 }

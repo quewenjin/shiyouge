@@ -17,12 +17,13 @@ public class User {
     private int userStudyRoomId;//用户的自习室ID
     private boolean ifSilent;//是否被禁言
     private Timestamp endSilentTime;//结束禁言时间
-    private String lable;//用户标签
+    private String lable;//用户标签 --> 默认59个0 --> 00000000000000000000000000000000000000000000000000000000000
     private int userStudyTimeIntotal;//用户自习总时长
     private int userStudyTimeToday;//用户今日自习时长
     private int userStudyTimeWeek;//用户本周自习时长
     private String openId;//open_id
     private int matchingFailedTimes;//匹配失败次数
+    private int ifOnMatching;//是否处于在匹配状态
 
     public String getUserId() {
         return userId;
@@ -182,5 +183,13 @@ public class User {
 
     public void setMatchingFailedTimes(int matchingFailedTimes) {
         this.matchingFailedTimes = matchingFailedTimes;
+    }
+
+    public int getIfOnMatching() {
+        return ifOnMatching;
+    }
+
+    public void setIfOnMatching(int ifOnMatching) {
+        this.ifOnMatching = ifOnMatching;
     }
 }

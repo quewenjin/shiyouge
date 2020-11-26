@@ -5,10 +5,28 @@
 
 <mapper namespace="com.example.shiyouge.mapper.MatchingMapper">
     <resultMap id="BaseResultMap" type="com.example.shiyouge.bean.Matching">
-        <id column="userIdOnMatching" property="userIdOnMatching"/>
+        <id column="matchingId" property="matchingId"/>
+        <result column="userIdOnMatching" property="userIdOnMatching"/>
         <result column="labelOfUser" property="labelOfUser"/>
+        <result column="failedTimes" property="failedTimes"/>
     </resultMap>
 
+    <insert id="createMatchingRole">
+        insert into matching(matchingId, userIdOnMatching, labelOfUser, failedTimes)
+        value (#{matchingId}, #{userIdOnMatching}, #{labelOfUser}, #{failedTimes})
+    </insert>
+
+    <delete id="deleteAllInf">
+        delete from matching
+    </delete>
+
+    <select id="getMatchingFailedTimesByUserId" resultType="int">
+        select failedTimes from matching where userId = #{userId}
+    </select>
+
+    <update id="setMatchingFailedTimesByUserId">
+        update matching set failedTimes = #{failedTimes} where userId = #{userId}
+    </update>
 
 
 </mapper>

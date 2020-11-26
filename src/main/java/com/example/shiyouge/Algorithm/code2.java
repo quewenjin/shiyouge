@@ -36,7 +36,7 @@ public class code2 {
      * 手写算法
      */
     private static double cal(int x,int y){
-        if(x==y) return 0;
+        if(x==y) return MIN;
         String sx=v.get(x),sy=v.get(y);
         int sumx=0,sumy=0,sumx2=0,sumy2=0,sumxy=0;
         int len=sx.length();

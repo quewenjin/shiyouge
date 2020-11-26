@@ -392,4 +392,48 @@ public class UserService {
     public User getUserByOpenId(String openId){
         return userMapper.getUserByOpenId(openId);
     }
+
+    /**
+     * 得到是否在匹配中
+     * @param userId ID
+     * @return 是否匹配中
+     */
+    public int getIfOnMatchingByUserId(String userId){
+        return userMapper.getIfOnMatchingByUserId(userId);
+    }
+
+    /**
+     * 设置是否匹配中
+     * @param userId ID
+     * @param ifOnMatching 状态
+     */
+    public void setIfOnMatchingByUserId(String userId, int ifOnMatching){
+        userMapper.setIfOnMatchingByUserId(userId, ifOnMatching);
+    }
+
+    /**
+     * 得到匹配失败次数
+     * @param userId ID
+     * @return 是否匹配中
+     */
+    public int getMatchingFailedTimesByUserId(String userId){
+        return userMapper.getMatchingFailedTimesByUserId(userId);
+    }
+
+    /**
+     * 设置匹配失败次数
+     * @param userId ID
+     * @param failedTimes 失败次数
+     */
+    public void setMatchingFailedTimesByUserId(String userId, int failedTimes){
+        userMapper.setMatchingFailedTimesByUserId(userId, failedTimes);
+    }
+
+    /**
+     * 处于某匹配状态的用户
+     * @return List
+     */
+    public List<User> getUsersByMatchingStatus(int ifOnMatching){
+        return userMapper.getTheUsersByMatchingStatus(ifOnMatching);
+    }
 }

@@ -25,6 +25,7 @@
         <result column="userStudyTimeWeek" property="userStudyTimeWeek"/>
         <result column="openId" property="openId"/>
         <result column="matchingFailedTimes" property="matchingFailedTimes"/>
+        <result column="ifOnMatching" property="ifOnMatching"/>
     </resultMap>
 
     <select id="getTheFertilizerQuantityOfUser" resultType="int">
@@ -208,6 +209,26 @@
 
     <select id="getUserByOpenId" resultMap="BaseResultMap">
         select * from user where openId = #{openId}
+    </select>
+
+    <select id="getIfOnMatchingByUserId" resultType="int">
+        select ifOnMatching from user where userId = #{userId}
+    </select>
+
+    <update id="setIfOnMatchingByUserId">
+        update user set ifOnMatching = #{ifOnMatching} where userId = #{userId}
+    </update>
+
+    <select id="getMatchingFailedTimesByUserId" resultType="int">
+        select matchingFailedTimes from user where userId = #{userId}
+    </select>
+
+    <update id="setMatchingFailedTimesByUserId">
+        update user set matchingFailedTimes = #{failedTimes} where userId = #{userId}
+    </update>
+
+    <select id="getTheUsersByMatchingStatus" resultMap="BaseResultMap">
+        select * from user where ifOnMatching = #{ifOnMatching}
     </select>
 
 </mapper>
