@@ -23,7 +23,7 @@ public class User {
     private int userStudyTimeWeek;//用户本周自习时长
     private String openId;//open_id
     private int matchingFailedTimes;//匹配失败次数
-    private int ifOnMatching;//是否处于在匹配状态
+    private int ifOnMatching;//当前匹配状态 --> 0:不在匹配状态，1：一阶匹配，2：二阶匹配，3：匹配舍友成功
 
     public String getUserId() {
         return userId;

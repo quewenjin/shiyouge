@@ -39,9 +39,12 @@ public class WeiXinController {
         // 发送请求
         String wxResult = HttpClientUtil.doGet(UserConstantInterface.WX_LOGIN_URL, param);
         JSONObject jsonObject = JSONObject.parseObject(wxResult);
-        // 获取参数返回的
+        // 获取参数返回
         String session_key = jsonObject.get("session_key").toString();
         String open_id = jsonObject.get("openid").toString();
+//        JSONObject json = new JSONObject();
+//        json.put("session_key", session_key);
+//        json.put("openid", open_id);
         // 根据返回的user实体类，判断用户是否是新用户，是的话，创建新的用户，信息存到数据库，返回 session_key 和 open_id
         JSONObject json = new JSONObject();
         //用open_id查询用户

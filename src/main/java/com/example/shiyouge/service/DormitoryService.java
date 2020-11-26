@@ -207,4 +207,13 @@ public class DormitoryService {
     public List<Dormitory> getAllDormitorys(){
         return dormitoryMapper.getAllDormitorys();
     }
+
+    /**
+     * 得到宿舍
+     * @param dormitoryId ID
+     * @return 宿舍
+     */
+    public Dormitory getDormitoryById(int dormitoryId){
+        return dormitoryMapper.getDormitoryById(dormitoryId);
+    }
 }

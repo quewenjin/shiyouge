@@ -6,15 +6,17 @@ import com.example.shiyouge.bean.User;
 import com.example.shiyouge.service.DormitoryService;
 import com.example.shiyouge.service.MatchingService;
 import com.example.shiyouge.service.UserService;
+import com.example.shiyouge.utils.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(value = "/matching")
+/**
+ * 周期执行匹配
+ */
+@Component
 public class MatchingController {
     @Autowired
     MatchingService matchingService;
@@ -61,10 +63,10 @@ public class MatchingController {
                     //存入数据库matching表
                     theMatchingId ++;
                     matchingService.createMatchingRole(theMatchingId, users.get(i).getUserId(), users.get(i).getLable(), 0);
-                    userService.setIfOnMatchingByUserId(users.get(i).getUserId(), 2);
+                    userService.setIfOnMatchingByUserId(users.get(i).getUserId(), 2);//匹配状态设置为2
                     theMatchingId ++;
                     matchingService.createMatchingRole(theMatchingId, users.get(match[i]).getUserId(), users.get(match[i]).getLable(), 0);
-                    userService.setIfOnMatchingByUserId(users.get(i).getUserId(), 2);
+                    userService.setIfOnMatchingByUserId(users.get(i).getUserId(), 2);//匹配状态设置为2
                     //历遍过设置为-1
                     match[match[i]] = -1;
                     match[i] = -1;
@@ -124,14 +126,44 @@ public class MatchingController {
                 }
             }
             //把匹配的成对存到第二阶的数据库
-            int theMatchingId = 0;
             for (int i = 0; i < 12; i++) {
                 if (left[i] >= 0){
-
+                    //产生随机ID
+                    int randomId = RandomUtil.getTheRandomDormitoryId();
+                    while (dormitoryService.getAllDormitorys().size() != 0){
+                        randomId = RandomUtil.getTheRandomDormitoryId();
+                    }
+                    String thePassword = String.valueOf(randomId);
+                    //创建宿舍
+                    dormitoryService.created(randomId, thePassword);
+                    //四人加入宿舍
+                    userService.joinDormitoryOfUser(users.get(2*i).getUserId(), randomId);
+                    userService.joinDormitoryOfUser(users.get(2*i+1).getUserId(), randomId);
+                    userService.joinDormitoryOfUser(users.get(2*left[i]).getUserId(), randomId);
+                    userService.joinDormitoryOfUser(users.get(2*left[i]+1).getUserId(), randomId);
+                    //设置四人状态为3
+                    userService.setIfOnMatchingByUserId(users.get(2*i).getUserId(), 3);
+                    userService.setIfOnMatchingByUserId(users.get(2*i+1).getUserId(), 3);
+                    userService.setIfOnMatchingByUserId(users.get(2*left[i]).getUserId(), 3);
+                    userService.setIfOnMatchingByUserId(users.get(2*left[i]+1).getUserId(), 3);
                     //历遍过设置为-1
                     left[left[i]] = -1;
                     left[i] = -1;
                 }
+            }
+            //清空二阶匹配数据库
+            matchingService.deleteAllInf();
+            //二阶匹配失败者重新打入数据库
+            int theMatchingId = 0;
+            for (int i = 0; i < userIdsOfFailure.size(); i++) {
+                //存入数据库matching表
+                //成对打入
+                theMatchingId ++;
+                matchingService.createMatchingRole(theMatchingId, userIdsOfFailure.get(i), labelOfUsers.get(i), faultTimesOfFailure[i]);
+                userService.setIfOnMatchingByUserId(users.get(i).getUserId(), 2);
+                theMatchingId ++;
+                matchingService.createMatchingRole(theMatchingId, userIdsOfFailure.get(i+1), labelOfUsers.get(i+1), faultTimesOfFailure[i+1]);
+                userService.setIfOnMatchingByUserId(users.get(i).getUserId(), 2);
             }
         }
     }

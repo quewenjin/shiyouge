@@ -114,9 +114,8 @@ public class UserController {
         JSONObject json = new JSONObject();
         try {
             int randomId = RandomUtil.getTheRandomDormitoryId();
-            List<Dormitory> dormitories = dormitoryService.getAllDormitorys();
-            if (dormitories.size() != 0){
-                randomId = dormitoryService.getMaxDormitoryId()+1;
+            while (dormitoryService.getAllDormitorys().size() != 0){
+                randomId = RandomUtil.getTheRandomDormitoryId();
             }
             json.put("dormitoryId", randomId);
             json.put("status", "succeed");
@@ -129,7 +128,7 @@ public class UserController {
     /**
      * 创建宿舍
      * @param params 宿舍ID 加入密码
-     * @return 状态：succeed 或 wrong
+     * @return 状态：succeed 或 wrong 或 occupied
      */
     @RequestMapping(value = "/createDormitory", method = RequestMethod.POST)
     public String createDormitory(@RequestBody Map<String, Object> params) {
@@ -138,10 +137,15 @@ public class UserController {
         String joinPassword = params.get("joinPassword").toString();
         JSONObject json = new JSONObject();
         try {
-            dormitoryService.created(DormitoryID, joinPassword);
-            //加入对应宿舍
-            userService.joinDormitoryOfUser(userId, DormitoryID);
-            json.put("status", "succeed");
+            Dormitory dormitory = dormitoryService.getDormitoryById(DormitoryID);
+            if (dormitory == null){
+                dormitoryService.created(DormitoryID, joinPassword);
+                //加入对应宿舍
+                userService.joinDormitoryOfUser(userId, DormitoryID);
+                json.put("status", "succeed");
+            } else {
+                json.put("status", "occupied");
+            }
         } catch (Exception e){
             json.put("status", "wrong");
         }
@@ -207,6 +211,25 @@ public class UserController {
         JSONObject json = new JSONObject();
         try {
             json.put("tags", userService.getTagsByUserId(userID));
+            json.put("status", "succeed");
+        } catch (Exception e){
+            json.put("status", "wrong");
+        }
+        return json.toString();
+    }
+
+    /**
+     * 设置是否进入自动匹配状态
+     * @param params 用户ID
+     * @return 状态：succeed 或 wrong
+     */
+    @RequestMapping(value = "/setIfOnMatching", method = RequestMethod.POST)
+    public String setIfOnMatching(@RequestBody Map<String, Object> params) {
+        String userId = params.get("userId").toString();
+        int ifOnMatching = Integer.parseInt(params.get("ifOnMatching").toString());
+        JSONObject json = new JSONObject();
+        try {
+            userService.setIfOnMatchingByUserId(userId, ifOnMatching);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");

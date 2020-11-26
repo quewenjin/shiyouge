@@ -133,4 +133,11 @@ public interface DormitoryMapper {
      * @return 宿舍List
      */
     List<Dormitory> getAllDormitorys();
+
+    /**
+     * 得到宿舍
+     * @param dormitoryId ID
+     * @return 宿舍
+     */
+    Dormitory getDormitoryById(int dormitoryId);
 }

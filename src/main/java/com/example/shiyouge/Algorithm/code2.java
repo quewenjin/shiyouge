@@ -6,7 +6,6 @@ public class code2 {
     private final static int N=101;
     private static List<String> v=new ArrayList<>(N);
     private static int[] fn =new int[N];
-    private static double MIN=-1e9;
     private static double limit=0.5;
     private static int n;
     private static int[] left =new int[N];
@@ -36,6 +35,7 @@ public class code2 {
      * 手写算法
      */
     private static double cal(int x,int y){
+        double MIN = -1e9;
         if(x==y) return MIN;
         String sx=v.get(x),sy=v.get(y);
         int sumx=0,sumy=0,sumx2=0,sumy2=0,sumxy=0;

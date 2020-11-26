@@ -10,7 +10,6 @@ import java.util.List;
 
 @Mapper
 public interface MessageBoardMapper {
-
     /**
      * 通过ID得到
      * @param dormitoryId 宿舍ID

@@ -79,16 +79,20 @@
         select max(dormitoryId) from dormitory
     </select>
 
-    <update id="setTheJoinPassward">
+    <update id="setTheJoinPassword">
         update dormitory set joinPassword = #{joinPassword} where dormitoryId = #{dormitoryId}
     </update>
 
-    <select id="getTheJoinPassward" resultType="java.lang.String">
+    <select id="getTheJoinPassword" resultType="java.lang.String">
         select joinPassword from dormitory where dormitoryId = #{dormitoryId}
     </select>
 
     <select id="getAllDormitorys" resultMap="BaseResultMap">
         select * from dormitory
+    </select>
+
+    <select id="getDormitoryById" resultMap="BaseResultMap">
+        select * from dormitory where dormitoryId = #{dormitoryId}
     </select>
 
 </mapper>
