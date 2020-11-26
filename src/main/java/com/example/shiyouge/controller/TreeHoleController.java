@@ -142,6 +142,9 @@ public class TreeHoleController {
                 //解除禁言状态
                 userService.setIfSilentByUserId(userId, 0);
             }
+        } else {
+            //防止结束禁言时间出现null情况
+            userService.setTheEndSilentTime(userId, createTime);
         }
         try {
             //在数据库创建评论信息
@@ -211,6 +214,9 @@ public class TreeHoleController {
                 //解除禁言状态
                 userService.setIfSilentByUserId(userId, 0);
             }
+        } else {
+            //防止结束禁言时间出现null情况
+            userService.setTheEndSilentTime(userId, createTime);
         }
         try {
             //在数据库创建评论
