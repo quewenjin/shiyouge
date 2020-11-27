@@ -59,7 +59,7 @@ public class code2 {
      */
     private static void go(int now,int n){
         double MAX = 1e9;
-        for(int i = 0; i<n; i++) {
+        for(int i = 0; i<=n; i++) {
             used[i]=0;
             slack[i]= MAX;
         }
@@ -70,7 +70,7 @@ public class code2 {
             double d= MAX;
             for(int i=0;i<n;i++){
                 if(used[i]==0){
-                    double tmp=lx[left[u]]+=ly[i]-G[left[u]][i];
+                    double tmp=lx[left[u]]+ly[i]-G[left[u]][i];
                     if(tmp<slack[i]){
                         slack[i]=tmp;
                         pre[i]=u;
@@ -80,7 +80,7 @@ public class code2 {
                     }
                 }
             }
-            for(int i=0;i<n;i++) {
+            for(int i=0;i<=n;i++) {
                 if (used[i]>0) {
                     lx[left[i]] -= d;
                     ly[i] += d;

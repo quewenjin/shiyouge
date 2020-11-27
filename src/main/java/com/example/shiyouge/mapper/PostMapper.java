@@ -102,4 +102,32 @@ public interface PostMapper {
      * @return 帖子发布时间
      */
     Timestamp getThePublishTimeOfPost(int postId);
+
+    /**
+     * 得到评论数
+     * @param postId ID
+     * @return int
+     */
+    int getTheCommentTimesByPostId(int postId);
+
+    /**
+     * 修改评论数
+     * @param postId ID
+     * @param times 次数
+     */
+    void setTheCommentTimesByPostId(@Param("postId") int postId, @Param("times") int times);
+
+    /**
+     * 得到评论数
+     * @param postId ID
+     * @return int
+     */
+    int getTheCollectedTimesByPostId(int postId);
+
+    /**
+     * 修改评论数
+     * @param postId ID
+     * @param times 次数
+     */
+    void setTheCollectedTimesByPostId(@Param("postId") int postId, @Param("times") int times);
 }

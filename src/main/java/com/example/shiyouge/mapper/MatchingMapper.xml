@@ -21,11 +21,11 @@
     </delete>
 
     <select id="getMatchingFailedTimesByUserId" resultType="int">
-        select failedTimes from matching where userId = #{userId}
+        select failedTimes from matching where userIdOnMatching = #{userId}
     </select>
 
     <update id="setMatchingFailedTimesByUserId">
-        update matching set failedTimes = #{failedTimes} where userId = #{userId}
+        update matching set failedTimes = #{failedTimes} where userIdOnMatching = #{userId}
     </update>
 
 

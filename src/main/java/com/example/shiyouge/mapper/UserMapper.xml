@@ -235,4 +235,8 @@
         select userId from user where openId = #{openId}
     </select>
 
+    <select id="getTheUserIdsByMatchingStatus" resultType="java.lang.String">
+        select userId from user where ifOnMatching = #{ifOnMatching}
+    </select>
+
 </mapper>

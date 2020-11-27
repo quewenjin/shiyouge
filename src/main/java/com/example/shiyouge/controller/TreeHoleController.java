@@ -155,6 +155,8 @@ public class TreeHoleController {
         try {
             //在数据库创建评论信息
             commentService.createTheNewComment(userId, postId, content, createTime);
+            //帖子评论数+1
+            postService.setCommentTimesByPostId(postId, postService.getCommentTimesByPostId(postId));
             json.put("status", "created");
             json.put("mes","创建评论成功");
         } catch (Exception e){
@@ -282,7 +284,10 @@ public class TreeHoleController {
         int postId = Integer.parseInt(params.get("postId").toString());
         JSONObject json = new JSONObject();
         try {
+            //收藏
             collectService.createCollection(userId, postId);
+            //收藏次数+1
+            postService.setTheCollectedTimesByPostId(postId, postService.getTheCollectedTimesByPostId(postId));
             json.put("status", "succeed");
             json.put("mes","收藏帖子成功");
         } catch (Exception e){

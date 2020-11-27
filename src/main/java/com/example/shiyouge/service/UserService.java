@@ -445,4 +445,12 @@ public class UserService {
     public String getUserIdByOpenId(String openId){
         return userMapper.getUserIdByOpenId(openId);
     }
+
+    /**
+     * 处于某匹配状态的用户
+     * @return List
+     */
+    public List<String> getUserIdsByMatchingStatus(int ifOnMatching){
+        return userMapper.getTheUserIdsByMatchingStatus(ifOnMatching);
+    }
 }

@@ -58,7 +58,14 @@ public class code1 {
         for(int i=0;i<n;i++){
             for(int j=0;j<i;j++){
                 double limit = 0.5;
-                if(match[j]==0&&cal(i,j)+Math.max(fn[i],fn[j])*0.1>= limit){
+                //System.out.println("i="+i+"j="+j+"c(i,j)="+cal(i,j)+"fn[i]="+fn[i]+"fn[j]="+fn[j]);
+                //System.out.println("#");
+                System.out.println(match[j]==0);
+                //System.out.println("%");
+                System.out.println((cal(i,j) + Math.max(fn[i],fn[j])*0.1)>= limit);
+                //System.out.println("$");
+                if(match[i]==-1 && match[j]==-1 && (cal(i,j)+Math.max(fn[i],fn[j])*0.1>= limit)){
+                    //System.out.println("iiii="+i+"jjjj="+j);
                     match[i]=j;
                     match[j]=i;
                 }

@@ -69,4 +69,20 @@
     <select id="getThePublishTimeOfPost" resultType="java.sql.Timestamp">
         select publishTime from post where postId = #{postId}
     </select>
+
+    <select id="getTheCommentTimesByPostId" resultType="int">
+        select commentedTimes from post where postId = #{postId}
+    </select>
+
+    <update id="setTheCommentTimesByPostId">
+        update post set commentedTimes = #{times} where postId = #{postId}
+    </update>
+
+    <select id="getTheCollectedTimesByPostId" resultType="int">
+        select collectedTimes from post where postId = #{postId}
+    </select>
+
+    <update id="setTheCollectedTimesByPostId">
+        update post set collectedTimes = #{times} where postId = #{postId}
+    </update>
 </mapper>

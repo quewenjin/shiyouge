@@ -112,4 +112,40 @@ public class PostService {
     public Timestamp getPublishTimeOfPost(int postId){
         return postMapper.getThePublishTimeOfPost(postId);
     }
+
+    /**
+     * 得到评论数
+     * @param postId ID
+     * @return int
+     */
+    public int getCommentTimesByPostId(int postId){
+        return postMapper.getTheCommentTimesByPostId(postId);
+    }
+
+    /**
+     * 修改评论数
+     * @param postId ID
+     * @param times 次数
+     */
+    public void setCommentTimesByPostId(int postId, int times){
+        postMapper.setTheCommentTimesByPostId(postId, times);
+    }
+
+    /**
+     * 得到评论数
+     * @param postId ID
+     * @return int
+     */
+    public int getTheCollectedTimesByPostId(int postId){
+        return postMapper.getTheCollectedTimesByPostId(postId);
+    }
+
+    /**
+     * 修改评论数
+     * @param postId ID
+     * @param times 次数
+     */
+    public void setTheCollectedTimesByPostId(int postId, int times){
+        postMapper.setTheCollectedTimesByPostId(postId, times);
+    }
 }

@@ -49,6 +49,7 @@ public class BackstageController {
             jo.put("userRealname", userService.getRealNameByUserId(userId));
             jo.put("userStudentNumber", userService.getStudentNumberByUserId(userId));
             jo.put("ifSilent", userService.getIfSilentByUserId(userId));
+            jo.put("ifOnMatching", userService.getIfOnMatchingByUserId(userId));
             jsonArray.add(jo);
         }
         return  jsonArray.toString();

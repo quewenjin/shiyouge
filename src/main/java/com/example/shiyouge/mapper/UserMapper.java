@@ -346,4 +346,10 @@ public interface UserMapper {
      * @return 用户ID
      */
     String getUserIdByOpenId(String openId);
+
+    /**
+     * 处于某匹配状态的用户
+     * @return List
+     */
+    List<String> getTheUserIdsByMatchingStatus(int ifOnMatching);
 }
