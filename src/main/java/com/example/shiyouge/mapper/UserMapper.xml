@@ -231,4 +231,8 @@
         select * from user where ifOnMatching = #{ifOnMatching}
     </select>
 
+    <select id="getUserIdByOpenId" resultType="java.lang.String">
+        select userId from user where openId = #{openId}
+    </select>
+
 </mapper>

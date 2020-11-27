@@ -42,14 +42,16 @@ public class WeiXinController {
         // 获取参数返回
         String session_key = jsonObject.get("session_key").toString();
         String open_id = jsonObject.get("openid").toString();
-//        JSONObject json = new JSONObject();
-//        json.put("session_key", session_key);
-//        json.put("openid", open_id);
         // 根据返回的user实体类，判断用户是否是新用户，是的话，创建新的用户，信息存到数据库，返回 session_key 和 open_id
         JSONObject json = new JSONObject();
         //用open_id查询用户
         User user = userService.getUserByOpenId(open_id);
-        if(user == null){
+        if(user != null){
+            System.out.println(userService.getUserIdByOpenId(open_id));
+            json.put("userId", userService.getUserIdByOpenId(open_id));
+            json.put("dormitoryId", user.getUserDormitoryId());
+            json.put("status", "succeed");
+        } else {
             // 添加到数据库
             String theUid = RandomUtil.getTheRandomUID();
             while (userService.getUserByUserId(theUid) != null){//防用户ID重复
@@ -57,7 +59,7 @@ public class WeiXinController {
             }
             //创建用户
             Boolean flag = userService.createUserByOpenId(theUid, open_id);
-            if(!flag){
+            if(!flag){//创建失败
                 json.put("status", "wrong");
             } else {
                 //随机头像
@@ -75,13 +77,11 @@ public class WeiXinController {
                 //设置头像
                 userService.setPhotoByUserId(theUid, theHead);
                 //其他信息
+                System.out.println(theUid);
                 json.put("userId", theUid);
                 json.put("dormitoryId", userService.getDormitoryIDByUserId(theUid));
                 json.put("status", "succeed");
             }
-        } else {
-            json.put("userId", user.getUserId());
-            json.put("dormitoryId", user.getUserDormitoryId());
         }
         // 封装返回小程序
         json.put("session_key", session_key);

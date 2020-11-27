@@ -339,4 +339,11 @@ public interface UserMapper {
      * @return List
      */
     List<User> getTheUsersByMatchingStatus(int ifOnMatching);
+
+    /**
+     * 用 openId 得到用户ID
+     * @param openId openid
+     * @return 用户ID
+     */
+    String getUserIdByOpenId(String openId);
 }

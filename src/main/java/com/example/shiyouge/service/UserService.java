@@ -436,4 +436,13 @@ public class UserService {
     public List<User> getUsersByMatchingStatus(int ifOnMatching){
         return userMapper.getTheUsersByMatchingStatus(ifOnMatching);
     }
+
+    /**
+     * 用 openId 得到用户ID
+     * @param openId openid
+     * @return 用户ID
+     */
+    public String getUserIdByOpenId(String openId){
+        return userMapper.getUserIdByOpenId(openId);
+    }
 }
