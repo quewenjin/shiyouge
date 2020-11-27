@@ -114,7 +114,7 @@ public class code2 {
             go(i,n/2);
         }
         for(int i=0;i<n/2;i++){
-            if(G[i][left[i]]<N){
+            if(G[i][left[i]]<0.5){
                 left[i]=-1;
             }
         }
