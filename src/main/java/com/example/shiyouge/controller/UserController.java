@@ -1,5 +1,6 @@
 package com.example.shiyouge.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.example.shiyouge.bean.Dormitory;
 import com.example.shiyouge.service.UserService;
 import com.alibaba.fastjson.JSONObject;
@@ -20,6 +21,17 @@ public class UserController {
     UserService userService;
     @Autowired
     DormitoryService dormitoryService;
+
+    //用户标签数组
+    String[] tagsArray ={"考研党","毕业就打工人","自觉的读书人","自觉性差","相约读书","一人游书海","爱提问",//学习
+            "独立解决", "优秀理科生","儒雅文科生","天赋型选手","努力拼搏者","竞赛得奖选手","学生工作强者",//学习
+            "早睡早起","晚睡晚起","爱好安静","噪音无感","工装裤","JK","Lolita",//生活
+            "DK","汉服","清淡","无辣不欢","火锅","烤肉","日料","韩料","动物真可爱","不喜欢动物",//生活
+            "王者荣耀","和平精英","斗地主","球类运动","听歌","韩综/韩剧","日剧","英美剧","追星",//兴趣
+            "美食","乐器","画画","麻将","魔方","收藏","桌游",//兴趣
+            "文静","活泼","社恐","爱好交友","乐观向上","老网抑云",//人生
+            "天道酬勤","快乐咸鱼","以和为贵","有仇必报","平淡是真","轰轰烈烈"//人生
+    };
 
     /**
      * 得到用户的各个属性
@@ -209,7 +221,18 @@ public class UserController {
         String userID = params.get("userId").toString();
         JSONObject json = new JSONObject();
         try {
-            json.put("tags", userService.getTagsByUserId(userID));
+            JSONArray jsonArray = new JSONArray();
+            String tags = userService.getTagsByUserId(userID);
+            int index = 1;
+            for (int i = 0; i < tags.length(); i++) {
+                if (tags.charAt(i) == '1'){
+                    JSONObject js = new JSONObject();
+                    js.put(String.valueOf(index), tagsArray[i]);
+                    jsonArray.add(js);
+                    index ++;
+                }
+            }
+            json.put("tags", jsonArray);
             json.put("status", "succeed");
         } catch (Exception e){
             json.put("status", "wrong");
