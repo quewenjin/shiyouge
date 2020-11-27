@@ -17,6 +17,7 @@ public class code1 {
      * @param fnn 传进来的这些人的匹配失败的次数的数组
      */
     public static void init(List<String> vv, int[] fnn){
+        v.clear();
         n=vv.size();
         for(int i=0;i<n;i++){
             v.add(vv.get(i));

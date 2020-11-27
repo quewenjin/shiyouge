@@ -36,13 +36,15 @@ public class StudyController {
         String userId = params.get("userId").toString();
         JSONObject json = new JSONObject();
         try{
-            json.put("status", "succeed");
             //查询相应信息
             json.put("fertilizerQuantity", userService.getFertilizerQuantityOfUser(userId));
             json.put("studyTimeTotal", userService.getStudyTimeTotalOfUser(userId));
             json.put("numberOfStudy", studyRoomService.getNumberOfStudyRoom(userService.getStudyRoomIdOfUser(userId)));
+            json.put("status", "succeed");
+            json.put("mes","返回信息成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","返回信息失败");
         }
         return json.toString();
     }
@@ -67,8 +69,10 @@ public class StudyController {
             userService.updateStudyTimeTodayOfUser(userId, userService.getStudyTimeTodayOfUser(userId)+studyTime);
             userService.updateStudyTimeWeekOfUser(userId, userService.getStudyTimeWeekOfUser(userId)+studyTime);
             json.put("status", "recorded");
+            json.put("mes","本次学习已记录");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -84,6 +88,7 @@ public class StudyController {
         JSONArray jsonArray = new JSONArray();
         try{
             json.put("status", "succeed");
+            json.put("mes","返回每日排名前10成功");
             List<String> userIds = userService.getTodayTop10();
             for (String userId: userIds) {
                 JSONObject jo = new JSONObject();
@@ -99,6 +104,7 @@ public class StudyController {
             json.put("inf", jsonArray);
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","返回每日排名前10失败");
         }
         return json.toString();
     }
@@ -115,6 +121,7 @@ public class StudyController {
         List<String> userIds = userService.getWeekTop10();
         try{
             json.put("status", "succeed");
+            json.put("mes","返回每周排名前10成功");
             for (String userId: userIds) {
                 JSONObject jo = new JSONObject();
                 jo.put("rank", rank);
@@ -129,6 +136,7 @@ public class StudyController {
             json.put("inf", jsonArray);
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","返回每周排名前10失败");
         }
         return json.toString();
     }
@@ -144,8 +152,10 @@ public class StudyController {
             //自习室人数+1
             studyRoomService.updateNumberOfStudyRoom(1, studyRoomService.getNumberOfStudyRoom(1)+1);
             json.put("status", "succeed");
+            json.put("mes","开始自习");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -160,13 +170,16 @@ public class StudyController {
         try{
             if (studyRoomService.getNumberOfStudyRoom(1) <= 0){
                 json.put("status", "wrong");
+                json.put("mes","发生了奇怪的错误");
             } else {
                 //自习室人数-1
                 studyRoomService.updateNumberOfStudyRoom(1, studyRoomService.getNumberOfStudyRoom(1)-1);
                 json.put("status", "succeed");
+                json.put("mes","结束自习");
             }
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }

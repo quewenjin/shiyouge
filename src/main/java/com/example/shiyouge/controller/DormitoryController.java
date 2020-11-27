@@ -49,8 +49,9 @@ public class DormitoryController {
             }
             json.put("messages", jsonArray);
             json.put("status", "succeed");
+            json.put("mes","返回留言板信息成功");
         } catch (Exception e){
-            json.put("status", "wrong");
+            json.put("status", "服务器开了个小差");
         }
         return json.toString();
     }
@@ -72,8 +73,10 @@ public class DormitoryController {
             //创建留言
             messageBoardService.creatTheNewMessage(dormitoryId, userId, content, leaveTime);
             json.put("status", "succeed");
+            json.put("mes","创建留言成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -100,8 +103,10 @@ public class DormitoryController {
             }
             json.put("chatRecords", jsonArray);
             json.put("status", "succeed");
+            json.put("mes","返回聊天记录成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -123,8 +128,10 @@ public class DormitoryController {
             //创建聊天记录
             chatSystemService.creatChatRecord(dormitoryId, userId, content, leaveTime);
             json.put("status", "succeed");
+            json.put("mes","发送成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }

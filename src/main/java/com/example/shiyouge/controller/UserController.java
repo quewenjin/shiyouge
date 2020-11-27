@@ -50,6 +50,7 @@ public class UserController {
         json.put("photo", userService.getPhotoByUserId(userID));
         json.put("dormitoryId", userService.getDormitoryIDByUserId(userID));
         json.put("ifOnMatching", userService.getIfOnMatchingByUserId(userID));
+        json.put("mes","返回信息成功");
         return json.toString();
     }
 
@@ -66,8 +67,10 @@ public class UserController {
         try {
             userService.setUserNickName(userID, Nickname);
             json.put("status", "succeed");
+            json.put("mes","修改昵称成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -89,8 +92,10 @@ public class UserController {
             userService.setTheUserStudentNumber(userId, studentNumber);// 设置学号
             userService.setTheUserSex(userId, userSex);// 设置性别
             json.put("status", "succeed");
+            json.put("mes","用户信息修改成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -111,8 +116,10 @@ public class UserController {
             //退出宿舍
             userService.quitDormitoryOfUser(userID);
             json.put("status", "succeed");
+            json.put("mes","退出宿舍成功");
         } catch (Exception De){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -131,8 +138,10 @@ public class UserController {
             }
             json.put("dormitoryId", randomId);
             json.put("status", "succeed");
+            json.put("mes","获得ID成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -155,11 +164,14 @@ public class UserController {
                 //加入对应宿舍
                 userService.joinDormitoryOfUser(userId, DormitoryID);
                 json.put("status", "succeed");
+                json.put("mes","创建宿舍成功");
             } else {
                 json.put("status", "occupied");
+                json.put("mes","该ID被占用了QAQ,介意重新来一遍吗");
             }
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -184,11 +196,14 @@ public class UserController {
                 //加入对应宿舍
                 userService.joinDormitoryOfUser(userId, DormitoryID);
                 json.put("status", "succeed");
+                json.put("mes","加入宿舍成功");
             } else {
                 json.put("status", "filled");
+                json.put("mes","该宿舍已满员");
             }
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -206,8 +221,10 @@ public class UserController {
         try {
             userService.setUserTag(userID, Tags);
             json.put("status", "succeed");
+            json.put("mes","设置标签成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -235,8 +252,10 @@ public class UserController {
             }
             json.put("tags", jsonArray);
             json.put("status", "succeed");
+            json.put("mes","返回用户标签成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -254,8 +273,10 @@ public class UserController {
         try {
             userService.setIfOnMatchingByUserId(userId, ifOnMatching);
             json.put("status", "succeed");
+            json.put("mes","进入匹配状态");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }

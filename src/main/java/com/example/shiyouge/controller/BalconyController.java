@@ -41,8 +41,10 @@ public class BalconyController {
             json.put("soilFertility", dormitoryService.getTheSoilFertilityOfDormitory(dormitoryId));
             json.put("flowerLevel", dormitoryService.getFlowerGrowthLevelOfDormitory(dormitoryId));
             json.put("status", "succeed");
+            json.put("mes","返回信息成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","返回信息失败");
         }
         return json.toString();
     }
@@ -162,8 +164,10 @@ public class BalconyController {
             }
             json.put("records", jsonArray);
             json.put("status", "succeed");
+            json.put("mes","返回记录成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }

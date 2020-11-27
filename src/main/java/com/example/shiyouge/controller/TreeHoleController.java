@@ -52,8 +52,10 @@ public class TreeHoleController {
             }
             json.put("posts", jsonArray);
             json.put("status", "succeed");
+            json.put("mes","返回帖子成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -80,8 +82,10 @@ public class TreeHoleController {
             }
             json.put("posts", jsonArray);
             json.put("status", "succeed");
+            json.put("mes","查询成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -112,8 +116,10 @@ public class TreeHoleController {
             }
             json.put("comments", jsonArray);
             json.put("status", "succeed");
+            json.put("mes","返回帖子详情成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -150,8 +156,10 @@ public class TreeHoleController {
             //在数据库创建评论信息
             commentService.createTheNewComment(userId, postId, content, createTime);
             json.put("status", "created");
+            json.put("mes","创建评论成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","创建评论失败");
         }
         return json.toString();
     }
@@ -184,8 +192,10 @@ public class TreeHoleController {
             //帖子举报次数 +1
             postService.setReportTimes(postId, postService.getReportTimes(postId)+1);
             json.put("status", "reported");
+            json.put("mes","举报成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -222,8 +232,10 @@ public class TreeHoleController {
             //在数据库创建评论
             postService.createThePost(userId, content, partition, createTime);
             json.put("status", "created");
+            json.put("mes","创建帖子成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -251,8 +263,10 @@ public class TreeHoleController {
             }
             json.put("posts", jsonArray);
             json.put("status", "succeed");
+            json.put("mes","返回我的收藏成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -270,8 +284,10 @@ public class TreeHoleController {
         try {
             collectService.createCollection(userId, postId);
             json.put("status", "succeed");
+            json.put("mes","收藏帖子成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -289,8 +305,10 @@ public class TreeHoleController {
         try {
             collectService.cancelCollection(userId, postId);
             json.put("status", "succeed");
+            json.put("mes","取消收藏成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
