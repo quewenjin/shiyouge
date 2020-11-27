@@ -29,10 +29,10 @@ public class MatchingController {
      * 第一阶段匹配
      * 每隔一段时间监测在匹配人数是否达到12
      * 每6分钟 执行任务
-     * 测试阶段每10秒一次，6人起步
+     * 测试阶段每20秒一次，6人起步
      */
     //@Scheduled(cron = "0 0/6 * * * ?")
-    @Scheduled(cron = "0/10 * * * * ?")
+    @Scheduled(cron = "0/20 * * * * ?")
     public void judgeTheNumForCode1() {
         System.out.println("一阶匹配开始");
         //得到处于一阶匹配的用户
@@ -87,10 +87,10 @@ public class MatchingController {
      * 第二阶段匹配
      * 每隔一段时间监测在匹配人数是否达到24
      * 每6分钟 执行任务
-     * 测试阶段每10秒一次，12人起步
+     * 测试阶段每20秒一次，12人起步
      */
     //@Scheduled(cron = "0 0/6 * * * ?")
-    @Scheduled(cron = "0/10 * * * * ?")
+    @Scheduled(cron = "0/20 * * * * ?")
     public void judgeTheNumForCode2() {
         System.out.println("二阶匹配开始");
         //得到处于二阶匹配的用户

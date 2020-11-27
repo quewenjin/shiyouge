@@ -65,6 +65,7 @@ public class BalconyController {
             if (fertilizerQuantity == 0){
                 //没有肥料的情况
                 json.put("status", "noFertilizer");
+                json.put("mes","肥料不足");
                 return json.toString();
             }
             //小黑板记录
@@ -80,8 +81,10 @@ public class BalconyController {
             //花的今天施肥+1
             dormitoryService.setSoilFertilityOfDormitory(dormitoryId, dormitoryService.getTheSoilFertilityOfDormitory(dormitoryId)+1);
             json.put("status", "succeed");
+            json.put("mes","施肥成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
@@ -104,11 +107,13 @@ public class BalconyController {
             //没有水的情况
             if (waterQuantity == 0){
                 json.put("status", "noWater");
+                json.put("mes","水量不足");
                 return json.toString();
             }
             //每日浇水达到上限情况
             if (dormitoryService.getTheSoilMoistureOfDormitory(dormitoryId) >= 10){
                 json.put("status", "tooWet");
+                json.put("mes","今日浇水已达上限");
                 return json.toString();
             }
             //小黑板记录
@@ -124,8 +129,10 @@ public class BalconyController {
             //花的今天浇水+1
             dormitoryService.setSoilMoistureOfDormitory(dormitoryId, dormitoryService.getTheSoilMoistureOfDormitory(dormitoryId)+1);
             json.put("status", "succeed");
+            json.put("mes","浇水成功");
         } catch (Exception e){
             json.put("status", "wrong");
+            json.put("mes","服务器开了个小差");
         }
         return json.toString();
     }
