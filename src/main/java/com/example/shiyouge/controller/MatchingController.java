@@ -27,10 +27,12 @@ public class MatchingController {
 
     /**
      * 第一阶段匹配
-     * 每隔一段时间监测在匹配人数是否达到
+     * 每隔一段时间监测在匹配人数是否达到12
      * 每6分钟 执行任务
+     * 测试阶段每10秒一次，6人起步
      */
-    @Scheduled(cron = "0 0/6 * * * ?")
+    //@Scheduled(cron = "0 0/6 * * * ?")
+    @Scheduled(cron = "0/10 * * * * ?")
     public void judgeTheNumForCode1() {
         System.out.println("一阶匹配开始");
         //得到处于一阶匹配的用户
@@ -38,7 +40,8 @@ public class MatchingController {
         List<String> labelOfUsers= null;
         int[] faultTimes = new int[users.size()];
         //如果总人数大于12，开始一阶匹配
-        if (users.size() >= 12){
+        //if (users.size() >= 12){
+        if (users.size() >= 6){
             //添加 List<label>
             for (User user: users) {
                 assert false;
@@ -52,7 +55,8 @@ public class MatchingController {
             code1.init(labelOfUsers, faultTimes);
             int[] match = code1.solve();
             //值为-1 的对应的失败次数+1
-            for (int i = 0; i < 12; i++) {
+            //for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < 6; i++) {
                 if (match[i] == -1){
                     String theUserId = users.get(i).getUserId();
                     userService.setMatchingFailedTimesByUserId(theUserId, userService.getMatchingFailedTimesByUserId(theUserId)+1);
@@ -60,7 +64,8 @@ public class MatchingController {
             }
             //把匹配的成对存到第二阶的数据库
             int theMatchingId = 0;
-            for (int i = 0; i < 12; i++) {
+            //for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < 6; i++) {
                 if (match[i] >= 0){
                     //存入数据库matching表
                     theMatchingId ++;
@@ -80,10 +85,12 @@ public class MatchingController {
 
     /**
      * 第二阶段匹配
-     * 每隔一段时间监测在匹配人数是否达到
+     * 每隔一段时间监测在匹配人数是否达到24
      * 每6分钟 执行任务
+     * 测试阶段每10秒一次，12人起步
      */
-    @Scheduled(cron = "0 0/6 * * * ?")
+    //@Scheduled(cron = "0 0/6 * * * ?")
+    @Scheduled(cron = "0/10 * * * * ?")
     public void judgeTheNumForCode2() {
         System.out.println("二阶匹配开始");
         //得到处于二阶匹配的用户
@@ -91,7 +98,8 @@ public class MatchingController {
         List<String> labelOfUsers= null;
         int[] faultTimes = new int[users.size()];
         //如果总人数大于24，开始一阶匹配
-        if (users.size() >= 24){
+        //if (users.size() >= 24){
+        if (users.size() >= 12){
             //添加 List<label>
             for (User user: users) {
                 assert false;
@@ -108,7 +116,8 @@ public class MatchingController {
             int[] faultTimesOfFailure = new int[users.size()];//二阶匹配失败者的失败次数
             int numOfFailure = 0;
             //值为 -1 的每对用户的失败次数+1,记录下来
-            for (int i = 0; i < 12; i++) {
+            //for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < 6; i++) {
                 if (left[i] == -1){
                     //成对的第一个
                     String theUserId1 = users.get(2*i).getUserId();
@@ -131,7 +140,8 @@ public class MatchingController {
                 }
             }
             //把匹配的成对存到第二阶的数据库
-            for (int i = 0; i < 12; i++) {
+            //for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < 6; i++) {
                 if (left[i] >= 0){
                     //产生随机ID
                     int randomId = RandomUtil.getTheRandomDormitoryId();

@@ -23,7 +23,7 @@ public class UserController {
     DormitoryService dormitoryService;
 
     //用户标签数组
-    String[] tagsArray ={"考研党","毕业就打工人","自觉的读书人","自觉性差","相约读书","一人游书海","爱提问",//学习
+    private String[] tagsArray ={"考研党","毕业就打工人","自觉的读书人","自觉性差","相约读书","一人游书海","爱提问",//学习
             "独立解决", "优秀理科生","儒雅文科生","天赋型选手","努力拼搏者","竞赛得奖选手","学生工作强者",//学习
             "早睡早起","晚睡晚起","爱好安静","噪音无感","工装裤","JK","Lolita",//生活
             "DK","汉服","清淡","无辣不欢","火锅","烤肉","日料","韩料","动物真可爱","不喜欢动物",//生活
@@ -49,6 +49,7 @@ public class UserController {
         json.put("realName", userService.getRealNameByUserId(userID));
         json.put("photo", userService.getPhotoByUserId(userID));
         json.put("dormitoryId", userService.getDormitoryIDByUserId(userID));
+        json.put("ifOnMatching", userService.getIfOnMatchingByUserId(userID));
         return json.toString();
     }
 
@@ -125,7 +126,7 @@ public class UserController {
         JSONObject json = new JSONObject();
         try {
             int randomId = RandomUtil.getTheRandomDormitoryId();
-            while (dormitoryService.getAllDormitorys().size() != 0){
+            while (dormitoryService.getDormitoryById(randomId) != null){
                 randomId = RandomUtil.getTheRandomDormitoryId();
             }
             json.put("dormitoryId", randomId);
